@@ -46,5 +46,10 @@ namespace noname_SanityArchiver
                 textFileWindow tfWindow = new textFileWindow(openFileDialog1.FileName);
             }
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            listViewLeft.Rows.Add(Resources.cica, "/ValamiTeszt.txt", "1235235Kb", ".EXE");
+        }
     }
 }
