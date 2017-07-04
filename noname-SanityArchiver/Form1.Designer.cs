@@ -63,7 +63,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 27);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -73,9 +73,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listView2);
-            this.splitContainer1.Size = new System.Drawing.Size(750, 365);
-            this.splitContainer1.SplitterDistance = 375;
-            this.splitContainer1.SplitterWidth = 3;
+            this.splitContainer1.Size = new System.Drawing.Size(1000, 455);
+            this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.TabIndex = 0;
             // 
             // listView1
@@ -91,10 +90,10 @@
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Margin = new System.Windows.Forms.Padding(2);
-            this.listView1.MinimumSize = new System.Drawing.Size(376, 4);
+            this.listView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listView1.MinimumSize = new System.Drawing.Size(500, 4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(376, 365);
+            this.listView1.Size = new System.Drawing.Size(500, 455);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -138,10 +137,10 @@
             this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem2});
             this.listView2.Location = new System.Drawing.Point(0, 0);
-            this.listView2.Margin = new System.Windows.Forms.Padding(2);
-            this.listView2.MinimumSize = new System.Drawing.Size(376, 4);
+            this.listView2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listView2.MinimumSize = new System.Drawing.Size(500, 4);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(376, 365);
+            this.listView2.Size = new System.Drawing.Size(500, 455);
             this.listView2.TabIndex = 1;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
@@ -169,7 +168,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(750, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1000, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -181,13 +180,13 @@
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(38, 24);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(46, 24);
             this.toolStripDropDownButton1.Text = "File";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.exitToolStripMenuItem.Text = "Exit (Alt+F4)";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -203,12 +202,12 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 392);
+            this.ClientSize = new System.Drawing.Size(1000, 482);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Totally Noname Commander - NEM REGISZTRÁLT";
