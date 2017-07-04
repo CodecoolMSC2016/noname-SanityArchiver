@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace noname_SanityArchiver
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
         }
@@ -36,6 +36,15 @@ namespace noname_SanityArchiver
             */
 
             #endregion Szarfos
+        }
+
+        private void tempOpenTextFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            if ( openFileDialog1.FileName != "" )
+            {
+                textFileWindow tfWindow = new textFileWindow(openFileDialog1.FileName);
+            }
         }
     }
 }
