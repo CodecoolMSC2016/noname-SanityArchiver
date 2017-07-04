@@ -27,25 +27,33 @@ namespace noname_SanityArchiver
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            SaveFile(fileLocation);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = String.Format("Default Extension (*{0})|*{0}", new FileInfo(fileLocation).Extension);
+            saveFileDialog1.DefaultExt = new FileInfo(fileLocation).Extension;
+            saveFileDialog1.AddExtension = true;
+            DialogResult dr = saveFileDialog1.ShowDialog(this);
+
+            if (dr == DialogResult.OK )
+            {
+                SaveFile(saveFileDialog1.FileName);
+            }
+        }
+
+        private void SaveFile(string newFileLocation)
+        {
             try
             {
-                File.WriteAllText(fileLocation, richTextBox1.Text, Encoding.UTF8);
-                string simpleFileName = new FileInfo(fileLocation).Name;
-                MessageBox.Show("File succesfully saved to: " + simpleFileName, "File Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                File.WriteAllText(newFileLocation, richTextBox1.Text, Encoding.UTF8);
+                MessageBox.Show("File succesfully saved to: " + new FileInfo(newFileLocation).Name, "File Saved!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception err)
             {
                 MessageBox.Show("Error while saving file: " + err.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            saveFileDialog1.Filter = "All Files (*.*)|*.*";
-            saveFileDialog1.FileName = new FileInfo(fileLocation).Name;
-            saveFileDialog1.DefaultExt = new FileInfo(fileLocation).Extension;
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.ShowDialog(this);
         }
 
         private void changeFontSize(object sender, EventArgs e)
