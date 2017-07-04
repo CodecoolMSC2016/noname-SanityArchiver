@@ -37,14 +37,25 @@ namespace noname_SanityArchiver
 
         public void DisplayFiles(DirectoryInfo selectedFolder)
         {
-            View.Rows.Clear();
-            CurrentItems.Clear();
+            
 
             UpdateAbsolutePath(selectedFolder.FullName);
-
-            FileInfo[] files = selectedFolder.GetFiles();
-            DirectoryInfo[] directories = selectedFolder.GetDirectories();
-
+            FileInfo[] files = null;
+            DirectoryInfo[] directories = null;
+            try
+            {
+                files = selectedFolder.GetFiles();
+                directories = selectedFolder.GetDirectories();
+                View.Rows.Clear();
+                CurrentItems.Clear();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                // give admin priviliges to user and remove try catch
+                return;
+            }
+            
+            
             DirectoryInfo parent = Directory.GetParent(selectedFolder.FullName); ;
             if (parent == null)
             {
@@ -73,7 +84,7 @@ namespace noname_SanityArchiver
 
                 if (itemType == ItemType.File)
                 {
-                    fileSize = (((FileInfo)items[i]).Length / 1048576).ToString();
+                    fileSize = (((FileInfo)items[i]).Length / 1024).ToString();
                     icon = Icon.ExtractAssociatedIcon(items[i].FullName).ToBitmap();
                 }
                 View.Rows.Add(icon, baseName, fileSize, items[i].Extension);
@@ -95,8 +106,8 @@ namespace noname_SanityArchiver
 
         private string RemoveFileExtension(string fileName)
         {
-            string fullName = fileName;
-            return fullName.Substring(fullName.LastIndexOf('.') + 1);
+            int extensionIndex = fileName.Contains('.') ? fileName.LastIndexOf('.') : fileName.Length;
+            return fileName.Substring(0, extensionIndex);
         }
     }
 }
