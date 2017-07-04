@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,13 @@ namespace noname_SanityArchiver
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            FileCryptor asd = new FileCryptor(@"C:\TEST\google-earth-view-1131.jpg");
+            asd.EncryptFile(@"pass");
+            
+            FileCryptor dsa = new FileCryptor(@"C:\TEST\google-earth-view-1131.jpg.tnc");
+            dsa.DecryptFile(@"pass");
+
+
             #region Szarfos
 
             /*

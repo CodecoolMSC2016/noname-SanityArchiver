@@ -2,13 +2,13 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace noname_SanityArchiver
 {
     internal class FileCryptor
     {
-        private string decryptedName;
-        private string encryptedName;
+        private string filename;
 
         /*
          * usage:
@@ -19,58 +19,85 @@ namespace noname_SanityArchiver
          *   dsa.DecryptFile(@"pass", iv);
          */
 
-        public FileCryptor(string deName, string enName)
+        public FileCryptor(string filename)
         {
-            decryptedName = deName;
-            encryptedName = enName;
+            this.filename = filename;
         }
 
-        public void DecryptFile(string password, byte[] iv)
+        public void DecryptFile(string password, string decryptedName = null)
         {
+            Regex filenameWithExtension = new Regex(@".+\.tnc", RegexOptions.IgnoreCase);
+            if (!filenameWithExtension.Match(filename).Success)
+            {
+                return;
+            }
+            if (decryptedName == null)
+            {
+                Regex cryptExtension = new Regex(@"\.tnc$");
+                decryptedName = cryptExtension.Replace(filename, "");
+            }
             byte[] key = ToKey(password);
 
             using (RijndaelManaged rijn = new RijndaelManaged())
             {
-                rijn.IV = iv;
                 rijn.Key = key;
-                using (FileStream fsIn = new FileStream(encryptedName, FileMode.Open))
-                using (FileStream fsOut = new FileStream(decryptedName, FileMode.Create))
+                using (FileStream fsIn = new FileStream(filename, FileMode.Open))
+                using (FileStream fsOut = new FileStream(decryptedName, FileMode.CreateNew))
                 {
-                    ICryptoTransform decryptor = rijn.CreateDecryptor();
-                    CryptoStream cs = new CryptoStream(fsIn, decryptor, CryptoStreamMode.Read);
-
-                    int data;
-                    while ((data = cs.ReadByte()) != -1)
+                    byte[] iv = new byte[16];
+                    for (int i = 0; i < iv.Length; i++)
                     {
-                        fsOut.WriteByte((byte)data);
+                        iv[i] = (byte)fsIn.ReadByte();
+                    }
+
+                    rijn.IV = iv;
+
+                    ICryptoTransform decryptor = rijn.CreateDecryptor();
+
+                    using (CryptoStream cs = new CryptoStream(fsOut, decryptor, CryptoStreamMode.Write))
+                    {
+                        int data;
+                        while ((data = fsIn.ReadByte()) != -1)
+                        {
+                            cs.WriteByte((byte)data);
+                        }
                     }
                 }
             }
         }
 
-        public byte[] EncryptFile(string password)
+        public void EncryptFile(string password, string encryptedName = null)
         {
+            if (encryptedName == null)
+            {
+                encryptedName = filename + ".tnc";
+            }
             byte[] key = ToKey(password);
 
             using (RijndaelManaged rijn = new RijndaelManaged())
             {
                 // TODO: change this
-                //rijn.GenerateIV();
-                rijn.IV = new byte[16];
+                rijn.GenerateIV();
+                //rijn.IV = new byte[16];
                 rijn.Key = key;
-                using (FileStream fsIn = new FileStream(decryptedName, FileMode.Open))
-                using (FileStream fsOut = new FileStream(encryptedName, FileMode.Create))
+                using (FileStream fsIn = new FileStream(filename, FileMode.Open))
+                using (FileStream fsOut = new FileStream(encryptedName, FileMode.CreateNew))
                 {
                     ICryptoTransform encryptor = rijn.CreateEncryptor();
-                    CryptoStream cs = new CryptoStream(fsIn, encryptor, CryptoStreamMode.Read);
-
-                    int data;
-                    while ((data = cs.ReadByte()) != -1)
+                    using (CryptoStream cs = new CryptoStream(fsIn, encryptor, CryptoStreamMode.Read))
                     {
-                        fsOut.WriteByte((byte)data);
+                        for (int i = 0; i < rijn.IV.Length; i++)
+                        {
+                            fsOut.WriteByte(rijn.IV[i]);
+                        }
+
+                        int data;
+                        while ((data = cs.ReadByte()) != -1)
+                        {
+                            fsOut.WriteByte((byte)data);
+                        }
                     }
                 }
-                return rijn.IV;
             }
         }
 
