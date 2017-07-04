@@ -7,15 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace noname_SanityArchiver
 {
     class FileExplorer
     {
+        public enum ItemType { Directory, File};
 
-        public Dictionary<string, DirectoryInfo> CurrentDirectories { get; set; }
-
-        public Dictionary<string, FileInfo> CurrentFiles { get; set; }
+        public List<FileSystemInfo> CurrentItems { get; set; }
 
         public DataGridView View { get; }
 
@@ -25,59 +25,60 @@ namespace noname_SanityArchiver
         public FileExplorer(DataGridView view, TextBox textBox)
         {
             View = view;
-            CurrentDirectories = new Dictionary<string, DirectoryInfo>();
-            CurrentFiles = new Dictionary<string, FileInfo>();
+            CurrentItems = new List<FileSystemInfo>();
             absoluePathBox = textBox;
         }
 
         public FileSystemInfo GetSelectedItem()
         {
-            string itemName = GetFileNameWithExtension(View.SelectedRows[0]);
-            if (CurrentDirectories.ContainsKey(itemName))
-            {
-                return CurrentDirectories[itemName];
-            }
-            return CurrentFiles[itemName];
+            int itemIndex = View.CurrentCell.RowIndex;
+            return CurrentItems[itemIndex];
         }
 
         public void DisplayFiles(DirectoryInfo selectedFolder)
         {
             View.Rows.Clear();
-            CurrentDirectories.Clear();
-            CurrentFiles.Clear();
+            CurrentItems.Clear();
 
             UpdateAbsolutePath(selectedFolder.FullName);
 
             FileInfo[] files = selectedFolder.GetFiles();
             DirectoryInfo[] directories = selectedFolder.GetDirectories();
-            //List<ListViewItem> items = new List<ListViewItem>();
-            //items.Add(new ListViewItem(new[] { "0", "...", "", "" }));
+
+            DirectoryInfo parent = Directory.GetParent(selectedFolder.FullName); ;
+            if (parent == null)
+            {
+                parent = selectedFolder;
+            }
+            CurrentItems.Add(parent);
+
             View.Rows.Add(Resources.icon_arrow, "...", "", "");
-            try
-            {
-                CurrentDirectories["..."] = Directory.GetParent(selectedFolder.FullName);
-            }
-            catch (NullReferenceException)
-            {
-                CurrentDirectories["..."] = selectedFolder;
-            }
 
-            for (int i = 0; i < directories.Length; i++)
-            {
-                CurrentDirectories.Add(directories[i].Name, directories[i]);
-                string dirName = directories[i].Name.Split('.')[0];
-                View.Rows.Add(Resources.icon_folder, dirName, "", directories[i].Extension);
+            AddItemsToView(directories, ItemType.Directory);
 
-            }
+            AddItemsToView(files, ItemType.File);
+        }
 
-            for (int i = 0; i < files.Length; i++)
+        private void AddItemsToView(FileSystemInfo[] items, ItemType itemType)
+        {
+            string fileSize;
+            string baseName;
+            Bitmap icon;
+            for (int i = 0; i < items.Length; i++)
             {
-                CurrentFiles.Add(files[i].Name, files[i]);
-                string fileSize = (files[i].Length / 1048576).ToString();
-                Icon icon = Icon.ExtractAssociatedIcon(files[i].FullName);
-                string fileName = files[i].Name.Split('.')[0];
-                View.Rows.Add(icon, fileName, fileSize, files[i].Extension);
+                CurrentItems.Add(items[i]);
+                baseName = RemoveFileExtension(items[i].Name);
+                icon = Resources.icon_folder;
+                fileSize = "";
+
+                if (itemType == ItemType.File)
+                {
+                    fileSize = (((FileInfo)items[i]).Length / 1048576).ToString();
+                    icon = Icon.ExtractAssociatedIcon(items[i].FullName).ToBitmap();
+                }
+                View.Rows.Add(icon, baseName, fileSize, items[i].Extension);
             }
+            
         }
 
         public void UpdateAbsolutePath(string path)
@@ -90,6 +91,12 @@ namespace noname_SanityArchiver
             string name = row.Cells[1].Value.ToString();
             string extension = row.Cells[3].Value.ToString();
             return name + extension;
+        }
+
+        private string RemoveFileExtension(string fileName)
+        {
+            string fullName = fileName;
+            return fullName.Substring(fullName.LastIndexOf('.') + 1);
         }
     }
 }

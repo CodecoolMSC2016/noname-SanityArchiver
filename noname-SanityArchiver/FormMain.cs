@@ -78,36 +78,19 @@ namespace noname_SanityArchiver
 #endregion
         private void CallAppropriateExplorer(FileExplorer explorer)
         {
-            string selectedItem = explorer.GetFileNameWithExtension(explorer.View.SelectedRows[0]);
-            if (explorer.CurrentDirectories.ContainsKey(selectedItem))
+            int itemIndex = explorer.View.CurrentCell.RowIndex;
+            FileSystemInfo selectedItem = explorer.CurrentItems[itemIndex];
+            var attr = File.GetAttributes(selectedItem.FullName);
+            if (attr.HasFlag(FileAttributes.Directory))
             {
-                DirectoryInfo chosenDirectory = explorer.CurrentDirectories[selectedItem];
-                explorer.DisplayFiles(chosenDirectory);
+                explorer.DisplayFiles((DirectoryInfo)selectedItem);
             }
         }
 
         private void UpdateAppropriateTextBox(FileExplorer explorer)
         {
-            string path = GetFullPathOfSelectedItem(explorer);
+            string path = explorer.GetSelectedItem().FullName;
             explorer.UpdateAbsolutePath(path);
         }
-
-        private string GetFullPathOfSelectedItem(FileExplorer explorer)
-        {
-            var selectedRow = explorer.View.SelectedRows[0];
-            string name = selectedRow.Cells[1].Value.ToString();
-            string extension = selectedRow.Cells[3].Value.ToString();
-            string selectedItem = name + extension;
-
-            if (explorer.CurrentDirectories.ContainsKey(selectedItem))
-            {
-                return explorer.CurrentDirectories[selectedItem].FullName;
-            }
-            return explorer.CurrentFiles[selectedItem].FullName;
-        }
-
-
-
-
     }
 }
