@@ -78,7 +78,7 @@ namespace noname_SanityArchiver
 #endregion
         private void CallAppropriateExplorer(FileExplorer explorer)
         {
-            string selectedItem = GetFileNameWithExtension(explorer.View.SelectedRows[0]);
+            string selectedItem = explorer.GetFileNameWithExtension(explorer.View.SelectedRows[0]);
             if (explorer.CurrentDirectories.ContainsKey(selectedItem))
             {
                 DirectoryInfo chosenDirectory = explorer.CurrentDirectories[selectedItem];
@@ -106,12 +106,7 @@ namespace noname_SanityArchiver
             return explorer.CurrentFiles[selectedItem].FullName;
         }
 
-        private string GetFileNameWithExtension(DataGridViewRow row)
-        {
-            string name = row.Cells[1].Value.ToString();
-            string extension = row.Cells[3].Value.ToString();
-            return name + extension;
-        }
+
 
 
     }

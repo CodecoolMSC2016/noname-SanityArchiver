@@ -30,6 +30,16 @@ namespace noname_SanityArchiver
             absoluePathBox = textBox;
         }
 
+        public FileSystemInfo GetSelectedItem()
+        {
+            string itemName = GetFileNameWithExtension(View.SelectedRows[0]);
+            if (CurrentDirectories.ContainsKey(itemName))
+            {
+                return CurrentDirectories[itemName];
+            }
+            return CurrentFiles[itemName];
+        }
+
         public void DisplayFiles(DirectoryInfo selectedFolder)
         {
             View.Rows.Clear();
@@ -73,6 +83,13 @@ namespace noname_SanityArchiver
         public void UpdateAbsolutePath(string path)
         {
             absoluePathBox.Text = path;
+        }
+
+        public string GetFileNameWithExtension(DataGridViewRow row)
+        {
+            string name = row.Cells[1].Value.ToString();
+            string extension = row.Cells[3].Value.ToString();
+            return name + extension;
         }
     }
 }
