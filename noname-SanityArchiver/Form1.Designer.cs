@@ -52,6 +52,7 @@
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.CompressButton = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -166,7 +167,8 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripDropDownButton1,
-            this.toolStripButton1});
+            this.toolStripButton1,
+            this.CompressButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(750, 27);
@@ -200,6 +202,16 @@
             this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
             this.toolStripButton1.Text = "toolStripButton1";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // CompressButton
+            // 
+            this.CompressButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.CompressButton.Image = ((System.Drawing.Image)(resources.GetObject("CompressButton.Image")));
+            this.CompressButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CompressButton.Name = "CompressButton";
+            this.CompressButton.Size = new System.Drawing.Size(64, 24);
+            this.CompressButton.Text = "Compress";
+            this.CompressButton.Click += new System.EventHandler(this.CompressButton_Click);
             // 
             // Form1
             // 
@@ -241,6 +253,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ColumnHeader iconHeader;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ToolStripButton CompressButton;
     }
 }
 
