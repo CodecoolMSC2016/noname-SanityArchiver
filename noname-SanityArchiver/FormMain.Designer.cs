@@ -145,7 +145,6 @@
             this.tempOpenTextFileToolStripMenuItem.Name = "tempOpenTextFileToolStripMenuItem";
             this.tempOpenTextFileToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.tempOpenTextFileToolStripMenuItem.Text = "Temp. Open Text File";
-            this.tempOpenTextFileToolStripMenuItem.Click += new System.EventHandler(this.tempOpenTextFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -276,7 +275,6 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Totally Noname Commander - NEM REGISZTRÁLT";
-            this.Load += new System.EventHandler(this.FormMain_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

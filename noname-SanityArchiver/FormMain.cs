@@ -13,12 +13,12 @@ using System.Collections;
 
 namespace noname_SanityArchiver
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         private string root;
         private FileExplorer fileExplorer;
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
             fileExplorer = FileExplorer.INSTANCE;
