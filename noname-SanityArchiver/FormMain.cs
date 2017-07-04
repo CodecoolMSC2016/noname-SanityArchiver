@@ -16,13 +16,22 @@ namespace noname_SanityArchiver
     public partial class FormMain : Form
     {
         private string root;
-        private FileExplorer fileExplorer;
+        private FileExplorer leftFileExplorer;
+        private FileExplorer rightFileExplorer;
 
         public FormMain()
         {
             InitializeComponent();
-            fileExplorer = FileExplorer.INSTANCE;
+            leftFileExplorer = new FileExplorer(LeftView, LeftTextBox);
+            rightFileExplorer = new FileExplorer(RightView, RightTextBox);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            var rootDirInfo = new DirectoryInfo(root).Root;
+            rightFileExplorer.DisplayFiles(rootDirInfo);
+            leftFileExplorer.DisplayFiles(rootDirInfo);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,69 +55,64 @@ namespace noname_SanityArchiver
             #endregion*/
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+#region ClickEvents
+        private void leftView_DoubleClick(object sender, EventArgs e)
         {
-            displayFiles(root);
+            CallAppropriateExplorer(leftFileExplorer);
         }
 
-        private void listView1_DoubleClick(object sender, EventArgs e)
+        private void rightView_DoubleClick(object sender, EventArgs e)
         {
-            string selectedItem = listView1.SelectedItems[0].SubItems[1].Text;
+            CallAppropriateExplorer(rightFileExplorer);
+        }
 
-            //string absolutePath = Path.GetFullPath(selectedFolder);
-            string selectedFolder = fileExplorer.CurrentDirectories[selectedItem].FullName;
-            FileAttributes attr = File.GetAttributes(selectedFolder);
-            if (attr.HasFlag(FileAttributes.Directory))
+        private void LeftView_Click(object sender, EventArgs e)
+        {
+            UpdateAppropriateTextBox(leftFileExplorer);
+        }
+
+        private void RightView_Click(object sender, EventArgs e)
+        {
+            UpdateAppropriateTextBox(rightFileExplorer);
+        }
+#endregion
+        private void CallAppropriateExplorer(FileExplorer explorer)
+        {
+            string selectedItem = GetFileNameWithExtension(explorer.View.SelectedRows[0]);
+            if (explorer.CurrentDirectories.ContainsKey(selectedItem))
             {
-                displayFiles(selectedFolder);
+                DirectoryInfo chosenDirectory = explorer.CurrentDirectories[selectedItem];
+                explorer.DisplayFiles(chosenDirectory);
             }
         }
 
-        private void displayFiles(DirectoryInfo selectedFolder)
+        private void UpdateAppropriateTextBox(FileExplorer explorer)
         {
-            listView1.Items.Clear();
-            fileExplorer.CurrentDirectories.Clear();
-            //root = selectedFolder;
-            //listView1.Update();
-            //listView1.Refresh();
-
-            FileInfo[] files = selectedFolder.GetFiles();
-            DirectoryInfo[] directories = selectedFolder.GetDirectories();
-            List<ListViewItem> items = new List<ListViewItem>();
-            items.Add(new ListViewItem(new[] { "0", "...", "", "" }));
-            try
-            {
-                fileExplorer.CurrentDirectories["..."] = Directory.GetParent(selectedFolder.FullName);
-            }
-            catch (NullReferenceException)
-            {
-                fileExplorer.CurrentDirectories["..."] = selectedFolder;
-            }
-
-            for (int i = 0; i < directories.Length; i++)
-            {
-                fileExplorer.CurrentDirectories.Add(directories[i].Name, directories[i].FullName);
-                string dirName = directories[i].Name.Split('.')[0];
-                var row = new ListViewItem(new[] { "", dirName, "", directories[i].Extension });
-                row.ImageIndex = i;
-                items.Add(row);
-                imageList1.Images.Add(Resources.folder);
-            }
-
-
-            for (int i = 0; i < files.Length; i++)
-            {
-                currentDirs.Add(files[i].Name, files[i].FullName);
-                string fileSize = (files[i].Length / 1048576).ToString();
-                Icon icon = Icon.ExtractAssociatedIcon(files[i].FullName);
-                string fileName = files[i].Name.Split('.')[0];
-                var row = new ListViewItem(new[] { "", fileName, fileSize, files[i].Extension });
-                row.ImageIndex = i;
-                items.Add(row);
-                imageList1.Images.Add(icon);
-
-            }
-            listView1.Items.AddRange(items.ToArray());
+            string path = GetFullPathOfSelectedItem(explorer);
+            explorer.UpdateAbsolutePath(path);
         }
+
+        private string GetFullPathOfSelectedItem(FileExplorer explorer)
+        {
+            var selectedRow = explorer.View.SelectedRows[0];
+            string name = selectedRow.Cells[1].Value.ToString();
+            string extension = selectedRow.Cells[3].Value.ToString();
+            string selectedItem = name + extension;
+
+            if (explorer.CurrentDirectories.ContainsKey(selectedItem))
+            {
+                return explorer.CurrentDirectories[selectedItem].FullName;
+            }
+            return explorer.CurrentFiles[selectedItem].FullName;
+        }
+
+        private string GetFileNameWithExtension(DataGridViewRow row)
+        {
+            string name = row.Cells[1].Value.ToString();
+            string extension = row.Cells[3].Value.ToString();
+            return name + extension;
+        }
+
+
     }
 }
