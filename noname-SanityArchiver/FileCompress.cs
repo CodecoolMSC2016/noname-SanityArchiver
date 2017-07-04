@@ -76,5 +76,30 @@ namespace noname_SanityArchiver
         {
             ZipFile.ExtractToDirectory(fileToDecompress, folderToExtract);
         }
+
+        public void Main(string[] args)
+        {
+
+            string path = @"C:\MyTest.txt";
+            if(!File.Exists(path))
+            {
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine("Hello");
+                    sw.WriteLine("And");
+                    sw.WriteLine("Welcome");
+                }
+            }
+
+
+            List<string> filesToCompressTEST = new List<string>();
+
+            filesToCompressTEST.Add("MyTest.txt");
+
+            FileCompress fc = new FileCompress(filesToCompressTEST);
+            fc.Compress(filesToCompressTEST, "test.zip");
+            Console.WriteLine("compress done");
+            Console.ReadKey();
+        }
     }
 }
