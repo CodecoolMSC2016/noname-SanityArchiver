@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,15 @@ namespace noname_SanityArchiver
             listView1.Items.Add(new ListViewItem("", 0));
 
             #endregion*/
+        }
+
+        private void tempOpenTextFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+            if ( openFileDialog1.FileName != "" )
+            {
+                textFileWindow tfWindow = new textFileWindow(openFileDialog1.FileName);
+            }
         }
     }
 }
