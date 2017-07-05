@@ -127,11 +127,7 @@ namespace noname_SanityArchiver
 
         private bool IsEnterPressed(KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                return true;
-            }
-            return false;
+            return e.KeyCode == Keys.Enter;
         }
 
         private void LeftView_KeyDown(object sender, KeyEventArgs e)
