@@ -106,7 +106,6 @@ namespace noname_SanityArchiver
         {
             AbsoluePathBox.Text = CurrentDirectory.FullName;
         }
-
         public string GetFileNameWithExtension(DataGridViewRow row)
         {
             string name = row.Cells[1].Value.ToString();
@@ -114,10 +113,39 @@ namespace noname_SanityArchiver
             return name + extension;
         }
 
+
         private string RemoveFileExtension(string fileName)
         {
             int extensionIndex = fileName.Contains('.') ? fileName.LastIndexOf('.') : fileName.Length;
             return fileName.Substring(0, extensionIndex);
+        }
+
+        /// <summary>
+        /// Returns the size of the given folder in Megabytes
+        /// </summary>
+        public double getFolderSize(string directoryPath)
+        {
+            if (!File.GetAttributes(directoryPath).HasFlag(FileAttributes.Directory))
+            {
+                return 0;
+            }
+
+            double size = 0;
+            string[] files = Directory.GetFiles(directoryPath);
+
+            foreach (string file in files)
+            {
+                size += new FileInfo(file).Length;
+            }
+
+            string[] directories = Directory.GetFiles(directoryPath);
+
+            foreach (string directory in directories)
+            {
+                size += getFolderSize(directory);
+            }
+
+            return Math.Ceiling(size / 1024 / 1024);
         }
     }
 }
