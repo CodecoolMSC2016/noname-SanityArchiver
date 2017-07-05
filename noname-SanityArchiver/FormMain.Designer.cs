@@ -53,6 +53,8 @@
             this.toolButtonCrypt = new System.Windows.Forms.ToolStripButton();
             this.toolButtonCompress = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolButtonDecompress = new System.Windows.Forms.ToolStripButton();
+            this.toolButtonDecrypt = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -227,7 +229,9 @@
             this.ToolFileDrop,
             this.toolStripSeparator1,
             this.toolButtonCrypt,
-            this.toolButtonCompress});
+            this.toolButtonDecrypt,
+            this.toolButtonCompress,
+            this.toolButtonDecompress});
             this.ToolbarMain.Location = new System.Drawing.Point(0, 0);
             this.ToolbarMain.Name = "ToolbarMain";
             this.ToolbarMain.Size = new System.Drawing.Size(1000, 27);
@@ -283,6 +287,22 @@
             this.toolButtonCompress.Text = "Compress";
             this.toolButtonCompress.Click += new System.EventHandler(this.toolButtonCompress_Click);
             // 
+            // toolButtonDecompress
+            // 
+            this.toolButtonDecompress.Image = ((System.Drawing.Image)(resources.GetObject("toolButtonDecompress.Image")));
+            this.toolButtonDecompress.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolButtonDecompress.Name = "toolButtonDecompress";
+            this.toolButtonDecompress.Size = new System.Drawing.Size(115, 24);
+            this.toolButtonDecompress.Text = "Decompress";
+            // 
+            // toolButtonDecrypt
+            // 
+            this.toolButtonDecrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolButtonDecrypt.Image")));
+            this.toolButtonDecrypt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolButtonDecrypt.Name = "toolButtonDecrypt";
+            this.toolButtonDecrypt.Size = new System.Drawing.Size(85, 24);
+            this.toolButtonDecrypt.Text = "Decrypt";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -336,6 +356,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderLeft;
         private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderLeft;
         private System.Windows.Forms.ToolStripButton toolButtonCompress;
+        private System.Windows.Forms.ToolStripButton toolButtonDecrypt;
+        private System.Windows.Forms.ToolStripButton toolButtonDecompress;
     }
 }
 
