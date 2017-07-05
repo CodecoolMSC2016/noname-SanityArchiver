@@ -19,14 +19,16 @@ namespace noname_SanityArchiver
 
         public DataGridView View { get; }
 
-        private TextBox absoluePathBox;
+        public TextBox AbsoluePathBox { get; }
+
+        private DirectoryInfo currentDirectory;
         
 
         public FileExplorer(DataGridView view, TextBox textBox)
         {
             View = view;
             CurrentItems = new List<FileSystemInfo>();
-            absoluePathBox = textBox;
+            AbsoluePathBox = textBox;
         }
 
         public FileSystemInfo GetSelectedItem()
@@ -34,12 +36,12 @@ namespace noname_SanityArchiver
             int itemIndex = View.CurrentCell.RowIndex;
             return CurrentItems[itemIndex];
         }
-
+        /// <summary>
+        /// fbgbhnzsnsznhznhszn
+        /// </summary>
+        /// <param name="selectedFolder"></param>
         public void DisplayFiles(DirectoryInfo selectedFolder)
         {
-            
-
-            UpdateAbsolutePath(selectedFolder.FullName);
             FileInfo[] files = null;
             DirectoryInfo[] directories = null;
             try
@@ -54,16 +56,21 @@ namespace noname_SanityArchiver
                 // give admin priviliges to user and remove try catch
                 return;
             }
-            
-            
-            DirectoryInfo parent = Directory.GetParent(selectedFolder.FullName); ;
-            if (parent == null)
+            catch (DirectoryNotFoundException)
             {
-                parent = selectedFolder;
+                UpdateAbsolutePath();
+                return;
             }
-            CurrentItems.Add(parent);
 
-            View.Rows.Add(Resources.icon_arrow, "...", "", "");
+
+            currentDirectory = selectedFolder;
+            UpdateAbsolutePath();
+            DirectoryInfo parent = Directory.GetParent(selectedFolder.FullName); ;
+            if (parent != null)
+            {
+                CurrentItems.Add(parent);
+                View.Rows.Add(Resources.icon_arrow, "...", "", "");
+            }
 
             AddItemsToView(directories, ItemType.Directory);
 
@@ -92,9 +99,9 @@ namespace noname_SanityArchiver
             
         }
 
-        public void UpdateAbsolutePath(string path)
+        public void UpdateAbsolutePath()
         {
-            absoluePathBox.Text = path;
+            AbsoluePathBox.Text = currentDirectory.FullName;
         }
 
         public string GetFileNameWithExtension(DataGridViewRow row)

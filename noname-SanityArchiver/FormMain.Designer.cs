@@ -99,7 +99,7 @@
             this.sizeHeaderLeft,
             this.extensionHeaderLeft});
             this.leftView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.leftView.Location = new System.Drawing.Point(0, 24);
+            this.leftView.Location = new System.Drawing.Point(0, 21);
             this.leftView.Margin = new System.Windows.Forms.Padding(0);
             this.leftView.Name = "leftView";
             this.leftView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -109,6 +109,7 @@
             this.leftView.TabIndex = 3;
             this.leftView.Click += new System.EventHandler(this.leftView_Click);
             this.leftView.DoubleClick += new System.EventHandler(this.leftView_DoubleClick);
+            this.leftView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LeftView_KeyDown);
             // 
             // iconHeaderLeft
             // 
@@ -151,6 +152,7 @@
             this.LeftTextBox.Name = "LeftTextBox";
             this.LeftTextBox.Size = new System.Drawing.Size(500, 24);
             this.LeftTextBox.TabIndex = 2;
+            this.LeftTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LeftTextBox_KeyDown);
             // 
             // rightView
             // 
@@ -166,8 +168,9 @@
             this.nameHeaderRight,
             this.sizeHeaderRight,
             this.extensionHeaderRight});
+
             this.rightView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rightView.Location = new System.Drawing.Point(0, 24);
+            this.rightView.Location = new System.Drawing.Point(0, 21);
             this.rightView.Margin = new System.Windows.Forms.Padding(0);
             this.rightView.Name = "rightView";
             this.rightView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -177,6 +180,7 @@
             this.rightView.TabIndex = 4;
             this.rightView.Click += new System.EventHandler(this.rightView_Click);
             this.rightView.DoubleClick += new System.EventHandler(this.rightView_DoubleClick);
+            this.rightView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RightView_KeyDown);
             // 
             // iconHeaderRight
             // 
@@ -215,6 +219,7 @@
             this.RightTextBox.Name = "RightTextBox";
             this.RightTextBox.Size = new System.Drawing.Size(496, 24);
             this.RightTextBox.TabIndex = 3;
+            this.RightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RightTextBox_KeyDown);
             // 
             // imageList1
             // 
