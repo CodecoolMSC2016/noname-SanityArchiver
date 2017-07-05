@@ -65,16 +65,6 @@ namespace noname_SanityArchiver
         {
             CallAppropriateExplorer(rightFileExplorer);
         }
-
-        private void LeftView_Click(object sender, EventArgs e)
-        {
-            UpdateAppropriateTextBox(leftFileExplorer);
-        }
-
-        private void RightView_Click(object sender, EventArgs e)
-        {
-            UpdateAppropriateTextBox(rightFileExplorer);
-        }
 #endregion
         private void CallAppropriateExplorer(FileExplorer explorer)
         {
@@ -87,10 +77,58 @@ namespace noname_SanityArchiver
             }
         }
 
-        private void UpdateAppropriateTextBox(FileExplorer explorer)
+        private void LeftTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            string path = explorer.GetSelectedItem().FullName;
-            explorer.UpdateAbsolutePath(path);
+            if (IsEnterPressed(e))
+            {
+                SearchForDirectory(leftFileExplorer);
+            }
+        }
+
+        private void RightTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsEnterPressed(e))
+            {
+                SearchForDirectory(rightFileExplorer);
+            }
+        }
+
+        private void SearchForDirectory(FileExplorer explorer)
+        {
+            string absolutePath = explorer.AbsoluePathBox.Text;
+            try
+            {
+                explorer.DisplayFiles(new DirectoryInfo(absolutePath));
+            }
+            catch (ArgumentException)
+            {
+                explorer.UpdateAbsolutePath();
+            }
+        }
+
+        private bool IsEnterPressed(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void LeftView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsEnterPressed(e))
+            {
+                CallAppropriateExplorer(leftFileExplorer);
+            }
+        }
+
+        private void RightView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsEnterPressed(e))
+            {
+                CallAppropriateExplorer(rightFileExplorer);
+            }
         }
     }
 }
