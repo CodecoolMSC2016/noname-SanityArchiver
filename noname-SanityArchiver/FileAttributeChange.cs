@@ -13,10 +13,9 @@ namespace noname_SanityArchiver
         public FileAttributeChange() { }
 
         // get file attributes
-        public FileAttributes GetFileAttributes(string filePath)
+        public void GetFileAttributes(string filePath)
         {
             FileAttributes attributes = File.GetAttributes(filePath);
-            return attributes;
         }
 
         // check whether a file has readonly attribute
@@ -63,8 +62,11 @@ namespace noname_SanityArchiver
             File.SetAttributes(filePath, FileAttributes.Hidden);
         }
 
-        
-
+        // clear all file attributes
+        public void ClearAttributes(string filePath)
+        {
+            File.SetAttributes(filePath, FileAttributes.Normal);
+        }
     }
 }   
 
