@@ -13,32 +13,66 @@ namespace noname_SanityArchiver
 
         public void TransferFiles(List<string> filePaths, string destinationPath, TransferType transferType)
         {
-            foreach (var filePath in filePaths)
+            if (transferType == TransferType.Copy)
             {
-                if (transferType == TransferType.Copy)
+                foreach (string filePath in filePaths)
                 {
-                    File.Copy(filePath, destinationPath, true);
+                    if (IsDirectory(filePath))
+                    {
+                        // TODO: implement directory copy
+                    }
+                    else
+                    {
+                        File.Copy(filePath, destinationPath, true);
+                    }
                 }
-                else
+            }
+            else if (transferType == TransferType.Move)
+            {
+                foreach (string filePath in filePaths)
                 {
-                    File.Move(filePath, destinationPath);
+                    if (IsDirectory(filePath))
+                    {
+                        Directory.Move(filePath, destinationPath);
+                    }
+                    else
+                    {
+                        File.Move(filePath, destinationPath);
+                    }
                 }
-                    
             }
         }
 
         public void TransferFiles(string filePath, string destinationPath, TransferType transferType)
         {
-            if (transferType == TransferType.Copy)
+            TransferFiles(new List<string>() { "" }, destinationPath, transferType);
+        }
+
+        public void Rename(string oldPath, string newName)
+        {
+            try
             {
-                File.Copy(filePath, destinationPath, true);
+                if (IsDirectory(oldPath))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(oldPath);
+                    dir.MoveTo(Path.Combine(dir.Parent.FullName, newName));
+                }
+                else
+                {
+                    FileInfo fi = new FileInfo(oldPath);
+                    fi.MoveTo(Path.Combine(fi.DirectoryName, newName));
+                }
             }
-            else
+            catch (IOException)
             {
-                File.Move(filePath, destinationPath);
+                throw;
             }
         }
 
-
+        private bool IsDirectory(string path)
+        {
+            FileAttributes attr = File.GetAttributes(path);
+            return attr.HasFlag(FileAttributes.Directory);
+        }
     }
 }

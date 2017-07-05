@@ -48,7 +48,7 @@ namespace noname_SanityArchiver
 
             FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
             cryptor.EncryptFile("pass");
-            selectedExplorer.DisplayFiles();
+            UpdatePanes();
         }
 
         private void toolButtonDecrypt_Click(object sender, EventArgs e)
@@ -57,7 +57,7 @@ namespace noname_SanityArchiver
 
             FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
             cryptor.DecryptFile("pass");
-            selectedExplorer.DisplayFiles();
+            UpdatePanes();
         }
 
         private void toolButtonCompress_Click(object sender, EventArgs e)
@@ -146,5 +146,38 @@ namespace noname_SanityArchiver
             }
         }
 
+        private void leftView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string oldPath = leftFileExplorer.CurrentItems[e.RowIndex].FullName;
+                var changedRow = leftView.Rows[e.RowIndex];
+                string newName = ((string)changedRow.Cells["nameHeaderLeft"].Value +
+                    (string)changedRow.Cells["extensionHeaderLeft"].Value);
+                FileTransfer ft = new FileTransfer();
+                ft.Rename(oldPath, newName);
+                UpdatePanes();
+            }
+        }
+
+        private void rightView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string oldPath = rightFileExplorer.CurrentItems[e.RowIndex].FullName;
+                var changedRow = rightView.Rows[e.RowIndex];
+                string newName = ((string)changedRow.Cells["nameHeaderRight"].Value +
+                    (string)changedRow.Cells["extensionHeaderRight"].Value);
+                FileTransfer ft = new FileTransfer();
+                ft.Rename(oldPath, newName);
+                UpdatePanes();
+            }
+        }
+
+        private void UpdatePanes()
+        {
+            leftFileExplorer.DisplayFiles();
+            rightFileExplorer.DisplayFiles();
+        }
     }
 }
