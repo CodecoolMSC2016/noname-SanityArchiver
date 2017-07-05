@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.LeftView = new System.Windows.Forms.DataGridView();
+            this.leftView = new System.Windows.Forms.DataGridView();
             this.iconHeaderLeft = new System.Windows.Forms.DataGridViewImageColumn();
             this.nameHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extensionHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LeftTextBox = new System.Windows.Forms.TextBox();
-            this.RightView = new System.Windows.Forms.DataGridView();
+            this.rightView = new System.Windows.Forms.DataGridView();
             this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
             this.nameHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,16 +51,16 @@
             this.tempOpenTextFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolButtonEncrypt = new System.Windows.Forms.ToolStripButton();
-            this.toolButtonCompress = new System.Windows.Forms.ToolStripButton();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.toolButtonDecompress = new System.Windows.Forms.ToolStripButton();
             this.toolButtonDecrypt = new System.Windows.Forms.ToolStripButton();
+            this.toolButtonCompress = new System.Windows.Forms.ToolStripButton();
+            this.toolButtonDecompress = new System.Windows.Forms.ToolStripButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LeftView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RightView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightView)).BeginInit();
             this.ToolbarMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,42 +73,42 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.LeftView);
+            this.splitContainer1.Panel1.Controls.Add(this.leftView);
             this.splitContainer1.Panel1.Controls.Add(this.LeftTextBox);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.RightView);
+            this.splitContainer1.Panel2.Controls.Add(this.rightView);
             this.splitContainer1.Panel2.Controls.Add(this.RightTextBox);
             this.splitContainer1.Size = new System.Drawing.Size(1000, 455);
             this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.TabIndex = 0;
             // 
-            // LeftView
+            // leftView
             // 
-            this.LeftView.AllowUserToAddRows = false;
-            this.LeftView.AllowUserToDeleteRows = false;
-            this.LeftView.AllowUserToOrderColumns = true;
-            this.LeftView.AllowUserToResizeRows = false;
-            this.LeftView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.LeftView.BackgroundColor = System.Drawing.Color.White;
-            this.LeftView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.LeftView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.leftView.AllowUserToAddRows = false;
+            this.leftView.AllowUserToDeleteRows = false;
+            this.leftView.AllowUserToOrderColumns = true;
+            this.leftView.AllowUserToResizeRows = false;
+            this.leftView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.leftView.BackgroundColor = System.Drawing.Color.White;
+            this.leftView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.leftView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iconHeaderLeft,
             this.nameHeaderLeft,
             this.sizeHeaderLeft,
             this.extensionHeaderLeft});
-            this.LeftView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LeftView.Location = new System.Drawing.Point(0, 24);
-            this.LeftView.Margin = new System.Windows.Forms.Padding(0);
-            this.LeftView.Name = "LeftView";
-            this.LeftView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.LeftView.RowHeadersWidth = 4;
-            this.LeftView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.LeftView.Size = new System.Drawing.Size(500, 431);
-            this.LeftView.TabIndex = 3;
-            this.LeftView.Click += new System.EventHandler(this.LeftView_Click);
-            this.LeftView.DoubleClick += new System.EventHandler(this.leftView_DoubleClick);
+            this.leftView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.leftView.Location = new System.Drawing.Point(0, 24);
+            this.leftView.Margin = new System.Windows.Forms.Padding(0);
+            this.leftView.Name = "leftView";
+            this.leftView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.leftView.RowHeadersWidth = 4;
+            this.leftView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.leftView.Size = new System.Drawing.Size(500, 431);
+            this.leftView.TabIndex = 3;
+            this.leftView.Click += new System.EventHandler(this.leftView_Click);
+            this.leftView.DoubleClick += new System.EventHandler(this.leftView_DoubleClick);
             // 
             // iconHeaderLeft
             // 
@@ -152,31 +152,31 @@
             this.LeftTextBox.Size = new System.Drawing.Size(500, 24);
             this.LeftTextBox.TabIndex = 2;
             // 
-            // RightView
+            // rightView
             // 
-            this.RightView.AllowUserToAddRows = false;
-            this.RightView.AllowUserToDeleteRows = false;
-            this.RightView.AllowUserToOrderColumns = true;
-            this.RightView.AllowUserToResizeRows = false;
-            this.RightView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.RightView.BackgroundColor = System.Drawing.Color.White;
-            this.RightView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.RightView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.rightView.AllowUserToAddRows = false;
+            this.rightView.AllowUserToDeleteRows = false;
+            this.rightView.AllowUserToOrderColumns = true;
+            this.rightView.AllowUserToResizeRows = false;
+            this.rightView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.rightView.BackgroundColor = System.Drawing.Color.White;
+            this.rightView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.rightView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iconHeaderRight,
             this.nameHeaderRight,
             this.sizeHeaderRight,
             this.extensionHeaderRight});
-            this.RightView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightView.Location = new System.Drawing.Point(0, 24);
-            this.RightView.Margin = new System.Windows.Forms.Padding(0);
-            this.RightView.Name = "RightView";
-            this.RightView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.RightView.RowHeadersWidth = 4;
-            this.RightView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.RightView.Size = new System.Drawing.Size(496, 431);
-            this.RightView.TabIndex = 4;
-            this.RightView.Click += new System.EventHandler(this.RightView_Click);
-            this.RightView.DoubleClick += new System.EventHandler(this.rightView_DoubleClick);
+            this.rightView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rightView.Location = new System.Drawing.Point(0, 24);
+            this.rightView.Margin = new System.Windows.Forms.Padding(0);
+            this.rightView.Name = "rightView";
+            this.rightView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.rightView.RowHeadersWidth = 4;
+            this.rightView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.rightView.Size = new System.Drawing.Size(496, 431);
+            this.rightView.TabIndex = 4;
+            this.rightView.Click += new System.EventHandler(this.rightView_Click);
+            this.rightView.DoubleClick += new System.EventHandler(this.rightView_DoubleClick);
             // 
             // iconHeaderRight
             // 
@@ -278,6 +278,15 @@
             this.toolButtonEncrypt.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.toolButtonEncrypt.Click += new System.EventHandler(this.toolButtonEncrypt_Click);
             // 
+            // toolButtonDecrypt
+            // 
+            this.toolButtonDecrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolButtonDecrypt.Image")));
+            this.toolButtonDecrypt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolButtonDecrypt.Name = "toolButtonDecrypt";
+            this.toolButtonDecrypt.Size = new System.Drawing.Size(85, 24);
+            this.toolButtonDecrypt.Text = "Decrypt";
+            this.toolButtonDecrypt.Click += new System.EventHandler(this.toolButtonDecrypt_Click);
+            // 
             // toolButtonCompress
             // 
             this.toolButtonCompress.Image = ((System.Drawing.Image)(resources.GetObject("toolButtonCompress.Image")));
@@ -295,15 +304,6 @@
             this.toolButtonDecompress.Size = new System.Drawing.Size(115, 24);
             this.toolButtonDecompress.Text = "Decompress";
             this.toolButtonDecompress.Click += new System.EventHandler(this.toolButtonDecompress_Click);
-            // 
-            // toolButtonDecrypt
-            // 
-            this.toolButtonDecrypt.Image = ((System.Drawing.Image)(resources.GetObject("toolButtonDecrypt.Image")));
-            this.toolButtonDecrypt.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolButtonDecrypt.Name = "toolButtonDecrypt";
-            this.toolButtonDecrypt.Size = new System.Drawing.Size(85, 24);
-            this.toolButtonDecrypt.Text = "Decrypt";
-            this.toolButtonDecrypt.Click += new System.EventHandler(this.toolButtonDecrypt_Click);
             // 
             // FormMain
             // 
@@ -324,8 +324,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.LeftView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RightView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.leftView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rightView)).EndInit();
             this.ToolbarMain.ResumeLayout(false);
             this.ToolbarMain.PerformLayout();
             this.ResumeLayout(false);
@@ -347,8 +347,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.TextBox LeftTextBox;
         private System.Windows.Forms.TextBox RightTextBox;
-        private System.Windows.Forms.DataGridView LeftView;
-        private System.Windows.Forms.DataGridView RightView;
+        private System.Windows.Forms.DataGridView leftView;
+        private System.Windows.Forms.DataGridView rightView;
         private System.Windows.Forms.DataGridViewImageColumn iconHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderRight;

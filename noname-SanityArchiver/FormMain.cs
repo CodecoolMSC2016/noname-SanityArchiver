@@ -22,8 +22,8 @@ namespace noname_SanityArchiver
         public FormMain()
         {
             InitializeComponent();
-            leftFileExplorer = new FileExplorer(LeftView, LeftTextBox);
-            rightFileExplorer = new FileExplorer(RightView, RightTextBox);
+            leftFileExplorer = new FileExplorer(leftView, LeftTextBox);
+            rightFileExplorer = new FileExplorer(rightView, RightTextBox);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         }
 
@@ -44,12 +44,18 @@ namespace noname_SanityArchiver
 
         private void toolButtonEncrypt_Click(object sender, EventArgs e)
         {
-            // TODO: implement crypt button
+            FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
+
+            FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
+            cryptor.EncryptFile("pass");
         }
 
         private void toolButtonDecrypt_Click(object sender, EventArgs e)
         {
+            FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
 
+            FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
+            cryptor.DecryptFile("pass");
         }
 
         private void toolButtonCompress_Click(object sender, EventArgs e)
@@ -76,12 +82,12 @@ namespace noname_SanityArchiver
             CallAppropriateExplorer(rightFileExplorer);
         }
 
-        private void LeftView_Click(object sender, EventArgs e)
+        private void leftView_Click(object sender, EventArgs e)
         {
             UpdateAppropriateTextBox(leftFileExplorer);
         }
 
-        private void RightView_Click(object sender, EventArgs e)
+        private void rightView_Click(object sender, EventArgs e)
         {
             UpdateAppropriateTextBox(rightFileExplorer);
         }
