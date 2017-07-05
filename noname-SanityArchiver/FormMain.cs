@@ -34,14 +34,17 @@ namespace noname_SanityArchiver
             leftFileExplorer.DisplayFiles(rootDirInfo);
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        #region ToolStrip Handlers
+
+
+        private void toolFileExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolButtonCrypt_Click(object sender, EventArgs e)
         {
-
+            // TODO: implement crypt button
             /*
             #region Szarfos 
 
@@ -52,10 +55,17 @@ namespace noname_SanityArchiver
             imageList1.Images.Add(icon);
             listView1.Items.Add(new ListViewItem("", 0));
 
-            #endregion*/
+            #endregion Szarfos
+            */
         }
 
-#region ClickEvents
+        private void toolButtonCompress_Click(object sender, EventArgs e)
+        {
+            // TODO: implement compress button
+        }
+
+        #endregion
+        #region View ClickEvents
         private void leftView_DoubleClick(object sender, EventArgs e)
         {
             CallAppropriateExplorer(leftFileExplorer);
@@ -92,5 +102,6 @@ namespace noname_SanityArchiver
             string path = explorer.GetSelectedItem().FullName;
             explorer.UpdateAbsolutePath(path);
         }
+
     }
 }
