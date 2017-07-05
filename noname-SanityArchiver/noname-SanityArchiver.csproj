@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileAttributeChange.cs" />
     <Compile Include="FileCryptor.cs" />
     <Compile Include="FileExplorer.cs" />
     <Compile Include="FormMain.cs">
