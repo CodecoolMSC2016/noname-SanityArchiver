@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileCompress.cs" />
+    <Compile Include="FileCopy.cs" />
     <Compile Include="FileCryptor.cs" />
     <Compile Include="FileExplorer.cs" />
     <Compile Include="FormMain.cs">
