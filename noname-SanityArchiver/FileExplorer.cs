@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace noname_SanityArchiver
 {
@@ -21,8 +20,7 @@ namespace noname_SanityArchiver
 
         public TextBox AbsoluePathBox { get; }
 
-        private DirectoryInfo currentDirectory;
-        
+        private DirectoryInfo CurrentDirectory { get; set; }
 
         public FileExplorer(DataGridView view, TextBox textBox)
         {
@@ -63,7 +61,7 @@ namespace noname_SanityArchiver
             }
 
 
-            currentDirectory = selectedFolder;
+            CurrentDirectory = selectedFolder;
             UpdateAbsolutePath();
             DirectoryInfo parent = Directory.GetParent(selectedFolder.FullName); ;
             if (parent != null)
@@ -75,6 +73,11 @@ namespace noname_SanityArchiver
             AddItemsToView(directories, ItemType.Directory);
 
             AddItemsToView(files, ItemType.File);
+        }
+
+        public void DisplayFiles()
+        {
+            DisplayFiles(CurrentDirectory);
         }
 
         private void AddItemsToView(FileSystemInfo[] items, ItemType itemType)
@@ -101,7 +104,7 @@ namespace noname_SanityArchiver
 
         public void UpdateAbsolutePath()
         {
-            AbsoluePathBox.Text = currentDirectory.FullName;
+            AbsoluePathBox.Text = CurrentDirectory.FullName;
         }
 
         public string GetFileNameWithExtension(DataGridViewRow row)

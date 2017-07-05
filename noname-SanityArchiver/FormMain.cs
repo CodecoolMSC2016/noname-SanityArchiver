@@ -48,6 +48,7 @@ namespace noname_SanityArchiver
 
             FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
             cryptor.EncryptFile("pass");
+            selectedExplorer.DisplayFiles();
         }
 
         private void toolButtonDecrypt_Click(object sender, EventArgs e)
@@ -56,6 +57,7 @@ namespace noname_SanityArchiver
 
             FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
             cryptor.DecryptFile("pass");
+            selectedExplorer.DisplayFiles();
         }
 
         private void toolButtonCompress_Click(object sender, EventArgs e)
@@ -94,7 +96,7 @@ namespace noname_SanityArchiver
             }
         }
 
-        private void LeftTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void leftTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (IsEnterPressed(e))
             {
@@ -102,7 +104,7 @@ namespace noname_SanityArchiver
             }
         }
 
-        private void RightTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void rightTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (IsEnterPressed(e))
             {
