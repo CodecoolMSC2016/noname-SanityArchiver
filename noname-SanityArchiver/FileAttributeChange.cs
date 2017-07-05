@@ -51,7 +51,20 @@ namespace noname_SanityArchiver
             }
         }
 
+        // set readonly attribute (no other attribute will set)
+        public void SetReadonlyAttribute(string filePath)
+        {
+            File.SetAttributes(filePath, FileAttributes.ReadOnly);
+        }
+
+        // set hidden attribute (no other attribute will set)
+        public void SetHiddenAttribute(string filePath)
+        {
+            File.SetAttributes(filePath, FileAttributes.Hidden);
+        }
+
         
+
     }
 }   
 
