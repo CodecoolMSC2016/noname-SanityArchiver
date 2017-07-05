@@ -50,7 +50,7 @@
             this.toolFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.tempOpenTextFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolButtonCrypt = new System.Windows.Forms.ToolStripButton();
+            this.toolButtonEncrypt = new System.Windows.Forms.ToolStripButton();
             this.toolButtonCompress = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolButtonDecompress = new System.Windows.Forms.ToolStripButton();
@@ -228,7 +228,7 @@
             this.ToolbarMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolFileDrop,
             this.toolStripSeparator1,
-            this.toolButtonCrypt,
+            this.toolButtonEncrypt,
             this.toolButtonDecrypt,
             this.toolButtonCompress,
             this.toolButtonDecompress});
@@ -268,15 +268,15 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolButtonCrypt
+            // toolButtonEncrypt
             // 
-            this.toolButtonCrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_archive;
-            this.toolButtonCrypt.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolButtonCrypt.Name = "toolButtonCrypt";
-            this.toolButtonCrypt.Size = new System.Drawing.Size(82, 24);
-            this.toolButtonCrypt.Text = "Encrypt";
-            this.toolButtonCrypt.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            this.toolButtonCrypt.Click += new System.EventHandler(this.toolButtonCrypt_Click);
+            this.toolButtonEncrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_archive;
+            this.toolButtonEncrypt.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolButtonEncrypt.Name = "toolButtonEncrypt";
+            this.toolButtonEncrypt.Size = new System.Drawing.Size(82, 24);
+            this.toolButtonEncrypt.Text = "Encrypt";
+            this.toolButtonEncrypt.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            this.toolButtonEncrypt.Click += new System.EventHandler(this.toolButtonEncrypt_Click);
             // 
             // toolButtonCompress
             // 
@@ -294,6 +294,7 @@
             this.toolButtonDecompress.Name = "toolButtonDecompress";
             this.toolButtonDecompress.Size = new System.Drawing.Size(115, 24);
             this.toolButtonDecompress.Text = "Decompress";
+            this.toolButtonDecompress.Click += new System.EventHandler(this.toolButtonDecompress_Click);
             // 
             // toolButtonDecrypt
             // 
@@ -302,6 +303,7 @@
             this.toolButtonDecrypt.Name = "toolButtonDecrypt";
             this.toolButtonDecrypt.Size = new System.Drawing.Size(85, 24);
             this.toolButtonDecrypt.Text = "Decrypt";
+            this.toolButtonDecrypt.Click += new System.EventHandler(this.toolButtonDecrypt_Click);
             // 
             // FormMain
             // 
@@ -338,7 +340,7 @@
         private System.Windows.Forms.ToolStrip ToolbarMain;
         private System.Windows.Forms.ToolStripDropDownButton ToolFileDrop;
         private System.Windows.Forms.ToolStripMenuItem toolFileExit;
-        private System.Windows.Forms.ToolStripButton toolButtonCrypt;
+        private System.Windows.Forms.ToolStripButton toolButtonEncrypt;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolStripMenuItem tempOpenTextFileToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;

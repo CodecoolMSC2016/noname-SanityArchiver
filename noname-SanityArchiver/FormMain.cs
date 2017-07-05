@@ -34,7 +34,7 @@ namespace noname_SanityArchiver
             leftFileExplorer.DisplayFiles(rootDirInfo);
         }
 
-        #region ToolStrip Handlers
+#region ToolStrip Handlers
 
 
         private void toolFileExit_Click(object sender, EventArgs e)
@@ -42,21 +42,14 @@ namespace noname_SanityArchiver
             Application.Exit();
         }
 
-        private void toolButtonCrypt_Click(object sender, EventArgs e)
+        private void toolButtonEncrypt_Click(object sender, EventArgs e)
         {
             // TODO: implement crypt button
-            /*
-            #region Szarfos 
+        }
 
-            string filename = @"C: \Users\racer01\AppData\Local\GitHubDesktop\GitHub Desktop.exe";
-            Icon icon = Icon.ExtractAssociatedIcon(filename);
+        private void toolButtonDecrypt_Click(object sender, EventArgs e)
+        {
 
-
-            imageList1.Images.Add(icon);
-            listView1.Items.Add(new ListViewItem("", 0));
-
-            #endregion Szarfos
-            */
         }
 
         private void toolButtonCompress_Click(object sender, EventArgs e)
@@ -64,7 +57,14 @@ namespace noname_SanityArchiver
             // TODO: implement compress button
         }
 
-        #endregion
+        private void toolButtonDecompress_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+#endregion
+
         #region View ClickEvents
         private void leftView_DoubleClick(object sender, EventArgs e)
         {
