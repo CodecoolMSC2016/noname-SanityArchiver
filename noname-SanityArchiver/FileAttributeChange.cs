@@ -35,6 +35,23 @@ namespace noname_SanityArchiver
             }
 
         }
+        // check whether a file has hidden attribute
+        public bool HasHiddenAttribute(string filePath)
+        {
+            bool isHidden = ((File.GetAttributes(filePath) & FileAttributes.Hidden)
+                == FileAttributes.Hidden);
 
-    }   
-}
+            if (isHidden == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        
+    }
+}   
+
