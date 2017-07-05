@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -89,17 +90,38 @@ namespace noname_SanityArchiver
             {
                 CurrentItems.Add(items[i]);
                 baseName = RemoveFileExtension(items[i].Name);
-                icon = Resources.icon_folder;
                 fileSize = "";
+                icon = Resources.icon_folder_full;
 
                 if (itemType == ItemType.File)
                 {
                     fileSize = (((FileInfo)items[i]).Length / 1024).ToString();
                     icon = Icon.ExtractAssociatedIcon(items[i].FullName).ToBitmap();
+                }else
+                {
+                    if (IsEmpty((DirectoryInfo)items[i]))
+                    { 
+                        icon = Resources.icon_folder;
+                    }
+                    
                 }
                 View.Rows.Add(icon, baseName, fileSize, items[i].Extension);
             }
             
+        }
+
+        private bool IsEmpty(DirectoryInfo dirInfo)
+        {
+            try
+            {
+                int fileCount = ((DirectoryInfo)dirInfo).GetFiles().Length;
+                int dirCount = ((DirectoryInfo)dirInfo).GetDirectories().Length;
+                return (fileCount + dirCount) == 0;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return false;
+            }
         }
 
         public void UpdateAbsolutePath()
