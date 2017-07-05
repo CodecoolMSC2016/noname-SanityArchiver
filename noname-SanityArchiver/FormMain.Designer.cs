@@ -89,6 +89,7 @@
             this.LeftView.AllowUserToOrderColumns = true;
             this.LeftView.AllowUserToResizeRows = false;
             this.LeftView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.LeftView.BackgroundColor = System.Drawing.Color.White;
             this.LeftView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.LeftView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iconHeaderLeft,
@@ -124,6 +125,7 @@
             this.RightView.AllowUserToOrderColumns = true;
             this.RightView.AllowUserToResizeRows = false;
             this.RightView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.RightView.BackgroundColor = System.Drawing.Color.White;
             this.RightView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RightView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iconHeaderRight,
