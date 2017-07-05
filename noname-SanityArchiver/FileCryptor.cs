@@ -10,15 +10,6 @@ namespace noname_SanityArchiver
     {
         private string filename;
 
-        /*
-         * usage:
-         *   FileCryptor asd = new FileCryptor(@"C:\TEST\asd.txt", @"C:\TEST\lol.txt");
-         *   byte[] iv = asd.EncryptFile(@"pass");
-         *
-         *   FileCryptor dsa = new FileCryptor(@"C:\TEST\dsa.txt", @"C:\TEST\lol.txt");
-         *   dsa.DecryptFile(@"pass", iv);
-         */
-
         public FileCryptor(string filename)
         {
             this.filename = filename;
@@ -76,9 +67,7 @@ namespace noname_SanityArchiver
 
             using (RijndaelManaged rijn = new RijndaelManaged())
             {
-                // TODO: change this
                 rijn.GenerateIV();
-                //rijn.IV = new byte[16];
                 rijn.Key = key;
                 using (FileStream fsIn = new FileStream(filename, FileMode.Open))
                 using (FileStream fsOut = new FileStream(encryptedName, FileMode.CreateNew))

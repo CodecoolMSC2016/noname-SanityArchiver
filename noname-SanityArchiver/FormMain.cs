@@ -22,8 +22,8 @@ namespace noname_SanityArchiver
         public FormMain()
         {
             InitializeComponent();
-            leftFileExplorer = new FileExplorer(LeftView, LeftTextBox);
-            rightFileExplorer = new FileExplorer(RightView, RightTextBox);
+            leftFileExplorer = new FileExplorer(leftView, LeftTextBox);
+            rightFileExplorer = new FileExplorer(rightView, RightTextBox);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         }
 
@@ -34,28 +34,46 @@ namespace noname_SanityArchiver
             leftFileExplorer.DisplayFiles(rootDirInfo);
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+#region ToolStrip Handlers
+
+
+        private void toolFileExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolButtonEncrypt_Click(object sender, EventArgs e)
         {
+            FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
 
-            /*
-            #region Szarfos 
-
-            string filename = @"C: \Users\racer01\AppData\Local\GitHubDesktop\GitHub Desktop.exe";
-            Icon icon = Icon.ExtractAssociatedIcon(filename);
-
-
-            imageList1.Images.Add(icon);
-            listView1.Items.Add(new ListViewItem("", 0));
-
-            #endregion*/
+            FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
+            cryptor.EncryptFile("pass");
+            selectedExplorer.DisplayFiles();
         }
 
-#region ClickEvents
+        private void toolButtonDecrypt_Click(object sender, EventArgs e)
+        {
+            FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
+
+            FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
+            cryptor.DecryptFile("pass");
+            selectedExplorer.DisplayFiles();
+        }
+
+        private void toolButtonCompress_Click(object sender, EventArgs e)
+        {
+            // TODO: implement compress button
+        }
+
+        private void toolButtonDecompress_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+#endregion
+
+        #region View ClickEvents
         private void leftView_DoubleClick(object sender, EventArgs e)
         {
             CallAppropriateExplorer(leftFileExplorer);
@@ -66,15 +84,6 @@ namespace noname_SanityArchiver
             CallAppropriateExplorer(rightFileExplorer);
         }
 
-        private void LeftView_Click(object sender, EventArgs e)
-        {
-            UpdateAppropriateTextBox(leftFileExplorer);
-        }
-
-        private void RightView_Click(object sender, EventArgs e)
-        {
-            UpdateAppropriateTextBox(rightFileExplorer);
-        }
 #endregion
         private void CallAppropriateExplorer(FileExplorer explorer)
         {
@@ -87,10 +96,59 @@ namespace noname_SanityArchiver
             }
         }
 
-        private void UpdateAppropriateTextBox(FileExplorer explorer)
+        private void leftTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            string path = explorer.GetSelectedItem().FullName;
-            explorer.UpdateAbsolutePath(path);
+            if (IsEnterPressed(e))
+            {
+                SearchForDirectory(leftFileExplorer);
+            }
         }
+
+        private void rightTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsEnterPressed(e))
+            {
+                SearchForDirectory(rightFileExplorer);
+            }
+        }
+
+        private void SearchForDirectory(FileExplorer explorer)
+        {
+            string absolutePath = explorer.AbsoluePathBox.Text;
+            try
+            {
+                explorer.DisplayFiles(new DirectoryInfo(absolutePath));
+            }
+            catch (ArgumentException)
+            {
+                explorer.UpdateAbsolutePath();
+            }
+        }
+
+        private bool IsEnterPressed(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void LeftView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsEnterPressed(e))
+            {
+                CallAppropriateExplorer(leftFileExplorer);
+            }
+        }
+
+        private void RightView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsEnterPressed(e))
+            {
+                CallAppropriateExplorer(rightFileExplorer);
+            }
+        }
+
     }
 }
