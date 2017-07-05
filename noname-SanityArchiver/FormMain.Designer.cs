@@ -32,16 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.LeftView = new System.Windows.Forms.DataGridView();
-            this.iconHeaderLeft = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nameHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sizeHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extensionHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LeftTextBox = new System.Windows.Forms.TextBox();
             this.RightView = new System.Windows.Forms.DataGridView();
-            this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nameHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sizeHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extensionHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RightTextBox = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -52,6 +44,14 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nameHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sizeHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extensionHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iconHeaderLeft = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nameHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sizeHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extensionHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -88,6 +88,7 @@
             this.LeftView.AllowUserToDeleteRows = false;
             this.LeftView.AllowUserToOrderColumns = true;
             this.LeftView.AllowUserToResizeRows = false;
+            this.LeftView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.LeftView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.LeftView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iconHeaderLeft,
@@ -106,35 +107,6 @@
             this.LeftView.Click += new System.EventHandler(this.LeftView_Click);
             this.LeftView.DoubleClick += new System.EventHandler(this.leftView_DoubleClick);
             // 
-            // iconHeaderLeft
-            // 
-            this.iconHeaderLeft.HeaderText = "Icon";
-            this.iconHeaderLeft.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.iconHeaderLeft.Name = "iconHeaderLeft";
-            this.iconHeaderLeft.ReadOnly = true;
-            this.iconHeaderLeft.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.iconHeaderLeft.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.iconHeaderLeft.Width = 32;
-            // 
-            // nameHeaderLeft
-            // 
-            this.nameHeaderLeft.HeaderText = "Name";
-            this.nameHeaderLeft.Name = "nameHeaderLeft";
-            this.nameHeaderLeft.Width = 200;
-            // 
-            // sizeHeaderLeft
-            // 
-            this.sizeHeaderLeft.HeaderText = "Size";
-            this.sizeHeaderLeft.Name = "sizeHeaderLeft";
-            this.sizeHeaderLeft.ReadOnly = true;
-            this.sizeHeaderLeft.Width = 75;
-            // 
-            // extensionHeaderLeft
-            // 
-            this.extensionHeaderLeft.HeaderText = "Extension";
-            this.extensionHeaderLeft.Name = "extensionHeaderLeft";
-            this.extensionHeaderLeft.Width = 75;
-            // 
             // LeftTextBox
             // 
             this.LeftTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -151,6 +123,7 @@
             this.RightView.AllowUserToDeleteRows = false;
             this.RightView.AllowUserToOrderColumns = true;
             this.RightView.AllowUserToResizeRows = false;
+            this.RightView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.RightView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.RightView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iconHeaderRight,
@@ -168,35 +141,6 @@
             this.RightView.TabIndex = 4;
             this.RightView.Click += new System.EventHandler(this.RightView_Click);
             this.RightView.DoubleClick += new System.EventHandler(this.rightView_DoubleClick);
-            // 
-            // iconHeaderRight
-            // 
-            this.iconHeaderRight.HeaderText = "Icon";
-            this.iconHeaderRight.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.iconHeaderRight.Name = "iconHeaderRight";
-            this.iconHeaderRight.ReadOnly = true;
-            this.iconHeaderRight.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.iconHeaderRight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.iconHeaderRight.Width = 32;
-            // 
-            // nameHeaderRight
-            // 
-            this.nameHeaderRight.HeaderText = "Name";
-            this.nameHeaderRight.Name = "nameHeaderRight";
-            this.nameHeaderRight.Width = 200;
-            // 
-            // sizeHeaderRight
-            // 
-            this.sizeHeaderRight.HeaderText = "Size";
-            this.sizeHeaderRight.Name = "sizeHeaderRight";
-            this.sizeHeaderRight.ReadOnly = true;
-            this.sizeHeaderRight.Width = 75;
-            // 
-            // extensionHeaderRight
-            // 
-            this.extensionHeaderRight.HeaderText = "Extension";
-            this.extensionHeaderRight.Name = "extensionHeaderRight";
-            this.extensionHeaderRight.Width = 75;
             // 
             // RightTextBox
             // 
@@ -236,20 +180,20 @@
             this.ToolFileDrop.Image = ((System.Drawing.Image)(resources.GetObject("ToolFileDrop.Image")));
             this.ToolFileDrop.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ToolFileDrop.Name = "ToolFileDrop";
-            this.ToolFileDrop.Size = new System.Drawing.Size(36, 24);
+            this.ToolFileDrop.Size = new System.Drawing.Size(38, 24);
             this.ToolFileDrop.Text = "File";
             // 
             // toolFileExit
             // 
             this.toolFileExit.Name = "toolFileExit";
-            this.toolFileExit.Size = new System.Drawing.Size(177, 22);
+            this.toolFileExit.Size = new System.Drawing.Size(184, 22);
             this.toolFileExit.Text = "Exit (Alt+F4)";
             this.toolFileExit.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // tempOpenTextFileToolStripMenuItem
             // 
             this.tempOpenTextFileToolStripMenuItem.Name = "tempOpenTextFileToolStripMenuItem";
-            this.tempOpenTextFileToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.tempOpenTextFileToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.tempOpenTextFileToolStripMenuItem.Text = "Temp. Open Text File";
             // 
             // toolStripSeparator1
@@ -262,10 +206,68 @@
             this.toolStripButton1.Image = global::noname_SanityArchiver.Properties.Resources.icon_archive;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(67, 24);
+            this.toolStripButton1.Size = new System.Drawing.Size(71, 24);
             this.toolStripButton1.Text = "Archive";
             this.toolStripButton1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // iconHeaderRight
+            // 
+            this.iconHeaderRight.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.iconHeaderRight.HeaderText = "Icon";
+            this.iconHeaderRight.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.iconHeaderRight.Name = "iconHeaderRight";
+            this.iconHeaderRight.ReadOnly = true;
+            this.iconHeaderRight.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.iconHeaderRight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.iconHeaderRight.Width = 32;
+            // 
+            // nameHeaderRight
+            // 
+            this.nameHeaderRight.HeaderText = "Name";
+            this.nameHeaderRight.Name = "nameHeaderRight";
+            // 
+            // sizeHeaderRight
+            // 
+            this.sizeHeaderRight.HeaderText = "Size";
+            this.sizeHeaderRight.Name = "sizeHeaderRight";
+            this.sizeHeaderRight.ReadOnly = true;
+            // 
+            // extensionHeaderRight
+            // 
+            this.extensionHeaderRight.HeaderText = "Extension";
+            this.extensionHeaderRight.Name = "extensionHeaderRight";
+            // 
+            // iconHeaderLeft
+            // 
+            this.iconHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.iconHeaderLeft.HeaderText = "Icon";
+            this.iconHeaderLeft.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.iconHeaderLeft.Name = "iconHeaderLeft";
+            this.iconHeaderLeft.ReadOnly = true;
+            this.iconHeaderLeft.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.iconHeaderLeft.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.iconHeaderLeft.Width = 32;
+            // 
+            // nameHeaderLeft
+            // 
+            this.nameHeaderLeft.HeaderText = "Name";
+            this.nameHeaderLeft.Name = "nameHeaderLeft";
+            // 
+            // sizeHeaderLeft
+            // 
+            this.sizeHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.sizeHeaderLeft.HeaderText = "Size";
+            this.sizeHeaderLeft.Name = "sizeHeaderLeft";
+            this.sizeHeaderLeft.ReadOnly = true;
+            this.sizeHeaderLeft.Width = 64;
+            // 
+            // extensionHeaderLeft
+            // 
+            this.extensionHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.extensionHeaderLeft.HeaderText = "Extension";
+            this.extensionHeaderLeft.Name = "extensionHeaderLeft";
+            this.extensionHeaderLeft.Width = 64;
             // 
             // FormMain
             // 
@@ -310,15 +312,15 @@
         private System.Windows.Forms.TextBox LeftTextBox;
         private System.Windows.Forms.TextBox RightTextBox;
         private System.Windows.Forms.DataGridView LeftView;
-        private System.Windows.Forms.DataGridViewImageColumn iconHeaderLeft;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderLeft;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderLeft;
-        private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderLeft;
         private System.Windows.Forms.DataGridView RightView;
         private System.Windows.Forms.DataGridViewImageColumn iconHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderRight;
+        private System.Windows.Forms.DataGridViewImageColumn iconHeaderLeft;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderLeft;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderLeft;
+        private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderLeft;
     }
 }
 
