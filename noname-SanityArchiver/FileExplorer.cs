@@ -116,7 +116,7 @@ namespace noname_SanityArchiver
                     }
                     
                 }
-                View.Rows.Add(icon, baseName, fileSize, items[i].Extension);
+                View.Rows.Add(icon, baseName, items[i].Extension, fileSize);
             }
             
         }

@@ -31,8 +31,10 @@ namespace noname_SanityArchiver
         private void FormMain_Load(object sender, EventArgs e)
         {
             var rootDirInfo = new DirectoryInfo(root).Root;
-            rightFileExplorer.DisplayFiles(rootDirInfo);
             leftFileExplorer.DisplayFiles(rootDirInfo);
+            rightFileExplorer.DisplayFiles(rootDirInfo);
+            leftView.ClearSelection();
+            rightView.ClearSelection();
         }
 
 #region ToolStrip Handlers
@@ -74,7 +76,7 @@ namespace noname_SanityArchiver
 
         #endregion
 
-        #region View ClickEvents
+#region View Events
         private void leftView_DoubleClick(object sender, EventArgs e)
         {
             CallAppropriateExplorer(leftFileExplorer);
@@ -85,65 +87,38 @@ namespace noname_SanityArchiver
             CallAppropriateExplorer(rightFileExplorer);
         }
 
-#endregion
-        private void CallAppropriateExplorer(FileExplorer explorer)
+        private void View_MouseDown(object sender, MouseEventArgs e)
         {
-            int itemIndex = explorer.View.CurrentCell.RowIndex;
-            FileSystemInfo selectedItem = explorer.CurrentItems[itemIndex];
-            var attr = File.GetAttributes(selectedItem.FullName);
-            if (attr.HasFlag(FileAttributes.Directory))
+            if (e.Button == MouseButtons.Right)
             {
-                explorer.DisplayFiles((DirectoryInfo)selectedItem);
+                DataGridView view = (DataGridView)sender;
+                var hti = view.HitTest(e.X, e.Y);
+                view.ClearSelection();
+                view.Rows[hti.RowIndex].Selected = true;
+                view.Focus();
             }
         }
 
-        private void leftTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void View_Leave(object sender, EventArgs e)
+        {
+            ((DataGridView)sender).ClearSelection();
+        }
+
+        private void View_KeyDown(object sender, KeyEventArgs e)
         {
             if (IsEnterPressed(e))
             {
-                SearchForDirectory(leftFileExplorer);
+                DataGridView view = (DataGridView)sender;
+                CallAppropriateExplorer(GetFileExplorer(view));
             }
         }
 
-        private void rightTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (IsEnterPressed(e))
             {
-                SearchForDirectory(rightFileExplorer);
-            }
-        }
-
-        private void SearchForDirectory(FileExplorer explorer)
-        {
-            string absolutePath = explorer.AbsoluePathBox.Text;
-            try
-            {
-                explorer.DisplayFiles(new DirectoryInfo(absolutePath));
-            }
-            catch (ArgumentException)
-            {
-                explorer.UpdateAbsolutePath();
-            }
-        }
-
-        private bool IsEnterPressed(KeyEventArgs e)
-        {
-            return e.KeyCode == Keys.Enter;
-        }
-
-        private void LeftView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (IsEnterPressed(e))
-            {
-                CallAppropriateExplorer(leftFileExplorer);
-            }
-        }
-
-        private void RightView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (IsEnterPressed(e))
-            {
-                CallAppropriateExplorer(rightFileExplorer);
+                TextBox textbox = (TextBox)sender;
+                SearchForDirectory(GetFileExplorer(textbox));
             }
         }
 
@@ -175,19 +150,84 @@ namespace noname_SanityArchiver
             }
         }
 
+        #endregion
+        private void CallAppropriateExplorer(FileExplorer explorer)
+        {
+            int itemIndex = explorer.View.CurrentCell.RowIndex;
+            FileSystemInfo selectedItem = explorer.CurrentItems[itemIndex];
+            var attr = File.GetAttributes(selectedItem.FullName);
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                explorer.DisplayFiles((DirectoryInfo)selectedItem);
+            }
+        }
+
+
+        private void SearchForDirectory(FileExplorer explorer)
+        {
+            string absolutePath = explorer.AbsoluePathBox.Text;
+            try
+            {
+                explorer.DisplayFiles(new DirectoryInfo(absolutePath));
+            }
+            catch (ArgumentException)
+            {
+                explorer.UpdateAbsolutePath();
+            }
+        }
+
+        private bool IsEnterPressed(KeyEventArgs e)
+        {
+            return e.KeyCode == Keys.Enter;
+        }
+
+
+
         private void UpdatePanes()
         {
             leftFileExplorer.DisplayFiles();
             rightFileExplorer.DisplayFiles();
         }
 
-        private void View_MouseDown(object sender, MouseEventArgs e)
+        private DataGridView GetOtherView(DataGridView view)
         {
-            if (e.Button == MouseButtons.Right)
+            if (view == leftView)
             {
-                var hti = ((DataGridView)sender).HitTest(e.X, e.Y);
-                ((DataGridView)sender).ClearSelection();
-                ((DataGridView)sender).Rows[hti.RowIndex].Selected = true;
+                return rightView;
+            }
+            else if (view == rightView)
+            {
+                return leftView;
+            }
+            return null;
+        }
+
+        private FileExplorer GetFileExplorer(DataGridView view)
+        {
+            if (view == leftView)
+            {
+                return leftFileExplorer;
+            }
+            else if (view == rightView)
+            {
+                return rightFileExplorer;
+            }
+            return null;
+        }
+
+        private FileExplorer GetFileExplorer(TextBox textbox)
+        {
+            if (true)
+            {
+                if (textbox == LeftTextBox)
+                {
+                    return leftFileExplorer;
+                }
+                else if (textbox == RightTextBox)
+                {
+                    return rightFileExplorer;
+                }
+                return null;
             }
         }
     }

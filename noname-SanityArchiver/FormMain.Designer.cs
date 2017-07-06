@@ -67,7 +67,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -79,9 +79,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightView);
             this.splitContainer1.Panel2.Controls.Add(this.RightTextBox);
-            this.splitContainer1.Size = new System.Drawing.Size(750, 367);
-            this.splitContainer1.SplitterDistance = 375;
-            this.splitContainer1.SplitterWidth = 3;
+            this.splitContainer1.Size = new System.Drawing.Size(1000, 455);
+            this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.TabIndex = 0;
             // 
             // leftView
@@ -100,17 +99,18 @@
             this.sizeHeaderLeft});
             this.leftView.ContextMenuStrip = this.listMenu;
             this.leftView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.leftView.Location = new System.Drawing.Point(0, 21);
+            this.leftView.Location = new System.Drawing.Point(0, 24);
             this.leftView.Margin = new System.Windows.Forms.Padding(0);
             this.leftView.Name = "leftView";
             this.leftView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.leftView.RowHeadersWidth = 4;
             this.leftView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.leftView.Size = new System.Drawing.Size(375, 346);
+            this.leftView.Size = new System.Drawing.Size(500, 431);
             this.leftView.TabIndex = 3;
             this.leftView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.leftView_CellValueChanged);
             this.leftView.DoubleClick += new System.EventHandler(this.leftView_DoubleClick);
-            this.leftView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LeftView_KeyDown);
+            this.leftView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.View_KeyDown);
+            this.leftView.Leave += new System.EventHandler(this.View_Leave);
             this.leftView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.View_MouseDown);
             // 
             // iconHeaderLeft
@@ -147,32 +147,33 @@
             // 
             // listMenu
             // 
+            this.listMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.listMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.archiveToolStripMenuItem,
             this.encryptToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(173, 70);
+            this.listMenu.Size = new System.Drawing.Size(203, 82);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_eye;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.openToolStripMenuItem.Text = "View";
             // 
             // archiveToolStripMenuItem
             // 
             this.archiveToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_package;
             this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
-            this.archiveToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.archiveToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.archiveToolStripMenuItem.Text = "Archive/Unarchive";
             // 
             // encryptToolStripMenuItem
             // 
             this.encryptToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_lock;
             this.encryptToolStripMenuItem.Name = "encryptToolStripMenuItem";
-            this.encryptToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.encryptToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
             this.encryptToolStripMenuItem.Text = "Encrypt/Decrypt";
             // 
             // LeftTextBox
@@ -181,10 +182,11 @@
             this.LeftTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.LeftTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.LeftTextBox.Location = new System.Drawing.Point(0, 0);
+            this.LeftTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.LeftTextBox.Name = "LeftTextBox";
-            this.LeftTextBox.Size = new System.Drawing.Size(375, 21);
+            this.LeftTextBox.Size = new System.Drawing.Size(500, 24);
             this.LeftTextBox.TabIndex = 2;
-            this.LeftTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.leftTextBox_KeyDown);
+            this.LeftTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // rightView
             // 
@@ -202,17 +204,18 @@
             this.sizeHeaderRight});
             this.rightView.ContextMenuStrip = this.listMenu;
             this.rightView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rightView.Location = new System.Drawing.Point(0, 21);
+            this.rightView.Location = new System.Drawing.Point(0, 24);
             this.rightView.Margin = new System.Windows.Forms.Padding(0);
             this.rightView.Name = "rightView";
             this.rightView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.rightView.RowHeadersWidth = 4;
             this.rightView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.rightView.Size = new System.Drawing.Size(372, 346);
+            this.rightView.Size = new System.Drawing.Size(496, 431);
             this.rightView.TabIndex = 4;
             this.rightView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.rightView_CellValueChanged);
             this.rightView.DoubleClick += new System.EventHandler(this.rightView_DoubleClick);
-            this.rightView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RightView_KeyDown);
+            this.rightView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.View_KeyDown);
+            this.rightView.Leave += new System.EventHandler(this.View_Leave);
             this.rightView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.View_MouseDown);
             // 
             // iconHeaderRight
@@ -252,10 +255,11 @@
             this.RightTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.RightTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.RightTextBox.Location = new System.Drawing.Point(0, 0);
+            this.RightTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.RightTextBox.Name = "RightTextBox";
-            this.RightTextBox.Size = new System.Drawing.Size(372, 21);
+            this.RightTextBox.Size = new System.Drawing.Size(496, 24);
             this.RightTextBox.TabIndex = 3;
-            this.RightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rightTextBox_KeyDown);
+            this.RightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // imageList1
             // 
@@ -266,19 +270,20 @@
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.toolStripTextBox1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 367);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 455);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(750, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1000, 27);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(45, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(56, 24);
             this.toolStripLabel1.Text = "Search:";
             // 
             // toolStripTextBox1
@@ -286,17 +291,17 @@
             this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.toolStripTextBox1.Size = new System.Drawing.Size(300, 25);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(399, 27);
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 392);
+            this.ClientSize = new System.Drawing.Size(1000, 482);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Totally Noname Commander - NEM REGISZTRÁLT";
