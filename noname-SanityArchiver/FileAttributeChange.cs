@@ -4,18 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 namespace noname_SanityArchiver
 {
-    class FileAttributeChange
+    public class FileAttributeChange
     {
+        public string selectedFile { get; set; }
+        private changeAttribute window;
 
-        public FileAttributeChange() { }
+        public FileAttributeChange(string filePath)
+        {
+            selectedFile = filePath;
+            window = new changeAttribute(this);
+
+            window.Show();
+            window.checkHidden(HasHiddenAttribute(filePath));
+            window.checkReadOnly(HasReadonlyAttribute(filePath));
+        }
 
         // get file attributes
-        public void GetFileAttributes(string filePath)
+        public FileAttributes GetFileAttributes(string filePath)
         {
-            FileAttributes attributes = File.GetAttributes(filePath);
+            return File.GetAttributes(filePath);
         }
 
         // check whether a file has readonly attribute
@@ -51,7 +62,7 @@ namespace noname_SanityArchiver
         }
 
         // set readonly attribute (no other attribute will set)
-        public void SetReadonlyAttribute(string filePath)
+        public void SetReadonlyAttribute(string filePath )
         {
             File.SetAttributes(filePath, FileAttributes.ReadOnly);
         }
@@ -66,6 +77,23 @@ namespace noname_SanityArchiver
         public void ClearAttributes(string filePath)
         {
             File.SetAttributes(filePath, FileAttributes.Normal);
+        }
+
+        public void button1_Click(object sender, EventArgs e)
+        {
+            ClearAttributes(selectedFile);
+
+            if ( window.HiddenState )
+            {
+                Debug.WriteLine("HIDDEN:" + window.HiddenState);
+                SetHiddenAttribute( selectedFile );
+            }
+
+            if ( window.ReadOnlyState )
+            {
+                Debug.WriteLine("READONLY:" + window.ReadOnlyState);
+                SetReadonlyAttribute(selectedFile);
+            }
         }
     }
 }   
