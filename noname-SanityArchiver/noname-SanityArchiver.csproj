@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileAttributeChange.cs" />
     <Compile Include="FileCompress.cs" />
     <Compile Include="FileTransfer.cs" />
     <Compile Include="FileCryptor.cs" />
