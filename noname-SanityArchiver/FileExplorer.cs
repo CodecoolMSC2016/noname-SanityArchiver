@@ -61,17 +61,14 @@ namespace noname_SanityArchiver
                 View.Rows.Clear();
                 CurrentItems.Clear();
             }
-            catch (UnauthorizedAccessException)
+            catch (Exception exception)
             {
-                // give admin priviliges to user and remove try catch
-                return;
+                if (exception is DirectoryNotFoundException || exception is UnauthorizedAccessException)
+                {
+                    UpdateAbsolutePath();
+                    return;
+                }
             }
-            catch (DirectoryNotFoundException)
-            {
-                UpdateAbsolutePath();
-                return;
-            }
-
 
             CurrentDirectory = selectedFolder;
             UpdateAbsolutePath();
@@ -172,7 +169,7 @@ namespace noname_SanityArchiver
 
             foreach (string directory in directories)
             {
-                size += getFolderSize(directory);
+                size += GetFolderSize(directory);
             }
 
             return Math.Ceiling(size / 1024 / 1024);
