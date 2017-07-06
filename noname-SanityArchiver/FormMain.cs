@@ -95,6 +95,14 @@ namespace noname_SanityArchiver
                 var hti = view.HitTest(e.X, e.Y);
                 view.ClearSelection();
                 view.Rows[hti.RowIndex].Selected = true;
+                if (sender == leftView)
+                {
+                    menuItemMove.Image = Resources.icon_arrow;
+                    menuItemMove.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
+                } else
+                {
+                    menuItemMove.Image = Resources.icon_arrow;
+                }
                 view.Focus();
             }
         }
@@ -130,8 +138,7 @@ namespace noname_SanityArchiver
                 var changedRow = leftView.Rows[e.RowIndex];
                 string newName = ((string)changedRow.Cells["nameHeaderLeft"].Value +
                     (string)changedRow.Cells["extensionHeaderLeft"].Value);
-                FileTransfer ft = new FileTransfer();
-                ft.Rename(oldPath, newName);
+                FileTransfer.Rename(oldPath, newName);
                 UpdatePanes();
             }
         }
@@ -144,8 +151,7 @@ namespace noname_SanityArchiver
                 var changedRow = rightView.Rows[e.RowIndex];
                 string newName = ((string)changedRow.Cells["nameHeaderRight"].Value +
                     (string)changedRow.Cells["extensionHeaderRight"].Value);
-                FileTransfer ft = new FileTransfer();
-                ft.Rename(oldPath, newName);
+                FileTransfer.Rename(oldPath, newName);
                 UpdatePanes();
             }
         }

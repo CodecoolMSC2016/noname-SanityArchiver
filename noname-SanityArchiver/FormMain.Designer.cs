@@ -37,9 +37,9 @@
             this.extensionHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.archiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.encryptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemView = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemArchive = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftTextBox = new System.Windows.Forms.TextBox();
             this.rightView = new System.Windows.Forms.DataGridView();
             this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
@@ -53,6 +53,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.menuItemMove = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -67,7 +68,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -149,32 +150,33 @@
             // 
             this.listMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.listMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.archiveToolStripMenuItem,
-            this.encryptToolStripMenuItem});
+            this.menuItemView,
+            this.menuItemArchive,
+            this.menuItemEncrypt,
+            this.menuItemMove});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(203, 82);
+            this.listMenu.Size = new System.Drawing.Size(203, 136);
             // 
-            // openToolStripMenuItem
+            // menuItemView
             // 
-            this.openToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_eye;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.openToolStripMenuItem.Text = "View";
+            this.menuItemView.Image = global::noname_SanityArchiver.Properties.Resources.icon_eye;
+            this.menuItemView.Name = "menuItemView";
+            this.menuItemView.Size = new System.Drawing.Size(202, 26);
+            this.menuItemView.Text = "View";
             // 
-            // archiveToolStripMenuItem
+            // menuItemArchive
             // 
-            this.archiveToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_package;
-            this.archiveToolStripMenuItem.Name = "archiveToolStripMenuItem";
-            this.archiveToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.archiveToolStripMenuItem.Text = "Archive/Unarchive";
+            this.menuItemArchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_package;
+            this.menuItemArchive.Name = "menuItemArchive";
+            this.menuItemArchive.Size = new System.Drawing.Size(202, 26);
+            this.menuItemArchive.Text = "Archive/Unarchive";
             // 
-            // encryptToolStripMenuItem
+            // menuItemEncrypt
             // 
-            this.encryptToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_lock;
-            this.encryptToolStripMenuItem.Name = "encryptToolStripMenuItem";
-            this.encryptToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
-            this.encryptToolStripMenuItem.Text = "Encrypt/Decrypt";
+            this.menuItemEncrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_lock;
+            this.menuItemEncrypt.Name = "menuItemEncrypt";
+            this.menuItemEncrypt.Size = new System.Drawing.Size(202, 26);
+            this.menuItemEncrypt.Text = "Encrypt/Decrypt";
             // 
             // LeftTextBox
             // 
@@ -293,6 +295,13 @@
             this.toolStripTextBox1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolStripTextBox1.Size = new System.Drawing.Size(399, 27);
             // 
+            // menuItemMove
+            // 
+            this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
+            this.menuItemMove.Name = "menuItemMove";
+            this.menuItemMove.Size = new System.Drawing.Size(202, 26);
+            this.menuItemMove.Text = "Move";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -344,9 +353,10 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ContextMenuStrip listMenu;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem archiveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem encryptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemView;
+        private System.Windows.Forms.ToolStripMenuItem menuItemArchive;
+        private System.Windows.Forms.ToolStripMenuItem menuItemEncrypt;
+        private System.Windows.Forms.ToolStripMenuItem menuItemMove;
     }
 }
 
