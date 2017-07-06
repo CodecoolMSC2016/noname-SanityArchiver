@@ -1,6 +1,7 @@
 ﻿using noname_SanityArchiver.Properties;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -30,11 +31,21 @@ namespace noname_SanityArchiver
             AbsoluePathBox = textBox;
         }
 
-        public FileSystemInfo GetSelectedItem()
+        public FileSystemInfo[] SelectedItems
         {
-            int itemIndex = View.CurrentCell.RowIndex;
-            return CurrentItems[itemIndex];
+            get
+            {
+                var selectedRows = View.SelectedRows;
+                FileSystemInfo[] selectedInfos = new FileSystemInfo[selectedRows.Count];
+                for (int i = 0; i < selectedRows.Count; i++)
+                {
+                    int selectedIndex = selectedRows[i].Index;
+                    selectedInfos[i] = CurrentItems[selectedIndex];
+                }
+                return selectedInfos;
+            }
         }
+
         /// <summary>
         /// fbgbhnzsnsznhznhszn
         /// </summary>

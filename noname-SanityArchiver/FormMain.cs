@@ -46,7 +46,7 @@ namespace noname_SanityArchiver
         {
             FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
 
-            FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
+            FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
             cryptor.EncryptFile("pass");
             UpdatePanes();
         }
@@ -55,7 +55,7 @@ namespace noname_SanityArchiver
         {
             FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
 
-            FileCryptor cryptor = new FileCryptor(selectedExplorer.GetSelectedItem().FullName);
+            FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
             cryptor.DecryptFile("pass");
             UpdatePanes();
         }
@@ -71,7 +71,7 @@ namespace noname_SanityArchiver
         }
 
 
-#endregion
+        #endregion
 
         #region View ClickEvents
         private void leftView_DoubleClick(object sender, EventArgs e)
