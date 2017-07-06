@@ -92,7 +92,6 @@ namespace noname_SanityArchiver
 
                 return zipPath;
             }
-
         }
 
         public bool CheckIfSelectedItemsContainsFolder(string[] items)
@@ -106,7 +105,6 @@ namespace noname_SanityArchiver
             }
             return false;
         }
-
 
         private static void CopyDirectory(string root, string dest)
         {
@@ -125,7 +123,6 @@ namespace noname_SanityArchiver
                 File.Copy(file, Path.Combine(dest, Path.GetFileName(file)));
             }
         }
-
 
         public void DeCompress(string fileToDecompress, string folderToExtract)
         {
