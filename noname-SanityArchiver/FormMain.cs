@@ -176,9 +176,13 @@ namespace noname_SanityArchiver
             {
                 explorer.DisplayFiles(new DirectoryInfo(absolutePath));
             }
-            catch (ArgumentException)
+            catch (Exception exception)
             {
-                explorer.UpdateAbsolutePath();
+                if (exception is UnauthorizedAccessException || exception is NotSupportedException)
+                {
+                    explorer.UpdateAbsolutePath();
+                }
+                throw exception;
             }
         }
 
