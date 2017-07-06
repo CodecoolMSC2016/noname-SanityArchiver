@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.IO;
+using System.Windows.Forms;
 
 namespace noname_SanityArchiver
 {
@@ -30,7 +32,8 @@ namespace noname_SanityArchiver
             }
             catch (IOException)
             {
-                throw;
+                MessageBox.Show("Cannot rename file or directory.", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -46,14 +49,8 @@ namespace noname_SanityArchiver
                 foreach (string filePath in filePaths)
                 {
                     string fullpath = Path.Combine(destinationPath, Path.GetFileName(filePath));
-                    if (IsDirectory(filePath))
-                    {
-                        FileSystem.CopyDirectory(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
-                    }
-                    else
-                    {
-                        FileSystem.CopyFile(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
-                    }
+                    MakeTransfer(FileSystem.CopyDirectory, FileSystem.CopyFile,
+                        filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
                 }
             }
             else if (transferType == TransferType.Move)
@@ -61,48 +58,33 @@ namespace noname_SanityArchiver
                 foreach (string filePath in filePaths)
                 {
                     string fullpath = Path.Combine(destinationPath, Path.GetFileName(filePath));
-                    if (IsDirectory(filePath))
-                    {
-                        FileSystem.MoveDirectory(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
-                    }
-                    else
-                    {
-                        FileSystem.MoveFile(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
-                    }
+                    MakeTransfer(FileSystem.MoveDirectory, FileSystem.MoveFile,
+                        filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
                 }
             }
         }
 
-        private static void CopyDirectory(string sourceDirName, string destinationPath)
+        private delegate void Transfer(string filePath, string fullPath, UIOption option, UICancelOption cancelOption);
+
+        private static void MakeTransfer(Transfer dirTransfer, Transfer fileTransfer,
+            string filePath, string fullPath, UIOption option, UICancelOption cancelOption)
         {
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
-
-            if (!dir.Exists)
+            try
             {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDirName);
-            }
-
-            DirectoryInfo[] dirs = dir.GetDirectories();
-
-            if (!Directory.Exists(destinationPath))
+                if (IsDirectory(filePath))
+                {
+                    dirTransfer.Invoke(filePath, fullPath, option, cancelOption);
+                }
+                else
+                {
+                    fileTransfer.Invoke(filePath, fullPath, option, cancelOption);
+                }
+            } catch (Exception e)
             {
-                Directory.CreateDirectory(destinationPath);
+                MessageBox.Show(e.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
-            {
-                string temppath = Path.Combine(destinationPath, file.Name);
-                file.CopyTo(temppath, true);
-            }
-
-            foreach (DirectoryInfo subdir in dirs)
-            {
-                string temppath = Path.Combine(destinationPath, subdir.Name);
-                CopyDirectory(subdir.FullName, temppath);
-            }
+            
         }
     }
 }

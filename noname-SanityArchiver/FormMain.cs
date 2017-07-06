@@ -13,12 +13,13 @@ namespace noname_SanityArchiver
         private FileExplorer leftFileExplorer;
         private FileExplorer rightFileExplorer;
         private string root;
+        
 
         public FormMain()
         {
             InitializeComponent();
-            leftFileExplorer = new FileExplorer(leftView, leftTextBox);
-            rightFileExplorer = new FileExplorer(rightView, rightTextBox);
+            leftFileExplorer = new FileExplorer(leftView, leftTextBox, listMenu);
+            rightFileExplorer = new FileExplorer(rightView, rightTextBox, listMenu);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         }
 
@@ -364,7 +365,7 @@ namespace noname_SanityArchiver
             leftFileExplorer.DisplayFiles();
             rightFileExplorer.DisplayFiles();
         }
-
+    
         #endregion Helpers
 
         private void listMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
@@ -375,9 +376,11 @@ namespace noname_SanityArchiver
             for (int i = 0; i < selectedPaths.Length; i++)
             {
                 string path = selectedPaths[i].FullName;
+
                 if (FileTransfer.IsDirectory(path))
                 {
-                    size += explorer.GetFolderSize(path);
+
+                    size += explorer.GetFolderSize(path, e);
                 }
                 else
                 {
@@ -385,7 +388,6 @@ namespace noname_SanityArchiver
                     size += selectedFile.Length;
                 }
             }
-
             menuItemSize.Text = (size / 1024) + " kB";
         }
 
@@ -396,5 +398,7 @@ namespace noname_SanityArchiver
 
             FileAttributeChange fac = new FileAttributeChange(selectedFile);
         }
+
     }
+
 }
