@@ -47,7 +47,7 @@ namespace noname_SanityArchiver
 
         private void toolButtonEncrypt_Click(object sender, EventArgs e)
         {
-            FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
+            FileExplorer selectedExplorer = GetFileExplorer(FocusedView);
 
             FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
             cryptor.EncryptFile("pass");
@@ -56,7 +56,7 @@ namespace noname_SanityArchiver
 
         private void toolButtonDecrypt_Click(object sender, EventArgs e)
         {
-            FileExplorer selectedExplorer = rightView.Focused ? rightFileExplorer : leftFileExplorer;
+            FileExplorer selectedExplorer = GetFileExplorer(FocusedView);
 
             FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
             cryptor.DecryptFile("pass");
@@ -191,7 +191,12 @@ namespace noname_SanityArchiver
             return e.KeyCode == Keys.Enter;
         }
 
-
+        public DataGridView FocusedView {
+            get
+            {
+                return rightView.Focused ? rightView : leftView;
+            }
+        }
 
         private void UpdatePanes()
         {
@@ -239,6 +244,12 @@ namespace noname_SanityArchiver
                 }
                 return null;
             }
+        }
+
+        private void menuItemView_Click(object sender, EventArgs e)
+        {
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            textFileWindow viewer = new textFileWindow(explorer.SelectedItems[0].FullName);
         }
     }
 }

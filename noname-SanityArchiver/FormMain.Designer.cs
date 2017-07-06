@@ -40,6 +40,7 @@
             this.menuItemView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemArchive = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemMove = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftTextBox = new System.Windows.Forms.TextBox();
             this.rightView = new System.Windows.Forms.DataGridView();
             this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
@@ -53,7 +54,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.menuItemMove = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -163,6 +163,7 @@
             this.menuItemView.Name = "menuItemView";
             this.menuItemView.Size = new System.Drawing.Size(202, 26);
             this.menuItemView.Text = "View";
+            this.menuItemView.Click += new System.EventHandler(this.menuItemView_Click);
             // 
             // menuItemArchive
             // 
@@ -177,6 +178,13 @@
             this.menuItemEncrypt.Name = "menuItemEncrypt";
             this.menuItemEncrypt.Size = new System.Drawing.Size(202, 26);
             this.menuItemEncrypt.Text = "Encrypt/Decrypt";
+            // 
+            // menuItemMove
+            // 
+            this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
+            this.menuItemMove.Name = "menuItemMove";
+            this.menuItemMove.Size = new System.Drawing.Size(202, 26);
+            this.menuItemMove.Text = "Move";
             // 
             // LeftTextBox
             // 
@@ -294,13 +302,6 @@
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolStripTextBox1.Size = new System.Drawing.Size(399, 27);
-            // 
-            // menuItemMove
-            // 
-            this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
-            this.menuItemMove.Name = "menuItemMove";
-            this.menuItemMove.Size = new System.Drawing.Size(202, 26);
-            this.menuItemMove.Text = "Move";
             // 
             // FormMain
             // 
