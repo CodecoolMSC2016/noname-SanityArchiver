@@ -11,7 +11,7 @@ namespace noname_SanityArchiver
     {
         public enum TransferType { Copy, Move }
 
-        public void TransferFiles(List<string> filePaths, string destinationPath, TransferType transferType)
+        public static void TransferFiles(List<string> filePaths, string destinationPath, TransferType transferType)
         {
             if (transferType == TransferType.Copy)
             {
@@ -19,7 +19,7 @@ namespace noname_SanityArchiver
                 {
                     if (IsDirectory(filePath))
                     {
-                        // TODO: implement directory copy
+                        CopyDirectory(filePath, destinationPath);   
                     }
                     else
                     {
@@ -43,12 +43,46 @@ namespace noname_SanityArchiver
             }
         }
 
-        public void TransferFiles(string filePath, string destinationPath, TransferType transferType)
+        public static void TransferFile(string filePath, string destinationPath, TransferType transferType)
         {
-            TransferFiles(new List<string>() { "" }, destinationPath, transferType);
+            TransferFiles(new List<string>() { filePath }, destinationPath, transferType);
         }
 
-        public void Rename(string oldPath, string newName)
+        private static void CopyDirectory(string sourceDirName, string destinationPath)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            if (!Directory.Exists(destinationPath))
+            {
+                Directory.CreateDirectory(destinationPath);
+            }
+
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = Path.Combine(destinationPath, file.Name);
+                file.CopyTo(temppath, true);
+            }
+
+            foreach (DirectoryInfo subdir in dirs)
+            {
+                string temppath = Path.Combine(destinationPath, subdir.Name);
+                CopyDirectory(subdir.FullName, temppath);
+            }
+
+
+        }
+
+        public static void Rename(string oldPath, string newName)
         {
             try
             {
@@ -69,7 +103,7 @@ namespace noname_SanityArchiver
             }
         }
 
-        private bool IsDirectory(string path)
+        private static bool IsDirectory(string path)
         {
             FileAttributes attr = File.GetAttributes(path);
             return attr.HasFlag(FileAttributes.Directory);
