@@ -37,12 +37,19 @@
             this.extensionHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemArchive = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemUnarchive = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDecrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMove = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftTextBox = new System.Windows.Forms.TextBox();
             this.rightView = new System.Windows.Forms.DataGridView();
             this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
@@ -50,21 +57,13 @@
             this.extensionHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rightTextBox = new System.Windows.Forms.TextBox();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
-            this.menuItemDecrypt = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -170,18 +169,31 @@
             this.menuItemEncrypt,
             this.menuItemDecrypt,
             this.toolStripSeparator2,
-            this.toolStripMenuItem1,
+            this.menuItemCopy,
             this.menuItemMove,
             this.toolStripSeparator3,
             this.deleteToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(180, 290);
+            this.listMenu.Size = new System.Drawing.Size(148, 262);
+            // 
+            // menuItemRefresh
+            // 
+            this.menuItemRefresh.Image = global::noname_SanityArchiver.Properties.Resources.icon_refresh;
+            this.menuItemRefresh.Name = "menuItemRefresh";
+            this.menuItemRefresh.Size = new System.Drawing.Size(147, 26);
+            this.menuItemRefresh.Text = "Refresh";
+            this.menuItemRefresh.Click += new System.EventHandler(this.menuItemRefresh_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(144, 6);
             // 
             // menuItemView
             // 
             this.menuItemView.Image = global::noname_SanityArchiver.Properties.Resources.icon_eye;
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(179, 26);
+            this.menuItemView.Size = new System.Drawing.Size(147, 26);
             this.menuItemView.Text = "View";
             this.menuItemView.Click += new System.EventHandler(this.menuItemView_Click);
             // 
@@ -189,7 +201,7 @@
             // 
             this.menuItemArchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_inpack;
             this.menuItemArchive.Name = "menuItemArchive";
-            this.menuItemArchive.Size = new System.Drawing.Size(179, 26);
+            this.menuItemArchive.Size = new System.Drawing.Size(147, 26);
             this.menuItemArchive.Text = "Archive";
             this.menuItemArchive.Click += new System.EventHandler(this.menuItemArchive_Click);
             // 
@@ -197,29 +209,63 @@
             // 
             this.menuItemUnarchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_unpack;
             this.menuItemUnarchive.Name = "menuItemUnarchive";
-            this.menuItemUnarchive.Size = new System.Drawing.Size(179, 26);
+            this.menuItemUnarchive.Size = new System.Drawing.Size(147, 26);
             this.menuItemUnarchive.Text = "Unarchive";
             this.menuItemUnarchive.Click += new System.EventHandler(this.menuItemUnarchive_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(176, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(144, 6);
             // 
             // menuItemEncrypt
             // 
             this.menuItemEncrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_lock;
             this.menuItemEncrypt.Name = "menuItemEncrypt";
-            this.menuItemEncrypt.Size = new System.Drawing.Size(179, 26);
+            this.menuItemEncrypt.Size = new System.Drawing.Size(147, 26);
             this.menuItemEncrypt.Text = "Encrypt";
             this.menuItemEncrypt.Click += new System.EventHandler(this.menuItemEncrypt_Click);
+            // 
+            // menuItemDecrypt
+            // 
+            this.menuItemDecrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_unlock;
+            this.menuItemDecrypt.Name = "menuItemDecrypt";
+            this.menuItemDecrypt.Size = new System.Drawing.Size(147, 26);
+            this.menuItemDecrypt.Text = "Decrypt";
+            this.menuItemDecrypt.Click += new System.EventHandler(this.menuItemDecrypt_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(144, 6);
+            // 
+            // menuItemCopy
+            // 
+            this.menuItemCopy.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
+            this.menuItemCopy.Name = "menuItemCopy";
+            this.menuItemCopy.Size = new System.Drawing.Size(147, 26);
+            this.menuItemCopy.Text = "Copy";
+            this.menuItemCopy.Click += new System.EventHandler(this.menuItemCopy_Click);
             // 
             // menuItemMove
             // 
             this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_move;
             this.menuItemMove.Name = "menuItemMove";
-            this.menuItemMove.Size = new System.Drawing.Size(179, 26);
+            this.menuItemMove.Size = new System.Drawing.Size(147, 26);
             this.menuItemMove.Text = "Move";
+            this.menuItemMove.Click += new System.EventHandler(this.menuItemMove_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(144, 6);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_erase;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // leftTextBox
             // 
@@ -306,24 +352,13 @@
             this.rightTextBox.TabIndex = 3;
             this.rightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
-            // imageList1
+            // sfd
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.sfd.Filter = "Zip Files(*.zip)|*.zip|All Files(*.*)|*.*";
             // 
-            // toolStrip1
+            // fbd
             // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel1,
-            this.toolStripTextBox1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 455);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1000, 27);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.fbd.Description = "Select the destination folder.";
             // 
             // toolStripLabel1
             // 
@@ -338,58 +373,18 @@
             this.toolStripTextBox1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolStripTextBox1.Size = new System.Drawing.Size(399, 27);
             // 
-            // sfd
+            // toolStrip1
             // 
-            this.sfd.Filter = "Zip Files(*.zip)|*.zip|All Files(*.*)|*.*";
-            // 
-            // fbd
-            // 
-            this.fbd.Description = "Select the destination folder.";
-            // 
-            // menuItemDecrypt
-            // 
-            this.menuItemDecrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_unlock;
-            this.menuItemDecrypt.Name = "menuItemDecrypt";
-            this.menuItemDecrypt.Size = new System.Drawing.Size(179, 26);
-            this.menuItemDecrypt.Text = "Decrypt";
-            this.menuItemDecrypt.Click += new System.EventHandler(this.menuItemDecrypt_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(176, 6);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 26);
-            this.toolStripMenuItem1.Text = "Copy";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_erase;
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(176, 6);
-            // 
-            // menuItemRefresh
-            // 
-            this.menuItemRefresh.Image = global::noname_SanityArchiver.Properties.Resources.icon_refresh;
-            this.menuItemRefresh.Name = "menuItemRefresh";
-            this.menuItemRefresh.Size = new System.Drawing.Size(179, 26);
-            this.menuItemRefresh.Text = "Refresh";
-            this.menuItemRefresh.Click += new System.EventHandler(this.menuItemRefresh_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(176, 6);
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.toolStripTextBox1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 455);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1000, 27);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // FormMain
             // 
@@ -424,8 +419,7 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.TextBox leftTextBox;
         private System.Windows.Forms.TextBox rightTextBox;
         private System.Windows.Forms.DataGridView leftView;
@@ -438,9 +432,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderRight;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ContextMenuStrip listMenu;
         private System.Windows.Forms.ToolStripMenuItem menuItemView;
         private System.Windows.Forms.ToolStripMenuItem menuItemArchive;
@@ -452,11 +443,14 @@
         private System.Windows.Forms.FolderBrowserDialog fbd;
         private System.Windows.Forms.ToolStripMenuItem menuItemDecrypt;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCopy;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }
 

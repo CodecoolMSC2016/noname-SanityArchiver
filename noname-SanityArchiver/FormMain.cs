@@ -47,45 +47,7 @@ namespace noname_SanityArchiver
             var rootDirInfo = new DirectoryInfo(root).Root;
             leftFileExplorer.DisplayFiles(rootDirInfo);
             rightFileExplorer.DisplayFiles(rootDirInfo);
-            leftView.ClearSelection();
-            rightView.ClearSelection();
         }
-
-        #region ToolStrip Handlers
-
-        private void toolButtonCompress_Click(object sender, EventArgs e)
-        {
-            // TODO: implement compress button
-        }
-
-        private void toolButtonDecompress_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void toolButtonDecrypt_Click(object sender, EventArgs e)
-        {
-            FileExplorer selectedExplorer = GetFileExplorer(FocusedView);
-
-            FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
-            cryptor.DecryptFile("pass");
-            UpdatePanes();
-        }
-
-        private void toolButtonEncrypt_Click(object sender, EventArgs e)
-        {
-            FileExplorer selectedExplorer = GetFileExplorer(FocusedView);
-
-            FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
-            cryptor.EncryptFile("pass");
-            UpdatePanes();
-        }
-
-        private void toolFileExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        #endregion ToolStrip Handlers
 
         #region View Events
 
@@ -156,7 +118,10 @@ namespace noname_SanityArchiver
             {
                 var hti = view.HitTest(e.X, e.Y);
                 view.ClearSelection();
-                view.Rows[hti.RowIndex].Selected = true;
+                if (hti.RowIndex >= 0)
+                {
+                    view.Rows[hti.RowIndex].Selected = true;
+                }
                 if (sender == leftView)
                 {
                     menuItemMove.Image = Resources.icon_arrow;
@@ -191,7 +156,22 @@ namespace noname_SanityArchiver
             }
 
             compress.Compress(selectedPaths, sfd.FileName);
-            explorer.DisplayFiles();
+            UpdatePanes();
+        }
+
+        private void menuItemCopy_Click(object sender, EventArgs e)
+        {
+            FileCompress compress = new FileCompress();
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            FileExplorer otherExp = GetFileExplorer(GetOtherView(FocusedView));
+            string[] selectedPaths = explorer.SelectedItems
+                .Select(selected => selected.FullName)
+                .ToArray();
+
+            string dest = otherExp.CurrentDirectory.FullName;
+            FileTransfer.TransferFiles(selectedPaths, Path.Combine(dest), FileTransfer.TransferType.Copy);
+
+            UpdatePanes();
         }
 
         private void menuItemDecrypt_Click(object sender, EventArgs e)
@@ -215,7 +195,7 @@ namespace noname_SanityArchiver
                 compress.DeCompress(zipFile, dir);
                 File.Delete(zipFile);
             }
-            explorer.DisplayFiles();
+            UpdatePanes();
         }
 
         private void menuItemEncrypt_Click(object sender, EventArgs e)
@@ -245,13 +225,28 @@ namespace noname_SanityArchiver
                     password);
             }
 
-            explorer.DisplayFiles();
+            UpdatePanes();
+        }
+
+        private void menuItemMove_Click(object sender, EventArgs e)
+        {
+            FileCompress compress = new FileCompress();
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            FileExplorer otherExp = GetFileExplorer(GetOtherView(FocusedView));
+            string[] selectedPaths = explorer.SelectedItems
+                .Select(selected => selected.FullName)
+                .ToArray();
+
+            string dest = GetFileExplorer(GetOtherView(FocusedView)).CurrentDirectory.FullName;
+            FileTransfer.TransferFiles(selectedPaths, dest, FileTransfer.TransferType.Move);
+
+            UpdatePanes();
         }
 
         private void menuItemRefresh_Click(object sender, EventArgs e)
         {
             FileExplorer explorer = GetFileExplorer(FocusedView);
-            explorer.DisplayFiles();
+            UpdatePanes();
         }
 
         private void menuItemUnarchive_Click(object sender, EventArgs e)
@@ -274,7 +269,7 @@ namespace noname_SanityArchiver
             {
                 compress.DeCompress(selectedPaths[i], fbd.SelectedPath);
             }
-            explorer.DisplayFiles();
+            UpdatePanes();
         }
 
         private void menuItemView_Click(object sender, EventArgs e)

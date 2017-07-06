@@ -1,29 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace noname_SanityArchiver
 {
-    class FileTransfer
+    internal class FileTransfer
     {
         public enum TransferType { Copy, Move }
 
-        public static void TransferFiles(List<string> filePaths, string destinationPath, TransferType transferType)
+        public static bool IsDirectory(string path)
+        {
+            FileAttributes attr = File.GetAttributes(path);
+            return attr.HasFlag(FileAttributes.Directory);
+        }
+
+        public static void Rename(string oldPath, string newName)
+        {
+            try
+            {
+                if (IsDirectory(oldPath))
+                {
+                    DirectoryInfo dir = new DirectoryInfo(oldPath);
+                    dir.MoveTo(Path.Combine(dir.Parent.FullName, newName));
+                }
+                else
+                {
+                    FileInfo fi = new FileInfo(oldPath);
+                    fi.MoveTo(Path.Combine(fi.DirectoryName, newName));
+                }
+            }
+            catch (IOException)
+            {
+                throw;
+            }
+        }
+
+        public static void TransferFile(string filePath, string destinationPath, TransferType transferType)
+        {
+            TransferFiles(new string[] { filePath }, destinationPath, transferType);
+        }
+
+        public static void TransferFiles(string[] filePaths, string destinationPath, TransferType transferType)
         {
             if (transferType == TransferType.Copy)
             {
                 foreach (string filePath in filePaths)
                 {
+                    string fullpath = Path.Combine(destinationPath, Path.GetFileName(filePath));
                     if (IsDirectory(filePath))
                     {
-                        CopyDirectory(filePath, destinationPath);   
+                        CopyDirectory(filePath, fullpath);
                     }
                     else
                     {
-                        File.Copy(filePath, destinationPath, true);
+                        File.Copy(filePath, fullpath, true);
                     }
                 }
             }
@@ -31,21 +59,17 @@ namespace noname_SanityArchiver
             {
                 foreach (string filePath in filePaths)
                 {
+                    string fullpath = Path.Combine(destinationPath, Path.GetFileName(filePath));
                     if (IsDirectory(filePath))
                     {
-                        Directory.Move(filePath, destinationPath);
+                        Directory.Move(filePath, fullpath);
                     }
                     else
                     {
-                        File.Move(filePath, destinationPath);
+                        File.Move(filePath, fullpath);
                     }
                 }
             }
-        }
-
-        public static void TransferFile(string filePath, string destinationPath, TransferType transferType)
-        {
-            TransferFiles(new List<string>() { filePath }, destinationPath, transferType);
         }
 
         private static void CopyDirectory(string sourceDirName, string destinationPath)
@@ -78,35 +102,6 @@ namespace noname_SanityArchiver
                 string temppath = Path.Combine(destinationPath, subdir.Name);
                 CopyDirectory(subdir.FullName, temppath);
             }
-
-
-        }
-
-        public static void Rename(string oldPath, string newName)
-        {
-            try
-            {
-                if (IsDirectory(oldPath))
-                {
-                    DirectoryInfo dir = new DirectoryInfo(oldPath);
-                    dir.MoveTo(Path.Combine(dir.Parent.FullName, newName));
-                }
-                else
-                {
-                    FileInfo fi = new FileInfo(oldPath);
-                    fi.MoveTo(Path.Combine(fi.DirectoryName, newName));
-                }
-            }
-            catch (IOException)
-            {
-                throw;
-            }
-        }
-
-        private static bool IsDirectory(string path)
-        {
-            FileAttributes attr = File.GetAttributes(path);
-            return attr.HasFlag(FileAttributes.Directory);
         }
     }
 }
