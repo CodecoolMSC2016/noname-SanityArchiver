@@ -53,6 +53,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.moveListMenuITem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -150,9 +151,10 @@
             this.listMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openToolStripMenuItem,
             this.archiveToolStripMenuItem,
-            this.encryptToolStripMenuItem});
+            this.encryptToolStripMenuItem,
+            this.moveListMenuITem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(173, 70);
+            this.listMenu.Size = new System.Drawing.Size(173, 114);
             // 
             // openToolStripMenuItem
             // 
@@ -288,6 +290,13 @@
             this.toolStripTextBox1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolStripTextBox1.Size = new System.Drawing.Size(300, 25);
             // 
+            // moveListMenuITem
+            // 
+            this.moveListMenuITem.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
+            this.moveListMenuITem.Name = "moveListMenuITem";
+            this.moveListMenuITem.Size = new System.Drawing.Size(172, 22);
+            this.moveListMenuITem.Text = "Move";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -342,6 +351,7 @@
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem archiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem encryptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveListMenuITem;
     }
 }
 

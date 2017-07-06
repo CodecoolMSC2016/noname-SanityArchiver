@@ -188,7 +188,16 @@ namespace noname_SanityArchiver
                 var hti = ((DataGridView)sender).HitTest(e.X, e.Y);
                 ((DataGridView)sender).ClearSelection();
                 ((DataGridView)sender).Rows[hti.RowIndex].Selected = true;
-            }
+
+                if (sender == leftView)
+                {
+                    moveListMenuITem.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
+                } else
+                {
+                    moveListMenuITem.Image = Resources.icon_arrow;
+                }
+            } 
         }
+
     }
 }
