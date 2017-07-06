@@ -153,7 +153,7 @@ namespace noname_SanityArchiver
         /// <summary>
         /// Returns the size of the given folder in Megabytes
         /// </summary>
-        public double getFolderSize(string directoryPath)
+        public double GetFolderSize(string directoryPath)
         {
             if (!File.GetAttributes(directoryPath).HasFlag(FileAttributes.Directory))
             {
