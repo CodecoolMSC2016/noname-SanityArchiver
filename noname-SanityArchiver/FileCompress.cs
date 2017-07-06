@@ -1,43 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
-using System.Diagnostics;
 
 namespace noname_SanityArchiver
 {
-    class FileCompress
+    internal class FileCompress
     {
-        public string CreateZipFromOneSelectedItem(string item, string zipFileName)
+        public bool CheckIfSelectedItemsContainsFolder(string[] items)
         {
-            string itemPath = Path.GetFullPath(item);
-            string zipPath;
-
-            if (File.Exists(itemPath))
+            foreach (string i in items)
             {
-                // compress the file
-                zipPath = Path.GetDirectoryName(itemPath) + "\\" + zipFileName + ".zip";
-                ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create);
-                zip.CreateEntryFromFile(item, Path.GetFileName(item), CompressionLevel.Optimal);
-
-                zip.Dispose();
-
-                return zipPath;
+                if (Directory.Exists(Path.GetDirectoryName(i)))
+                {
+                    return true;
+                }
             }
-            else if (Directory.Exists(itemPath))
-            {
-                string folderPath = Path.GetFullPath(item);
+            return false;
+        }
 
-                zipPath = Path.GetDirectoryName(folderPath) + "\\" + zipFileName + ".zip";
-
-                // compress the folder
-                ZipFile.CreateFromDirectory(folderPath, zipPath);
-                return zipPath;
-            }
-            return null;
+        public string Compress(string[] items, string zipFileName)
+        {
+            return items.Length == 1 ?
+                CreateZipFromOneSelectedItem(items[0], zipFileName)
+                : CreateZipFromMoreSelectedItems(items, zipFileName);
         }
 
         public string CreateZipFromMoreSelectedItems(string[] items, string zipFileName)
@@ -65,7 +49,6 @@ namespace noname_SanityArchiver
                     {
                         CopyDirectory(Path.GetFullPath(i), tempFolderPath);
                     }
-
                 }
 
                 string zipPath = Path.GetDirectoryName(folderPath) + "\\" + zipFileName + ".zip";
@@ -94,16 +77,35 @@ namespace noname_SanityArchiver
             }
         }
 
-        public bool CheckIfSelectedItemsContainsFolder(string[] items)
+        public string CreateZipFromOneSelectedItem(string item, string zipPath)
         {
-            foreach (string i in items)
+            string itemPath = Path.GetFullPath(item);
+
+            if (File.Exists(itemPath))
             {
-                if (Directory.Exists(Path.GetDirectoryName(i)))
-                {
-                    return true;
-                }
+                // compress the file
+                File.Delete(zipPath);
+                ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create);
+                zip.CreateEntryFromFile(item, Path.GetFileName(item), CompressionLevel.Optimal);
+
+                zip.Dispose();
+
+                return zipPath;
             }
-            return false;
+            else if (Directory.Exists(itemPath))
+            {
+                string folderPath = Path.GetFullPath(item);
+
+                // compress the folder
+                ZipFile.CreateFromDirectory(folderPath, zipPath);
+                return zipPath;
+            }
+            return null;
+        }
+
+        public void DeCompress(string fileToDecompress, string folderToExtract)
+        {
+            ZipFile.ExtractToDirectory(fileToDecompress, folderToExtract);
         }
 
         private static void CopyDirectory(string root, string dest)
@@ -122,11 +124,6 @@ namespace noname_SanityArchiver
             {
                 File.Copy(file, Path.Combine(dest, Path.GetFileName(file)));
             }
-        }
-
-        public void DeCompress(string fileToDecompress, string folderToExtract)
-        {
-            ZipFile.ExtractToDirectory(fileToDecompress, folderToExtract);
         }
     }
 }

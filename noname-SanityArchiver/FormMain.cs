@@ -251,5 +251,47 @@ namespace noname_SanityArchiver
             FileExplorer explorer = GetFileExplorer(FocusedView);
             textFileWindow viewer = new textFileWindow(explorer.SelectedItems[0].FullName);
         }
+
+        private void menuItemArchive_Click(object sender, EventArgs e)
+        {
+            FileCompress compress = new FileCompress();
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            string[] selectedPaths = explorer.SelectedItems
+                .Select(selected => selected.FullName).ToArray();
+
+            sfd.InitialDirectory = explorer.CurrentDirectory.FullName;
+            sfd.FileName = Path.GetFileNameWithoutExtension(explorer.SelectedItems[0].Name);
+            DialogResult result = sfd.ShowDialog(this);
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            compress.Compress(selectedPaths, sfd.FileName);
+            explorer.DisplayFiles();
+        }
+
+        private void menuItemUnarchive_Click(object sender, EventArgs e)
+        {
+            FileCompress compress = new FileCompress();
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            string[] selectedPaths = explorer.SelectedItems
+                .Where(info => info.Extension == ".zip")
+                .Select(selected => selected.FullName)
+                .ToArray();
+
+            fbd.SelectedPath = explorer.CurrentDirectory.FullName;
+            DialogResult result = fbd.ShowDialog(this);
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            for (int i = 0; i < selectedPaths.Length; i++)
+            {
+                compress.DeCompress(selectedPaths[i], fbd.SelectedPath);
+            }
+            explorer.DisplayFiles();
+        }
     }
 }
