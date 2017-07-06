@@ -100,7 +100,7 @@ namespace noname_SanityArchiver
             for (int i = 0; i < items.Length; i++)
             {
                 CurrentItems.Add(items[i]);
-                baseName = RemoveFileExtension(items[i].Name);
+                baseName = Path.GetFileNameWithoutExtension(items[i].Name);
                 fileSize = "";
                 icon = Resources.icon_folder_full;
 
@@ -148,13 +148,6 @@ namespace noname_SanityArchiver
             string name = row.Cells[1].Value.ToString();
             string extension = row.Cells[3].Value.ToString();
             return name + extension;
-        }
-
-
-        private string RemoveFileExtension(string fileName)
-        {
-            int extensionIndex = fileName.Contains('.') ? fileName.LastIndexOf('.') : fileName.Length;
-            return fileName.Substring(0, extensionIndex);
         }
 
         /// <summary>
