@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using System.Diagnostics;
 
 namespace noname_SanityArchiver
 {
@@ -178,6 +179,16 @@ namespace noname_SanityArchiver
         {
             leftFileExplorer.DisplayFiles();
             rightFileExplorer.DisplayFiles();
+        }
+
+        private void View_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hti = ((DataGridView)sender).HitTest(e.X, e.Y);
+                ((DataGridView)sender).ClearSelection();
+                ((DataGridView)sender).Rows[hti.RowIndex].Selected = true;
+            }
         }
     }
 }
