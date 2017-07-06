@@ -129,9 +129,13 @@ namespace noname_SanityArchiver
                 int dirCount = ((DirectoryInfo)dirInfo).GetDirectories().Length;
                 return (fileCount + dirCount) == 0;
             }
-            catch (UnauthorizedAccessException)
+            catch (Exception exception)
             {
-                return false;
+                if (exception is UnauthorizedAccessException || exception is NotSupportedException)
+                {
+                    return false;
+                }
+                throw exception;
             }
         }
 
