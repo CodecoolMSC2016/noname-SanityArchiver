@@ -93,19 +93,24 @@ namespace noname_SanityArchiver
         {
             string fileSize;
             string baseName;
+            string extension;
             Bitmap icon;
             for (int i = 0; i < items.Length; i++)
             {
                 CurrentItems.Add(items[i]);
-                baseName = Path.GetFileNameWithoutExtension(items[i].Name);
-                fileSize = "";
+                baseName = items[i].Name;
                 icon = Resources.icon_folder_full;
+                fileSize = string.Empty;
+                extension = string.Empty;
 
                 if (itemType == ItemType.File)
                 {
+                    baseName = Path.GetFileNameWithoutExtension(baseName);
                     fileSize = (((FileInfo)items[i]).Length / 1024).ToString();
                     icon = Icon.ExtractAssociatedIcon(items[i].FullName).ToBitmap();
-                }else
+                    extension = items[i].Extension;
+                }
+                else
                 {
                     if (IsEmpty((DirectoryInfo)items[i]))
                     { 
@@ -113,7 +118,7 @@ namespace noname_SanityArchiver
                     }
                     
                 }
-                View.Rows.Add(icon, baseName, items[i].Extension, fileSize);
+                View.Rows.Add(icon, baseName, extension, fileSize);
             }
             
         }
