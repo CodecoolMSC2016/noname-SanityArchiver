@@ -327,6 +327,10 @@
             this.menuItemUnarchive.Text = "Unarchive";
             this.menuItemUnarchive.Click += new System.EventHandler(this.menuItemUnarchive_Click);
             // 
+            // fbd
+            // 
+            this.fbd.Description = "Select the destination folder.";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);

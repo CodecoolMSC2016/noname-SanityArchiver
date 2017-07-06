@@ -1,24 +1,18 @@
 ﻿using noname_SanityArchiver.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
-using System.Collections;
-using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace noname_SanityArchiver
 {
     public partial class FormMain : Form
     {
-        private string root;
         private FileExplorer leftFileExplorer;
         private FileExplorer rightFileExplorer;
+        private string root;
 
         public FormMain()
         {
@@ -26,6 +20,25 @@ namespace noname_SanityArchiver
             leftFileExplorer = new FileExplorer(leftView, LeftTextBox);
             rightFileExplorer = new FileExplorer(rightView, RightTextBox);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
+        }
+
+        public DataGridView FocusedView
+        {
+            get
+            {
+                return rightView.Focused ? rightView : leftView;
+            }
+        }
+
+        private void CallAppropriateExplorer(FileExplorer explorer)
+        {
+            int itemIndex = explorer.View.CurrentCell.RowIndex;
+            FileSystemInfo selectedItem = explorer.CurrentItems[itemIndex];
+            var attr = File.GetAttributes(selectedItem.FullName);
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                explorer.DisplayFiles((DirectoryInfo)selectedItem);
+            }
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -37,21 +50,15 @@ namespace noname_SanityArchiver
             rightView.ClearSelection();
         }
 
-#region ToolStrip Handlers
+        #region ToolStrip Handlers
 
-
-        private void toolFileExit_Click(object sender, EventArgs e)
+        private void toolButtonCompress_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            // TODO: implement compress button
         }
 
-        private void toolButtonEncrypt_Click(object sender, EventArgs e)
+        private void toolButtonDecompress_Click(object sender, EventArgs e)
         {
-            FileExplorer selectedExplorer = GetFileExplorer(FocusedView);
-
-            FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
-            cryptor.EncryptFile("pass");
-            UpdatePanes();
         }
 
         private void toolButtonDecrypt_Click(object sender, EventArgs e)
@@ -63,72 +70,23 @@ namespace noname_SanityArchiver
             UpdatePanes();
         }
 
-        private void toolButtonCompress_Click(object sender, EventArgs e)
+        private void toolButtonEncrypt_Click(object sender, EventArgs e)
         {
-            // TODO: implement compress button
+            FileExplorer selectedExplorer = GetFileExplorer(FocusedView);
+
+            FileCryptor cryptor = new FileCryptor(selectedExplorer.SelectedItems[0].FullName);
+            cryptor.EncryptFile("pass");
+            UpdatePanes();
         }
 
-        private void toolButtonDecompress_Click(object sender, EventArgs e)
+        private void toolFileExit_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
+        #endregion ToolStrip Handlers
 
-        #endregion
-
-#region View Events
-        private void leftView_DoubleClick(object sender, EventArgs e)
-        {
-            CallAppropriateExplorer(leftFileExplorer);
-        }
-
-        private void rightView_DoubleClick(object sender, EventArgs e)
-        {
-            CallAppropriateExplorer(rightFileExplorer);
-        }
-
-        private void View_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                DataGridView view = (DataGridView)sender;
-                var hti = view.HitTest(e.X, e.Y);
-                view.ClearSelection();
-                view.Rows[hti.RowIndex].Selected = true;
-                if (sender == leftView)
-                {
-                    menuItemMove.Image = Resources.icon_arrow;
-                    menuItemMove.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
-                } else
-                {
-                    menuItemMove.Image = Resources.icon_arrow;
-                }
-                view.Focus();
-            }
-        }
-
-        private void View_Leave(object sender, EventArgs e)
-        {
-            ((DataGridView)sender).ClearSelection();
-        }
-
-        private void View_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (IsEnterPressed(e))
-            {
-                DataGridView view = (DataGridView)sender;
-                CallAppropriateExplorer(GetFileExplorer(view));
-            }
-        }
-
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (IsEnterPressed(e))
-            {
-                TextBox textbox = (TextBox)sender;
-                SearchForDirectory(GetFileExplorer(textbox));
-            }
-        }
+        #region View Events
 
         private void leftView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
@@ -141,6 +99,11 @@ namespace noname_SanityArchiver
                 FileTransfer.Rename(oldPath, newName);
                 UpdatePanes();
             }
+        }
+
+        private void leftView_DoubleClick(object sender, EventArgs e)
+        {
+            CallAppropriateExplorer(leftFileExplorer);
         }
 
         private void rightView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -156,108 +119,66 @@ namespace noname_SanityArchiver
             }
         }
 
-        #endregion
-        private void CallAppropriateExplorer(FileExplorer explorer)
+        private void rightView_DoubleClick(object sender, EventArgs e)
         {
-            int itemIndex = explorer.View.CurrentCell.RowIndex;
-            FileSystemInfo selectedItem = explorer.CurrentItems[itemIndex];
-            var attr = File.GetAttributes(selectedItem.FullName);
-            if (attr.HasFlag(FileAttributes.Directory))
+            CallAppropriateExplorer(rightFileExplorer);
+        }
+
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsEnterPressed(e))
             {
-                explorer.DisplayFiles((DirectoryInfo)selectedItem);
+                TextBox textbox = (TextBox)sender;
+                SearchForDirectory(GetFileExplorer(textbox));
             }
         }
 
-
-        private void SearchForDirectory(FileExplorer explorer)
+        private void View_KeyDown(object sender, KeyEventArgs e)
         {
-            string absolutePath = explorer.AbsoluePathBox.Text;
-            try
+            if (IsEnterPressed(e))
             {
-                explorer.DisplayFiles(new DirectoryInfo(absolutePath));
+                DataGridView view = (DataGridView)sender;
+                CallAppropriateExplorer(GetFileExplorer(view));
             }
-            catch (Exception exception)
+        }
+
+        private void View_Leave(object sender, EventArgs e)
+        {
+            ((DataGridView)sender).ClearSelection();
+        }
+
+        private void View_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
             {
-                if (exception is UnauthorizedAccessException || exception is NotSupportedException)
+                DataGridView view = (DataGridView)sender;
+                var hti = view.HitTest(e.X, e.Y);
+                view.ClearSelection();
+                view.Rows[hti.RowIndex].Selected = true;
+                if (sender == leftView)
                 {
-                    explorer.UpdateAbsolutePath();
+                    menuItemMove.Image = Resources.icon_arrow;
+                    menuItemMove.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
                 }
-                throw exception;
-            }
-        }
-
-        private bool IsEnterPressed(KeyEventArgs e)
-        {
-            return e.KeyCode == Keys.Enter;
-        }
-
-        public DataGridView FocusedView {
-            get
-            {
-                return rightView.Focused ? rightView : leftView;
-            }
-        }
-
-        private void UpdatePanes()
-        {
-            leftFileExplorer.DisplayFiles();
-            rightFileExplorer.DisplayFiles();
-        }
-
-        private DataGridView GetOtherView(DataGridView view)
-        {
-            if (view == leftView)
-            {
-                return rightView;
-            }
-            else if (view == rightView)
-            {
-                return leftView;
-            }
-            return null;
-        }
-
-        private FileExplorer GetFileExplorer(DataGridView view)
-        {
-            if (view == leftView)
-            {
-                return leftFileExplorer;
-            }
-            else if (view == rightView)
-            {
-                return rightFileExplorer;
-            }
-            return null;
-        }
-
-        private FileExplorer GetFileExplorer(TextBox textbox)
-        {
-            if (true)
-            {
-                if (textbox == LeftTextBox)
+                else
                 {
-                    return leftFileExplorer;
+                    menuItemMove.Image = Resources.icon_arrow;
                 }
-                else if (textbox == RightTextBox)
-                {
-                    return rightFileExplorer;
-                }
-                return null;
+                view.Focus();
             }
         }
 
-        private void menuItemView_Click(object sender, EventArgs e)
-        {
-            FileExplorer explorer = GetFileExplorer(FocusedView);
-            textFileWindow viewer = new textFileWindow(explorer.SelectedItems[0].FullName);
-        }
+        #endregion View Events
+
+        #region MenuStrip Handlers
 
         private void menuItemArchive_Click(object sender, EventArgs e)
         {
             FileCompress compress = new FileCompress();
             FileExplorer explorer = GetFileExplorer(FocusedView);
             string[] selectedPaths = explorer.SelectedItems
-                .Select(selected => selected.FullName).ToArray();
+                .Select(selected => selected.FullName)
+                .ToArray();
 
             sfd.InitialDirectory = explorer.CurrentDirectory.FullName;
             sfd.FileName = Path.GetFileNameWithoutExtension(explorer.SelectedItems[0].Name);
@@ -293,5 +214,71 @@ namespace noname_SanityArchiver
             }
             explorer.DisplayFiles();
         }
+
+        private void menuItemView_Click(object sender, EventArgs e)
+        {
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            textFileWindow viewer = new textFileWindow(explorer.SelectedItems[0].FullName);
+        }
+
+        #endregion MenuStrip Handlers
+
+        #region Helpers
+
+        private FileExplorer GetFileExplorer(Control control)
+        {
+            if (control == leftView || control == LeftTextBox)
+            {
+                return leftFileExplorer;
+            }
+            else if (control == rightView || control == RightTextBox)
+            {
+                return rightFileExplorer;
+            }
+            return null;
+        }
+
+        private DataGridView GetOtherView(DataGridView view)
+        {
+            if (view == leftView)
+            {
+                return rightView;
+            }
+            else if (view == rightView)
+            {
+                return leftView;
+            }
+            return null;
+        }
+
+        private bool IsEnterPressed(KeyEventArgs e)
+        {
+            return e.KeyCode == Keys.Enter;
+        }
+
+        private void SearchForDirectory(FileExplorer explorer)
+        {
+            string absolutePath = explorer.AbsoluePathBox.Text;
+            try
+            {
+                explorer.DisplayFiles(new DirectoryInfo(absolutePath));
+            }
+            catch (Exception exception)
+            {
+                if (exception is UnauthorizedAccessException || exception is NotSupportedException)
+                {
+                    explorer.UpdateAbsolutePath();
+                }
+                throw exception;
+            }
+        }
+
+        private void UpdatePanes()
+        {
+            leftFileExplorer.DisplayFiles();
+            rightFileExplorer.DisplayFiles();
+        }
+
+        #endregion Helpers
     }
 }
