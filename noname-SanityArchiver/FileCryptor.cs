@@ -15,12 +15,12 @@ namespace noname_SanityArchiver
             this.filename = filename;
         }
 
-        public void DecryptFile(string password, string decryptedName = null)
+        public string DecryptFile(string password, string decryptedName = null)
         {
             Regex filenameWithExtension = new Regex(@".+\.tnc", RegexOptions.IgnoreCase);
             if (!filenameWithExtension.Match(filename).Success)
             {
-                return;
+                return null;
             }
             if (decryptedName == null)
             {
@@ -52,6 +52,7 @@ namespace noname_SanityArchiver
                         {
                             cs.WriteByte((byte)data);
                         }
+                        return decryptedName;
                     }
                 }
             }
@@ -88,6 +89,15 @@ namespace noname_SanityArchiver
                     }
                 }
             }
+        }
+
+        public static void EncryptMultiple(string[] paths, string location, string password, string encryptedName = null)
+        {
+            FileCompress comp = new FileCompress();
+            comp.Compress(paths, location);
+            FileCryptor cryptor = new FileCryptor(location);
+            cryptor.EncryptFile(password, encryptedName);
+            File.Delete(location);
         }
 
         private byte[] ToKey(string pass)

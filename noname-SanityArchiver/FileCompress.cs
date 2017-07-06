@@ -24,7 +24,7 @@ namespace noname_SanityArchiver
                 : CreateZipFromMoreSelectedItems(items, zipFileName);
         }
 
-        public string CreateZipFromMoreSelectedItems(string[] items, string zipFileName)
+        public string CreateZipFromMoreSelectedItems(string[] items, string zipPath)
         {
             if (this.CheckIfSelectedItemsContainsFolder(items))
             {
@@ -51,10 +51,10 @@ namespace noname_SanityArchiver
                     }
                 }
 
-                string zipPath = Path.GetDirectoryName(folderPath) + "\\" + zipFileName + ".zip";
-
                 // compress the temporary folder as a single folder
                 ZipFile.CreateFromDirectory(tempFolderPath, zipPath);
+
+                Directory.Delete(tempFolderPath, true);
 
                 return zipPath;
             }
@@ -62,7 +62,6 @@ namespace noname_SanityArchiver
             {
                 string fileName = items[0];
                 string startPath = Path.GetDirectoryName(fileName);
-                string zipPath = startPath + "\\" + zipFileName + ".zip";
 
                 // compress file(s)
                 ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create);

@@ -86,6 +86,7 @@ namespace noname_SanityArchiver
 
         public void DisplayFiles()
         {
+            Microsoft.VisualBasic.Interaction.Beep();
             DisplayFiles(CurrentDirectory);
         }
 

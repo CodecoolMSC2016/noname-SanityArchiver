@@ -60,6 +60,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
@@ -155,9 +156,6 @@
     <None Include="Resources\icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\szqiguxt.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\cgm62znq.bmp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +171,7 @@
     <None Include="Resources\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_Folder.png" />
+    <None Include="Resources\icon_folder.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_folder_full.png" />
@@ -200,16 +198,16 @@
     <None Include="Resources\icon_unpack.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\padlock.png" />
+    <None Include="Resources\icon_lock.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\refresh-page-option.png" />
+    <None Include="Resources\icon_refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\round-bomb.png" />
+    <None Include="Resources\icon_erase.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\unlocked-padlock.png" />
+    <None Include="Resources\icon_unlock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

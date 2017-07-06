@@ -4,6 +4,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace noname_SanityArchiver
@@ -17,8 +18,8 @@ namespace noname_SanityArchiver
         public FormMain()
         {
             InitializeComponent();
-            leftFileExplorer = new FileExplorer(leftView, LeftTextBox);
-            rightFileExplorer = new FileExplorer(rightView, RightTextBox);
+            leftFileExplorer = new FileExplorer(leftView, leftTextBox);
+            rightFileExplorer = new FileExplorer(rightView, rightTextBox);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
         }
 
@@ -149,9 +150,10 @@ namespace noname_SanityArchiver
 
         private void View_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            DataGridView view = (DataGridView)sender;
+            FileExplorer explorer = GetFileExplorer(view);
+            if (e.Button == MouseButtons.Right && explorer.SelectedItems.Length == 1)
             {
-                DataGridView view = (DataGridView)sender;
                 var hti = view.HitTest(e.X, e.Y);
                 view.ClearSelection();
                 view.Rows[hti.RowIndex].Selected = true;
@@ -192,6 +194,66 @@ namespace noname_SanityArchiver
             explorer.DisplayFiles();
         }
 
+        private void menuItemDecrypt_Click(object sender, EventArgs e)
+        {
+            FileCompress compress = new FileCompress();
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            string[] selectedPaths = explorer.SelectedItems
+                .Where(info => info.Extension == ".tnc")
+                .Select(selected => selected.FullName)
+                .ToArray();
+
+            string password = Microsoft.VisualBasic.Interaction.InputBox("Please enter password:", "Enter password");
+
+            for (int i = 0; i < selectedPaths.Length; i++)
+            {
+                FileCryptor cryptor = new FileCryptor(selectedPaths[i]);
+                string zipFile = cryptor.DecryptFile(password);
+                Regex removeZipExt = new Regex(@"\.zip$", RegexOptions.IgnoreCase);
+                string dir = removeZipExt.Replace(zipFile, "");
+                Directory.CreateDirectory(dir);
+                compress.DeCompress(zipFile, dir);
+                File.Delete(zipFile);
+            }
+            explorer.DisplayFiles();
+        }
+
+        private void menuItemEncrypt_Click(object sender, EventArgs e)
+        {
+            FileCompress compress = new FileCompress();
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            string[] selectedPaths = explorer.SelectedItems
+                .Select(selected => selected.FullName)
+                .ToArray();
+
+            string password = Microsoft.VisualBasic.Interaction.InputBox("Please enter password:", "Enter password");
+
+            if (selectedPaths.Length == 1)
+            {
+                string filepath = selectedPaths[0];
+                FileCryptor cryptor = new FileCryptor(filepath);
+                if (password != "")
+                {
+                    cryptor.EncryptFile(password);
+                }
+            }
+            else if (selectedPaths.Length > 1)
+            {
+                DirectoryInfo currentDir = explorer.CurrentDirectory;
+                FileCryptor.EncryptMultiple(selectedPaths,
+                    Path.Combine(currentDir.FullName, currentDir.Name + ".zip"),
+                    password);
+            }
+
+            explorer.DisplayFiles();
+        }
+
+        private void menuItemRefresh_Click(object sender, EventArgs e)
+        {
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            explorer.DisplayFiles();
+        }
+
         private void menuItemUnarchive_Click(object sender, EventArgs e)
         {
             FileCompress compress = new FileCompress();
@@ -227,11 +289,11 @@ namespace noname_SanityArchiver
 
         private FileExplorer GetFileExplorer(Control control)
         {
-            if (control == leftView || control == LeftTextBox)
+            if (control == leftView || control == leftTextBox)
             {
                 return leftFileExplorer;
             }
-            else if (control == rightView || control == RightTextBox)
+            else if (control == rightView || control == rightTextBox)
             {
                 return rightFileExplorer;
             }

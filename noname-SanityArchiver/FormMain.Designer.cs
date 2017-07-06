@@ -39,15 +39,17 @@
             this.listMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemArchive = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemUnarchive = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemMove = new System.Windows.Forms.ToolStripMenuItem();
-            this.LeftTextBox = new System.Windows.Forms.TextBox();
+            this.leftTextBox = new System.Windows.Forms.TextBox();
             this.rightView = new System.Windows.Forms.DataGridView();
             this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
             this.nameHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extensionHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sizeHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RightTextBox = new System.Windows.Forms.TextBox();
+            this.rightTextBox = new System.Windows.Forms.TextBox();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -55,9 +57,14 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemUnarchive = new System.Windows.Forms.ToolStripMenuItem();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
+            this.menuItemDecrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,12 +85,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.leftView);
-            this.splitContainer1.Panel1.Controls.Add(this.LeftTextBox);
+            this.splitContainer1.Panel1.Controls.Add(this.leftTextBox);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightView);
-            this.splitContainer1.Panel2.Controls.Add(this.RightTextBox);
+            this.splitContainer1.Panel2.Controls.Add(this.rightTextBox);
             this.splitContainer1.Size = new System.Drawing.Size(1000, 455);
             this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.TabIndex = 0;
@@ -154,56 +161,77 @@
             // 
             this.listMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.listMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemRefresh,
+            this.toolStripSeparator4,
             this.menuItemView,
             this.menuItemArchive,
             this.menuItemUnarchive,
             this.toolStripSeparator1,
             this.menuItemEncrypt,
-            this.menuItemMove});
+            this.menuItemDecrypt,
+            this.toolStripSeparator2,
+            this.toolStripMenuItem1,
+            this.menuItemMove,
+            this.toolStripSeparator3,
+            this.deleteToolStripMenuItem});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(190, 140);
+            this.listMenu.Size = new System.Drawing.Size(180, 290);
             // 
             // menuItemView
             // 
             this.menuItemView.Image = global::noname_SanityArchiver.Properties.Resources.icon_eye;
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(189, 26);
+            this.menuItemView.Size = new System.Drawing.Size(179, 26);
             this.menuItemView.Text = "View";
             this.menuItemView.Click += new System.EventHandler(this.menuItemView_Click);
             // 
             // menuItemArchive
             // 
-            this.menuItemArchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_package;
+            this.menuItemArchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_inpack;
             this.menuItemArchive.Name = "menuItemArchive";
-            this.menuItemArchive.Size = new System.Drawing.Size(189, 26);
+            this.menuItemArchive.Size = new System.Drawing.Size(179, 26);
             this.menuItemArchive.Text = "Archive";
             this.menuItemArchive.Click += new System.EventHandler(this.menuItemArchive_Click);
+            // 
+            // menuItemUnarchive
+            // 
+            this.menuItemUnarchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_unpack;
+            this.menuItemUnarchive.Name = "menuItemUnarchive";
+            this.menuItemUnarchive.Size = new System.Drawing.Size(179, 26);
+            this.menuItemUnarchive.Text = "Unarchive";
+            this.menuItemUnarchive.Click += new System.EventHandler(this.menuItemUnarchive_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(176, 6);
             // 
             // menuItemEncrypt
             // 
             this.menuItemEncrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_lock;
             this.menuItemEncrypt.Name = "menuItemEncrypt";
-            this.menuItemEncrypt.Size = new System.Drawing.Size(189, 26);
-            this.menuItemEncrypt.Text = "Encrypt/Decrypt";
+            this.menuItemEncrypt.Size = new System.Drawing.Size(179, 26);
+            this.menuItemEncrypt.Text = "Encrypt";
+            this.menuItemEncrypt.Click += new System.EventHandler(this.menuItemEncrypt_Click);
             // 
             // menuItemMove
             // 
-            this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
+            this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_move;
             this.menuItemMove.Name = "menuItemMove";
-            this.menuItemMove.Size = new System.Drawing.Size(189, 26);
+            this.menuItemMove.Size = new System.Drawing.Size(179, 26);
             this.menuItemMove.Text = "Move";
             // 
-            // LeftTextBox
+            // leftTextBox
             // 
-            this.LeftTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.LeftTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LeftTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LeftTextBox.Location = new System.Drawing.Point(0, 0);
-            this.LeftTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.LeftTextBox.Name = "LeftTextBox";
-            this.LeftTextBox.Size = new System.Drawing.Size(500, 24);
-            this.LeftTextBox.TabIndex = 2;
-            this.LeftTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            this.leftTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.leftTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.leftTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.leftTextBox.Location = new System.Drawing.Point(0, 0);
+            this.leftTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.leftTextBox.Name = "leftTextBox";
+            this.leftTextBox.Size = new System.Drawing.Size(500, 24);
+            this.leftTextBox.TabIndex = 2;
+            this.leftTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // rightView
             // 
@@ -266,17 +294,17 @@
             this.sizeHeaderRight.ReadOnly = true;
             this.sizeHeaderRight.Width = 64;
             // 
-            // RightTextBox
+            // rightTextBox
             // 
-            this.RightTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RightTextBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.RightTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.RightTextBox.Location = new System.Drawing.Point(0, 0);
-            this.RightTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.RightTextBox.Name = "RightTextBox";
-            this.RightTextBox.Size = new System.Drawing.Size(496, 24);
-            this.RightTextBox.TabIndex = 3;
-            this.RightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            this.rightTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rightTextBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rightTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rightTextBox.Location = new System.Drawing.Point(0, 0);
+            this.rightTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.rightTextBox.Name = "rightTextBox";
+            this.rightTextBox.Size = new System.Drawing.Size(496, 24);
+            this.rightTextBox.TabIndex = 3;
+            this.rightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // imageList1
             // 
@@ -314,22 +342,54 @@
             // 
             this.sfd.Filter = "Zip Files(*.zip)|*.zip|All Files(*.*)|*.*";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
-            // 
-            // menuItemUnarchive
-            // 
-            this.menuItemUnarchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_package;
-            this.menuItemUnarchive.Name = "menuItemUnarchive";
-            this.menuItemUnarchive.Size = new System.Drawing.Size(189, 26);
-            this.menuItemUnarchive.Text = "Unarchive";
-            this.menuItemUnarchive.Click += new System.EventHandler(this.menuItemUnarchive_Click);
-            // 
             // fbd
             // 
             this.fbd.Description = "Select the destination folder.";
+            // 
+            // menuItemDecrypt
+            // 
+            this.menuItemDecrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_unlock;
+            this.menuItemDecrypt.Name = "menuItemDecrypt";
+            this.menuItemDecrypt.Size = new System.Drawing.Size(179, 26);
+            this.menuItemDecrypt.Text = "Decrypt";
+            this.menuItemDecrypt.Click += new System.EventHandler(this.menuItemDecrypt_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(176, 6);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 26);
+            this.toolStripMenuItem1.Text = "Copy";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Image = global::noname_SanityArchiver.Properties.Resources.icon_erase;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(176, 6);
+            // 
+            // menuItemRefresh
+            // 
+            this.menuItemRefresh.Image = global::noname_SanityArchiver.Properties.Resources.icon_refresh;
+            this.menuItemRefresh.Name = "menuItemRefresh";
+            this.menuItemRefresh.Size = new System.Drawing.Size(179, 26);
+            this.menuItemRefresh.Text = "Refresh";
+            this.menuItemRefresh.Click += new System.EventHandler(this.menuItemRefresh_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(176, 6);
             // 
             // FormMain
             // 
@@ -366,8 +426,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox LeftTextBox;
-        private System.Windows.Forms.TextBox RightTextBox;
+        private System.Windows.Forms.TextBox leftTextBox;
+        private System.Windows.Forms.TextBox rightTextBox;
         private System.Windows.Forms.DataGridView leftView;
         private System.Windows.Forms.DataGridView rightView;
         private System.Windows.Forms.DataGridViewImageColumn iconHeaderLeft;
@@ -390,6 +450,13 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemUnarchive;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.FolderBrowserDialog fbd;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDecrypt;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRefresh;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 
