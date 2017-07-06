@@ -73,9 +73,9 @@ namespace noname_SanityArchiver.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_archive {
+        internal static System.Drawing.Bitmap icon_arrow {
             get {
-                object obj = ResourceManager.GetObject("icon_archive", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace noname_SanityArchiver.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_arrow {
+        internal static System.Drawing.Bitmap icon_eye {
             get {
-                object obj = ResourceManager.GetObject("icon_arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_eye", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +106,26 @@ namespace noname_SanityArchiver.Properties {
         internal static System.Drawing.Bitmap icon_folder_full {
             get {
                 object obj = ResourceManager.GetObject("icon_folder_full", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_lock {
+            get {
+                object obj = ResourceManager.GetObject("icon_lock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_package {
+            get {
+                object obj = ResourceManager.GetObject("icon_package", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
