@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Microsoft.VisualBasic.FileIO;
+using System.IO;
 
 namespace noname_SanityArchiver
 {
@@ -47,11 +48,11 @@ namespace noname_SanityArchiver
                     string fullpath = Path.Combine(destinationPath, Path.GetFileName(filePath));
                     if (IsDirectory(filePath))
                     {
-                        CopyDirectory(filePath, fullpath);
+                        FileSystem.CopyDirectory(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
                     }
                     else
                     {
-                        File.Copy(filePath, fullpath, true);
+                        FileSystem.CopyFile(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
                     }
                 }
             }
@@ -62,11 +63,11 @@ namespace noname_SanityArchiver
                     string fullpath = Path.Combine(destinationPath, Path.GetFileName(filePath));
                     if (IsDirectory(filePath))
                     {
-                        Directory.Move(filePath, fullpath);
+                        FileSystem.MoveDirectory(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
                     }
                     else
                     {
-                        File.Move(filePath, fullpath);
+                        FileSystem.MoveFile(filePath, fullpath, UIOption.AllDialogs, UICancelOption.DoNothing);
                     }
                 }
             }

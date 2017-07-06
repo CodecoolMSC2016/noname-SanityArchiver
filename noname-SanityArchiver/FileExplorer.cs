@@ -69,7 +69,7 @@ namespace noname_SanityArchiver
             if (parent != null)
             {
                 CurrentItems.Add(parent);
-                View.Rows.Add(Resources.icon_arrow, "...", "", "");
+                View.Rows.Add(Resources.icon_arrow_left, "...", "", "");
             }
 
             AddItemsToView(directories, ItemType.Directory);
@@ -92,16 +92,16 @@ namespace noname_SanityArchiver
         }
 
         /// <summary>
-        /// Returns the size of the given folder in Megabytes
+        /// Returns the size of the given folder in bytes
         /// </summary>
-        public double GetFolderSize(string directoryPath)
+        public long GetFolderSize(string directoryPath)
         {
             if (!File.GetAttributes(directoryPath).HasFlag(FileAttributes.Directory))
             {
                 return 0;
             }
 
-            double size = 0;
+            long size = 0;
             string[] files = Directory.GetFiles(directoryPath);
 
             foreach (string file in files)
@@ -109,14 +109,14 @@ namespace noname_SanityArchiver
                 size += new FileInfo(file).Length;
             }
 
-            string[] directories = Directory.GetFiles(directoryPath);
+            string[] directories = Directory.GetDirectories(directoryPath);
 
             foreach (string directory in directories)
             {
                 size += GetFolderSize(directory);
             }
 
-            return Math.Ceiling(size / 1024 / 1024);
+            return size;
         }
 
         public void UpdateAbsolutePath()
@@ -141,7 +141,7 @@ namespace noname_SanityArchiver
                 if (itemType == ItemType.File)
                 {
                     baseName = Path.GetFileNameWithoutExtension(baseName);
-                    fileSize = (((FileInfo)items[i]).Length / 1024).ToString();
+                    fileSize = (((FileInfo)items[i]).Length / 1024).ToString() + " kB";
                     icon = Icon.ExtractAssociatedIcon(items[i].FullName).ToBitmap();
                     extension = items[i].Extension;
                 }

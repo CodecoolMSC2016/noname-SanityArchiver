@@ -73,9 +73,19 @@ namespace noname_SanityArchiver.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_arrow {
+        internal static System.Drawing.Bitmap icon_arrow_left {
             get {
-                object obj = ResourceManager.GetObject("icon_arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_arrow_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_arrow_right {
+            get {
+                object obj = ResourceManager.GetObject("icon_arrow_right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

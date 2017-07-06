@@ -1,7 +1,6 @@
 ﻿using noname_SanityArchiver.Properties;
 using System;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -124,12 +123,13 @@ namespace noname_SanityArchiver
                 }
                 if (sender == leftView)
                 {
-                    menuItemMove.Image = Resources.icon_arrow;
-                    menuItemMove.Image.RotateFlip(RotateFlipType.Rotate180FlipY);
+                    menuItemCopy.Image = Resources.icon_arrow_right;
+                    menuItemMove.Image = Resources.icon_arrow_right;
                 }
                 else
                 {
-                    menuItemMove.Image = Resources.icon_arrow;
+                    menuItemCopy.Image = Resources.icon_arrow_left;
+                    menuItemMove.Image = Resources.icon_arrow_left;
                 }
                 view.Focus();
             }
@@ -194,6 +194,27 @@ namespace noname_SanityArchiver
                 Directory.CreateDirectory(dir);
                 compress.DeCompress(zipFile, dir);
                 File.Delete(zipFile);
+            }
+            UpdatePanes();
+        }
+
+        private void menuItemDelete_Click(object sender, EventArgs e)
+        {
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            string[] selectedPaths = explorer.SelectedItems
+                .Select(selected => selected.FullName)
+                .ToArray();
+            for (int i = 0; i < selectedPaths.Length; i++)
+            {
+                string path = selectedPaths[i];
+                if (FileTransfer.IsDirectory(path))
+                {
+                    Directory.Delete(path, true);
+                }
+                else
+                {
+                    File.Delete(path);
+                }
             }
             UpdatePanes();
         }
@@ -278,17 +299,25 @@ namespace noname_SanityArchiver
             textFileWindow viewer = new textFileWindow(explorer.SelectedItems[0].FullName);
         }
 
+        private void Switch_Click(object sender, EventArgs e)
+        {
+            PictureBox control = (PictureBox)sender;
+            FileExplorer from = GetFileExplorer(control);
+            FileExplorer to = GetFileExplorer(GetOtherView(FocusedView));
+            to.DisplayFiles(from.CurrentDirectory);
+        }
+
         #endregion MenuStrip Handlers
 
         #region Helpers
 
         private FileExplorer GetFileExplorer(Control control)
         {
-            if (control == leftView || control == leftTextBox)
+            if (control == leftView || control == leftTextBox || control == leftToRight)
             {
                 return leftFileExplorer;
             }
-            else if (control == rightView || control == rightTextBox)
+            else if (control == rightView || control == rightTextBox || control == rightToLeft)
             {
                 return rightFileExplorer;
             }
@@ -337,5 +366,35 @@ namespace noname_SanityArchiver
         }
 
         #endregion Helpers
+
+        private void listMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            FileSystemInfo[] selectedPaths = explorer.SelectedItems;
+            long size = 0;
+            for (int i = 0; i < selectedPaths.Length; i++)
+            {
+                string path = selectedPaths[i].FullName;
+                if (FileTransfer.IsDirectory(path))
+                {
+                    size += explorer.GetFolderSize(path);
+                }
+                else
+                {
+                    FileInfo selectedFile = (FileInfo)selectedPaths[i];
+                    size += selectedFile.Length;
+                }
+            }
+
+            menuItemSize.Text = (size / 1024) + " kB";
+        }
+
+        private void menuItemChangeAttr_Click(object sender, EventArgs e)
+        {
+            FileExplorer explorer = GetFileExplorer(FocusedView);
+            string selectedFile = explorer.SelectedItems[0].FullName;
+
+            FileAttributeChange fac = new FileAttributeChange(selectedFile);
+        }
     }
 }

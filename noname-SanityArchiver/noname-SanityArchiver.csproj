@@ -81,6 +81,12 @@
     <Compile Include="FileTransfer.cs" />
     <Compile Include="FileCryptor.cs" />
     <Compile Include="FileExplorer.cs" />
+    <Compile Include="FormChangeAttr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChangeAttr.Designer.cs">
+      <DependentUpon>FormChangeAttr.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     <Compile Include="textFileWindow.Designer.cs">
       <DependentUpon>textFileWindow.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormChangeAttr.resx">
+      <DependentUpon>FormChangeAttr.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,6 +217,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_unlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_right_arrow.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right-arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
