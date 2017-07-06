@@ -188,10 +188,28 @@
     <None Include="Resources\delivery-package.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\left-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_inpack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_move.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_unpack.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\padlock.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\left-arrow.png" />
+    <None Include="Resources\refresh-page-option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\round-bomb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unlocked-padlock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

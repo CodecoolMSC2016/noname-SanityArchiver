@@ -83,6 +83,16 @@ namespace noname_SanityArchiver.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_erase {
+            get {
+                object obj = ResourceManager.GetObject("icon_erase", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_eye {
             get {
                 object obj = ResourceManager.GetObject("icon_eye", resourceCulture);
@@ -113,6 +123,16 @@ namespace noname_SanityArchiver.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_inpack {
+            get {
+                object obj = ResourceManager.GetObject("icon_inpack", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_lock {
             get {
                 object obj = ResourceManager.GetObject("icon_lock", resourceCulture);
@@ -123,9 +143,39 @@ namespace noname_SanityArchiver.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_package {
+        internal static System.Drawing.Bitmap icon_move {
             get {
-                object obj = ResourceManager.GetObject("icon_package", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_move", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_refresh {
+            get {
+                object obj = ResourceManager.GetObject("icon_refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_unlock {
+            get {
+                object obj = ResourceManager.GetObject("icon_unlock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_unpack {
+            get {
+                object obj = ResourceManager.GetObject("icon_unpack", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

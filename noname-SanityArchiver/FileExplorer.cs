@@ -22,7 +22,7 @@ namespace noname_SanityArchiver
 
         public TextBox AbsoluePathBox { get; }
 
-        private DirectoryInfo CurrentDirectory { get; set; }
+        public DirectoryInfo CurrentDirectory { get; set; }
 
         public FileExplorer(DataGridView view, TextBox textBox)
         {

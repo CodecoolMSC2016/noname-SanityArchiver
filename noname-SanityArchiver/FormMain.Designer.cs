@@ -40,6 +40,7 @@
             this.menuItemView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemArchive = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemEncrypt = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemMove = new System.Windows.Forms.ToolStripMenuItem();
             this.LeftTextBox = new System.Windows.Forms.TextBox();
             this.rightView = new System.Windows.Forms.DataGridView();
             this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
@@ -53,7 +54,10 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.menuItemMove = new System.Windows.Forms.ToolStripMenuItem();
+            this.sfd = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemUnarchive = new System.Windows.Forms.ToolStripMenuItem();
+            this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -152,31 +156,42 @@
             this.listMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemView,
             this.menuItemArchive,
+            this.menuItemUnarchive,
+            this.toolStripSeparator1,
             this.menuItemEncrypt,
             this.menuItemMove});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(203, 136);
+            this.listMenu.Size = new System.Drawing.Size(190, 140);
             // 
             // menuItemView
             // 
             this.menuItemView.Image = global::noname_SanityArchiver.Properties.Resources.icon_eye;
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(202, 26);
+            this.menuItemView.Size = new System.Drawing.Size(189, 26);
             this.menuItemView.Text = "View";
+            this.menuItemView.Click += new System.EventHandler(this.menuItemView_Click);
             // 
             // menuItemArchive
             // 
             this.menuItemArchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_package;
             this.menuItemArchive.Name = "menuItemArchive";
-            this.menuItemArchive.Size = new System.Drawing.Size(202, 26);
-            this.menuItemArchive.Text = "Archive/Unarchive";
+            this.menuItemArchive.Size = new System.Drawing.Size(189, 26);
+            this.menuItemArchive.Text = "Archive";
+            this.menuItemArchive.Click += new System.EventHandler(this.menuItemArchive_Click);
             // 
             // menuItemEncrypt
             // 
             this.menuItemEncrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_lock;
             this.menuItemEncrypt.Name = "menuItemEncrypt";
-            this.menuItemEncrypt.Size = new System.Drawing.Size(202, 26);
+            this.menuItemEncrypt.Size = new System.Drawing.Size(189, 26);
             this.menuItemEncrypt.Text = "Encrypt/Decrypt";
+            // 
+            // menuItemMove
+            // 
+            this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
+            this.menuItemMove.Name = "menuItemMove";
+            this.menuItemMove.Size = new System.Drawing.Size(189, 26);
+            this.menuItemMove.Text = "Move";
             // 
             // LeftTextBox
             // 
@@ -295,12 +310,26 @@
             this.toolStripTextBox1.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.toolStripTextBox1.Size = new System.Drawing.Size(399, 27);
             // 
-            // menuItemMove
+            // sfd
             // 
-            this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow;
-            this.menuItemMove.Name = "menuItemMove";
-            this.menuItemMove.Size = new System.Drawing.Size(202, 26);
-            this.menuItemMove.Text = "Move";
+            this.sfd.Filter = "Zip Files(*.zip)|*.zip|All Files(*.*)|*.*";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
+            // 
+            // menuItemUnarchive
+            // 
+            this.menuItemUnarchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_package;
+            this.menuItemUnarchive.Name = "menuItemUnarchive";
+            this.menuItemUnarchive.Size = new System.Drawing.Size(189, 26);
+            this.menuItemUnarchive.Text = "Unarchive";
+            this.menuItemUnarchive.Click += new System.EventHandler(this.menuItemUnarchive_Click);
+            // 
+            // fbd
+            // 
+            this.fbd.Description = "Select the destination folder.";
             // 
             // FormMain
             // 
@@ -357,6 +386,10 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemArchive;
         private System.Windows.Forms.ToolStripMenuItem menuItemEncrypt;
         private System.Windows.Forms.ToolStripMenuItem menuItemMove;
+        private System.Windows.Forms.SaveFileDialog sfd;
+        private System.Windows.Forms.ToolStripMenuItem menuItemUnarchive;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.FolderBrowserDialog fbd;
     }
 }
 
