@@ -16,7 +16,7 @@ namespace noname_SanityArchiver
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormStartWindow());
+            Application.Run(new FormMain());
         }
     }
 }

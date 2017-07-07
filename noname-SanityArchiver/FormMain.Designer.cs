@@ -32,6 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.leftView = new System.Windows.Forms.DataGridView();
+            this.iconHeaderLeft = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nameHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extensionHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sizeHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -54,6 +58,10 @@
             this.leftTextBox = new System.Windows.Forms.TextBox();
             this.leftToRight = new System.Windows.Forms.PictureBox();
             this.rightView = new System.Windows.Forms.DataGridView();
+            this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
+            this.nameHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extensionHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sizeHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.searchPanelRight = new System.Windows.Forms.Panel();
             this.rightTextBox = new System.Windows.Forms.TextBox();
             this.rightToLeft = new System.Windows.Forms.PictureBox();
@@ -61,14 +69,6 @@
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
-            this.iconHeaderLeft = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nameHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extensionHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sizeHeaderLeft = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iconHeaderRight = new System.Windows.Forms.DataGridViewImageColumn();
-            this.nameHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extensionHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sizeHeaderRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -133,6 +133,38 @@
             this.leftView.Leave += new System.EventHandler(this.View_Leave);
             this.leftView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.View_MouseDown);
             // 
+            // iconHeaderLeft
+            // 
+            this.iconHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.iconHeaderLeft.Frozen = true;
+            this.iconHeaderLeft.HeaderText = "";
+            this.iconHeaderLeft.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.iconHeaderLeft.Name = "iconHeaderLeft";
+            this.iconHeaderLeft.ReadOnly = true;
+            this.iconHeaderLeft.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.iconHeaderLeft.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.iconHeaderLeft.Width = 32;
+            // 
+            // nameHeaderLeft
+            // 
+            this.nameHeaderLeft.HeaderText = "Name";
+            this.nameHeaderLeft.Name = "nameHeaderLeft";
+            // 
+            // extensionHeaderLeft
+            // 
+            this.extensionHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.extensionHeaderLeft.HeaderText = "Extension";
+            this.extensionHeaderLeft.Name = "extensionHeaderLeft";
+            this.extensionHeaderLeft.Width = 64;
+            // 
+            // sizeHeaderLeft
+            // 
+            this.sizeHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.sizeHeaderLeft.HeaderText = "Size";
+            this.sizeHeaderLeft.Name = "sizeHeaderLeft";
+            this.sizeHeaderLeft.ReadOnly = true;
+            this.sizeHeaderLeft.Width = 64;
+            // 
             // listMenu
             // 
             this.listMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -155,27 +187,27 @@
             this.toolStripSeparator6,
             this.menuItemSize});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(165, 316);
+            this.listMenu.Size = new System.Drawing.Size(170, 318);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // menuItemRefresh
             // 
             this.menuItemRefresh.Image = global::noname_SanityArchiver.Properties.Resources.icon_refresh;
             this.menuItemRefresh.Name = "menuItemRefresh";
-            this.menuItemRefresh.Size = new System.Drawing.Size(164, 26);
+            this.menuItemRefresh.Size = new System.Drawing.Size(169, 26);
             this.menuItemRefresh.Text = "Refresh";
             this.menuItemRefresh.Click += new System.EventHandler(this.menuItemRefresh_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(166, 6);
             // 
             // menuItemView
             // 
             this.menuItemView.Image = global::noname_SanityArchiver.Properties.Resources.icon_eye;
             this.menuItemView.Name = "menuItemView";
-            this.menuItemView.Size = new System.Drawing.Size(164, 26);
+            this.menuItemView.Size = new System.Drawing.Size(169, 26);
             this.menuItemView.Text = "View";
             this.menuItemView.Click += new System.EventHandler(this.menuItemView_Click);
             // 
@@ -183,7 +215,7 @@
             // 
             this.menuItemArchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_inpack;
             this.menuItemArchive.Name = "menuItemArchive";
-            this.menuItemArchive.Size = new System.Drawing.Size(164, 26);
+            this.menuItemArchive.Size = new System.Drawing.Size(169, 26);
             this.menuItemArchive.Text = "Archive";
             this.menuItemArchive.Click += new System.EventHandler(this.menuItemArchive_Click);
             // 
@@ -191,20 +223,20 @@
             // 
             this.menuItemUnarchive.Image = global::noname_SanityArchiver.Properties.Resources.icon_unpack;
             this.menuItemUnarchive.Name = "menuItemUnarchive";
-            this.menuItemUnarchive.Size = new System.Drawing.Size(164, 26);
+            this.menuItemUnarchive.Size = new System.Drawing.Size(169, 26);
             this.menuItemUnarchive.Text = "Unarchive";
             this.menuItemUnarchive.Click += new System.EventHandler(this.menuItemUnarchive_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(166, 6);
             // 
             // menuItemEncrypt
             // 
             this.menuItemEncrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_lock;
             this.menuItemEncrypt.Name = "menuItemEncrypt";
-            this.menuItemEncrypt.Size = new System.Drawing.Size(164, 26);
+            this.menuItemEncrypt.Size = new System.Drawing.Size(169, 26);
             this.menuItemEncrypt.Text = "Encrypt";
             this.menuItemEncrypt.Click += new System.EventHandler(this.menuItemEncrypt_Click);
             // 
@@ -212,20 +244,20 @@
             // 
             this.menuItemDecrypt.Image = global::noname_SanityArchiver.Properties.Resources.icon_unlock;
             this.menuItemDecrypt.Name = "menuItemDecrypt";
-            this.menuItemDecrypt.Size = new System.Drawing.Size(164, 26);
+            this.menuItemDecrypt.Size = new System.Drawing.Size(169, 26);
             this.menuItemDecrypt.Text = "Decrypt";
             this.menuItemDecrypt.Click += new System.EventHandler(this.menuItemDecrypt_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
             // 
             // menuItemCopy
             // 
             this.menuItemCopy.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow_left;
             this.menuItemCopy.Name = "menuItemCopy";
-            this.menuItemCopy.Size = new System.Drawing.Size(164, 26);
+            this.menuItemCopy.Size = new System.Drawing.Size(169, 26);
             this.menuItemCopy.Text = "Copy";
             this.menuItemCopy.Click += new System.EventHandler(this.menuItemCopy_Click);
             // 
@@ -233,39 +265,39 @@
             // 
             this.menuItemMove.Image = global::noname_SanityArchiver.Properties.Resources.icon_move;
             this.menuItemMove.Name = "menuItemMove";
-            this.menuItemMove.Size = new System.Drawing.Size(164, 26);
+            this.menuItemMove.Size = new System.Drawing.Size(169, 26);
             this.menuItemMove.Text = "Move";
             this.menuItemMove.Click += new System.EventHandler(this.menuItemMove_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(166, 6);
             // 
             // menuItemChangeAttr
             // 
             this.menuItemChangeAttr.Name = "menuItemChangeAttr";
-            this.menuItemChangeAttr.Size = new System.Drawing.Size(164, 26);
+            this.menuItemChangeAttr.Size = new System.Drawing.Size(169, 26);
             this.menuItemChangeAttr.Text = "Change Attribute";
             this.menuItemChangeAttr.Click += new System.EventHandler(this.menuItemChangeAttr_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(166, 6);
             // 
             // menuItemDelete
             // 
             this.menuItemDelete.Image = global::noname_SanityArchiver.Properties.Resources.icon_erase;
             this.menuItemDelete.Name = "menuItemDelete";
-            this.menuItemDelete.Size = new System.Drawing.Size(164, 26);
+            this.menuItemDelete.Size = new System.Drawing.Size(169, 26);
             this.menuItemDelete.Text = "Delete";
             this.menuItemDelete.Click += new System.EventHandler(this.menuItemDelete_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(166, 6);
             // 
             // menuItemSize
             // 
@@ -274,7 +306,7 @@
             this.menuItemSize.ForeColor = System.Drawing.SystemColors.WindowFrame;
             this.menuItemSize.Name = "menuItemSize";
             this.menuItemSize.ReadOnly = true;
-            this.menuItemSize.Size = new System.Drawing.Size(100, 14);
+            this.menuItemSize.Size = new System.Drawing.Size(100, 16);
             this.menuItemSize.Text = "asdasd";
             // 
             // searchPanelLeft
@@ -283,7 +315,7 @@
             this.searchPanelLeft.Controls.Add(this.leftToRight);
             this.searchPanelLeft.Dock = System.Windows.Forms.DockStyle.Top;
             this.searchPanelLeft.Location = new System.Drawing.Point(0, 0);
-            this.searchPanelLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.searchPanelLeft.Margin = new System.Windows.Forms.Padding(2);
             this.searchPanelLeft.Name = "searchPanelLeft";
             this.searchPanelLeft.Size = new System.Drawing.Size(375, 20);
             this.searchPanelLeft.TabIndex = 5;
@@ -305,7 +337,7 @@
             this.leftToRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.leftToRight.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow_right;
             this.leftToRight.Location = new System.Drawing.Point(357, 0);
-            this.leftToRight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.leftToRight.Margin = new System.Windows.Forms.Padding(2);
             this.leftToRight.Name = "leftToRight";
             this.leftToRight.Size = new System.Drawing.Size(18, 20);
             this.leftToRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -343,82 +375,6 @@
             this.rightView.Leave += new System.EventHandler(this.View_Leave);
             this.rightView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.View_MouseDown);
             // 
-            // searchPanelRight
-            // 
-            this.searchPanelRight.Controls.Add(this.rightTextBox);
-            this.searchPanelRight.Controls.Add(this.rightToLeft);
-            this.searchPanelRight.Dock = System.Windows.Forms.DockStyle.Top;
-            this.searchPanelRight.Location = new System.Drawing.Point(0, 0);
-            this.searchPanelRight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.searchPanelRight.Name = "searchPanelRight";
-            this.searchPanelRight.Size = new System.Drawing.Size(372, 20);
-            this.searchPanelRight.TabIndex = 5;
-            // 
-            // rightTextBox
-            // 
-            this.rightTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rightTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rightTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.rightTextBox.Location = new System.Drawing.Point(18, 0);
-            this.rightTextBox.Name = "rightTextBox";
-            this.rightTextBox.Size = new System.Drawing.Size(354, 21);
-            this.rightTextBox.TabIndex = 3;
-            this.rightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
-            // 
-            // rightToLeft
-            // 
-            this.rightToLeft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rightToLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rightToLeft.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow_left;
-            this.rightToLeft.Location = new System.Drawing.Point(0, 0);
-            this.rightToLeft.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.rightToLeft.Name = "rightToLeft";
-            this.rightToLeft.Size = new System.Drawing.Size(18, 20);
-            this.rightToLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.rightToLeft.TabIndex = 4;
-            this.rightToLeft.TabStop = false;
-            this.rightToLeft.Click += new System.EventHandler(this.Switch_Click);
-            // 
-            // sfd
-            // 
-            this.sfd.Filter = "Zip Files(*.zip)|*.zip|All Files(*.*)|*.*";
-            // 
-            // fbd
-            // 
-            this.fbd.Description = "Select the destination folder.";
-            // 
-            // iconHeaderLeft
-            // 
-            this.iconHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.iconHeaderLeft.Frozen = true;
-            this.iconHeaderLeft.HeaderText = "";
-            this.iconHeaderLeft.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
-            this.iconHeaderLeft.Name = "iconHeaderLeft";
-            this.iconHeaderLeft.ReadOnly = true;
-            this.iconHeaderLeft.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.iconHeaderLeft.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.iconHeaderLeft.Width = 32;
-            // 
-            // nameHeaderLeft
-            // 
-            this.nameHeaderLeft.HeaderText = "Name";
-            this.nameHeaderLeft.Name = "nameHeaderLeft";
-            // 
-            // extensionHeaderLeft
-            // 
-            this.extensionHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.extensionHeaderLeft.HeaderText = "Extension";
-            this.extensionHeaderLeft.Name = "extensionHeaderLeft";
-            this.extensionHeaderLeft.Width = 64;
-            // 
-            // sizeHeaderLeft
-            // 
-            this.sizeHeaderLeft.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.sizeHeaderLeft.HeaderText = "Size";
-            this.sizeHeaderLeft.Name = "sizeHeaderLeft";
-            this.sizeHeaderLeft.ReadOnly = true;
-            this.sizeHeaderLeft.Width = 64;
-            // 
             // iconHeaderRight
             // 
             this.iconHeaderRight.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -450,6 +406,50 @@
             this.sizeHeaderRight.ReadOnly = true;
             this.sizeHeaderRight.Width = 64;
             // 
+            // searchPanelRight
+            // 
+            this.searchPanelRight.Controls.Add(this.rightTextBox);
+            this.searchPanelRight.Controls.Add(this.rightToLeft);
+            this.searchPanelRight.Dock = System.Windows.Forms.DockStyle.Top;
+            this.searchPanelRight.Location = new System.Drawing.Point(0, 0);
+            this.searchPanelRight.Margin = new System.Windows.Forms.Padding(2);
+            this.searchPanelRight.Name = "searchPanelRight";
+            this.searchPanelRight.Size = new System.Drawing.Size(372, 20);
+            this.searchPanelRight.TabIndex = 5;
+            // 
+            // rightTextBox
+            // 
+            this.rightTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rightTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rightTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rightTextBox.Location = new System.Drawing.Point(18, 0);
+            this.rightTextBox.Name = "rightTextBox";
+            this.rightTextBox.Size = new System.Drawing.Size(354, 21);
+            this.rightTextBox.TabIndex = 3;
+            this.rightTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            // 
+            // rightToLeft
+            // 
+            this.rightToLeft.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rightToLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rightToLeft.Image = global::noname_SanityArchiver.Properties.Resources.icon_arrow_left;
+            this.rightToLeft.Location = new System.Drawing.Point(0, 0);
+            this.rightToLeft.Margin = new System.Windows.Forms.Padding(2);
+            this.rightToLeft.Name = "rightToLeft";
+            this.rightToLeft.Size = new System.Drawing.Size(18, 20);
+            this.rightToLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.rightToLeft.TabIndex = 4;
+            this.rightToLeft.TabStop = false;
+            this.rightToLeft.Click += new System.EventHandler(this.Switch_Click);
+            // 
+            // sfd
+            // 
+            this.sfd.Filter = "Zip Files(*.zip)|*.zip|All Files(*.*)|*.*";
+            // 
+            // fbd
+            // 
+            this.fbd.Description = "Select the destination folder.";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -457,7 +457,7 @@
             this.ClientSize = new System.Drawing.Size(750, 392);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Totally Noname Commander - NEM REGISZTRÁLT";

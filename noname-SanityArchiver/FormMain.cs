@@ -21,6 +21,9 @@ namespace noname_SanityArchiver
             leftFileExplorer = new FileExplorer(leftView, leftTextBox, listMenu);
             rightFileExplorer = new FileExplorer(rightView, rightTextBox, listMenu);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
+            var formStart = new FormStartWindow();
+            formStart.ShowDialog(this);
+
         }
 
         public DataGridView FocusedView
@@ -47,6 +50,7 @@ namespace noname_SanityArchiver
             var rootDirInfo = new DirectoryInfo(root).Root;
             leftFileExplorer.DisplayFiles(rootDirInfo);
             rightFileExplorer.DisplayFiles(rootDirInfo);
+
         }
 
         #region View Events

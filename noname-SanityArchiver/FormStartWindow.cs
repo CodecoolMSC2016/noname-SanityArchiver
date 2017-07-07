@@ -15,15 +15,12 @@ namespace noname_SanityArchiver
         public FormStartWindow()
         {
             InitializeComponent();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Hide();
-            var mainForm = new FormMain();
-            mainForm.FormClosed += (s, args) => this.Close();
-            mainForm.Show();
-           
+            Close();
         }
     }
 }
