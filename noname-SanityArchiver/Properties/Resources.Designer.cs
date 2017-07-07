@@ -93,6 +93,16 @@ namespace noname_SanityArchiver.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_attributes {
+            get {
+                object obj = ResourceManager.GetObject("icon_attributes", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_erase {
             get {
                 object obj = ResourceManager.GetObject("icon_erase", resourceCulture);
@@ -156,6 +166,16 @@ namespace noname_SanityArchiver.Properties {
         internal static System.Drawing.Bitmap icon_move {
             get {
                 object obj = ResourceManager.GetObject("icon_move", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_move_right {
+            get {
+                object obj = ResourceManager.GetObject("icon_move_right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

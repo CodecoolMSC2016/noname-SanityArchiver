@@ -1,6 +1,8 @@
 ﻿using noname_SanityArchiver.Properties;
 using System;
+using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -12,7 +14,9 @@ namespace noname_SanityArchiver
     {
         private FileExplorer leftFileExplorer;
         private FileExplorer rightFileExplorer;
+        private BackgroundWorker calculateSizeBW;
         private string root;
+        private long calculatedSize = 0;
 
         public FormMain()
         {
@@ -124,12 +128,12 @@ namespace noname_SanityArchiver
                 if (sender == leftView)
                 {
                     menuItemCopy.Image = Resources.icon_arrow_right;
-                    menuItemMove.Image = Resources.icon_arrow_right;
+                    menuItemMove.Image = Resources.icon_move_right;
                 }
                 else
                 {
                     menuItemCopy.Image = Resources.icon_arrow_left;
-                    menuItemMove.Image = Resources.icon_arrow_left;
+                    menuItemMove.Image = Resources.icon_move;
                 }
                 view.Focus();
             }
@@ -367,26 +371,14 @@ namespace noname_SanityArchiver
 
         #endregion Helpers
 
-        private void listMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void listMenu_Opening(object sender, CancelEventArgs e)
         {
-            FileExplorer explorer = GetFileExplorer(FocusedView);
-            FileSystemInfo[] selectedPaths = explorer.SelectedItems;
-            long size = 0;
-            for (int i = 0; i < selectedPaths.Length; i++)
-            {
-                string path = selectedPaths[i].FullName;
-                if (FileTransfer.IsDirectory(path))
-                {
-                    size += explorer.GetFolderSize(path);
-                }
-                else
-                {
-                    FileInfo selectedFile = (FileInfo)selectedPaths[i];
-                    size += selectedFile.Length;
-                }
-            }
-
-            menuItemSize.Text = (size / 1024) + " kB";
+            menuItemSize.Text = "Calculating...";
+            calculateSizeBW = new BackgroundWorker();
+            calculateSizeBW.WorkerSupportsCancellation = true;
+            calculateSizeBW.DoWork += new DoWorkEventHandler(calculateSizeBW_DoWork);
+            calculateSizeBW.RunWorkerCompleted += new RunWorkerCompletedEventHandler(calculateSizeBW_RunWorkerCompleted);
+            calculateSizeBW.RunWorkerAsync(GetFileExplorer(FocusedView));
         }
 
         private void menuItemChangeAttr_Click(object sender, EventArgs e)
@@ -395,6 +387,54 @@ namespace noname_SanityArchiver
             string selectedFile = explorer.SelectedItems[0].FullName;
 
             FileAttributeChange fac = new FileAttributeChange(selectedFile);
+        }
+
+        private void calculateSizeBW_DoWork(object sender, DoWorkEventArgs e)
+        {
+            FileExplorer explorer = (FileExplorer)e.Argument;
+            FileSystemInfo[] selectedPaths = explorer.SelectedItems;
+            long totalSize = 0;
+            for (int i = 0; i < selectedPaths.Length; i++)
+            {
+
+                string path = selectedPaths[i].FullName;
+                if (FileTransfer.IsDirectory(path))
+                {
+                    long size = explorer.GetFolderSize(path, calculateSizeBW);
+
+                    if (size < 0)
+                    {
+                        calculateSizeBW.CancelAsync();
+                    }
+                    else
+                    {
+                        totalSize += size;
+                    }
+                }
+                else
+                {
+                    FileInfo selectedFile = (FileInfo)selectedPaths[i];
+                    totalSize += selectedFile.Length;
+                }
+            }        
+                calculatedSize = (totalSize / 1024);
+        }
+
+        private void calculateSizeBW_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            menuItemSize.Text = calculatedSize + " kB (" + Math.Floor((decimal)calculatedSize / 1024 ) + " MB)";
+
+            if ( e.Cancelled )
+            {
+                Debug.WriteLine("CALCELLED");
+                menuItemSize.Text = "Unknown size";
+            }
+        }
+
+        private void listMenu_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            Debug.WriteLine("CLOSED");
+            calculateSizeBW.CancelAsync();
         }
     }
 }

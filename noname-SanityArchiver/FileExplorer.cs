@@ -1,6 +1,7 @@
 ﻿using noname_SanityArchiver.Properties;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -94,29 +95,40 @@ namespace noname_SanityArchiver
         /// <summary>
         /// Returns the size of the given folder in bytes
         /// </summary>
-        public long GetFolderSize(string directoryPath)
+        public long GetFolderSize(string directoryPath, BackgroundWorker bw)
         {
-            if (!File.GetAttributes(directoryPath).HasFlag(FileAttributes.Directory))
+
+            try
             {
-                return 0;
+                if (!File.GetAttributes(directoryPath).HasFlag(FileAttributes.Directory))
+                {
+                    return 0;
+                }
+
+                long size = 0;
+                string[] files = Directory.GetFiles(directoryPath);
+
+                foreach (string file in files)
+                {
+                    size += new FileInfo(file).Length;
+                }
+
+                string[] directories = Directory.GetDirectories(directoryPath);
+
+                foreach (string directory in directories)
+                {
+                    size += GetFolderSize(directory, bw);
+                }
+                return size;
+
             }
-
-            long size = 0;
-            string[] files = Directory.GetFiles(directoryPath);
-
-            foreach (string file in files)
+            catch (Exception)
             {
-                size += new FileInfo(file).Length;
+                bw.CancelAsync();
+                return -1;
             }
-
-            string[] directories = Directory.GetDirectories(directoryPath);
-
-            foreach (string directory in directories)
-            {
-                size += GetFolderSize(directory);
-            }
-
-            return size;
+           
+           
         }
 
         public void UpdateAbsolutePath()
