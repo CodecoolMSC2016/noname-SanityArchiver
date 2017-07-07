@@ -100,11 +100,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="reg.cs">
+    <Compile Include="FormStartWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="reg.Designer.cs">
-      <DependentUpon>reg.cs</DependentUpon>
+    <Compile Include="FormStartWindow.Designer.cs">
+      <DependentUpon>FormStartWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="SizeDetector3000.cs" />
     <Compile Include="textFileWindow.cs">
@@ -124,8 +124,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="reg.resx">
-      <DependentUpon>reg.cs</DependentUpon>
+    <EmbeddedResource Include="FormStartWindow.resx">
+      <DependentUpon>FormStartWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="textFileWindow.resx">
       <DependentUpon>textFileWindow.cs</DependentUpon>

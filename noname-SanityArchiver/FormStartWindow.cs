@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace noname_SanityArchiver
 {
-    public partial class reg_cs : Form
+    public partial class FormStartWindow : Form
     {
-        public reg_cs()
+        public FormStartWindow()
         {
             InitializeComponent();
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

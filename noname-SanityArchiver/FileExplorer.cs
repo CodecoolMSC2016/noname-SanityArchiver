@@ -10,11 +10,12 @@ namespace noname_SanityArchiver
 {
     internal class FileExplorer
     {
-        public FileExplorer(DataGridView view, TextBox textBox)
+        public FileExplorer(DataGridView view, TextBox textBox, ContextMenuStrip listMenu)
         {
             View = view;
             CurrentItems = new List<FileSystemInfo>();
             AbsoluePathBox = textBox;
+            this.listMenu = listMenu;
         }
 
         public enum ItemType { Directory, File };
@@ -22,6 +23,7 @@ namespace noname_SanityArchiver
         public TextBox AbsoluePathBox { get; }
         public DirectoryInfo CurrentDirectory { get; set; }
         public List<FileSystemInfo> CurrentItems { get; set; }
+        private ContextMenuStrip listMenu;
 
         public FileSystemInfo[] SelectedItems
         {
@@ -46,36 +48,29 @@ namespace noname_SanityArchiver
         /// <param name="selectedFolder"></param>
         public void DisplayFiles(DirectoryInfo selectedFolder)
         {
-            FileInfo[] files = null;
-            DirectoryInfo[] directories = null;
-            try
+            FileInfo[] files;
+            DirectoryInfo[] directories;
+
+            LoadFilesAndDirectories(out files, out directories, selectedFolder);
+
+            if (files != null && directories != null)
             {
-                files = selectedFolder.GetFiles();
-                directories = selectedFolder.GetDirectories();
                 View.Rows.Clear();
                 CurrentItems.Clear();
-            }
-            catch (Exception exception)
-            {
-                if (exception is DirectoryNotFoundException || exception is UnauthorizedAccessException)
+
+                CurrentDirectory = selectedFolder;
+                UpdateAbsolutePath();
+                DirectoryInfo parent = Directory.GetParent(selectedFolder.FullName); ;
+                if (parent != null)
                 {
-                    UpdateAbsolutePath();
-                    return;
+                    CurrentItems.Add(parent);
+                    View.Rows.Add(Resources.icon_arrow_left, "...", "", "");
                 }
+
+                AddItemsToView(directories, ItemType.Directory);
+
+                AddItemsToView(files, ItemType.File);
             }
-
-            CurrentDirectory = selectedFolder;
-            UpdateAbsolutePath();
-            DirectoryInfo parent = Directory.GetParent(selectedFolder.FullName); ;
-            if (parent != null)
-            {
-                CurrentItems.Add(parent);
-                View.Rows.Add(Resources.icon_arrow_left, "...", "", "");
-            }
-
-            AddItemsToView(directories, ItemType.Directory);
-
-            AddItemsToView(files, ItemType.File);
         }
 
         public void DisplayFiles()
@@ -83,6 +78,31 @@ namespace noname_SanityArchiver
             Microsoft.VisualBasic.Interaction.Beep();
             DisplayFiles(CurrentDirectory);
             View.ClearSelection();
+        }
+
+        private void LoadFilesAndDirectories(out FileInfo[] files, out DirectoryInfo[] directories, DirectoryInfo selectedFolder)
+        {
+            try
+            {
+                files = selectedFolder.GetFiles();
+                directories = selectedFolder.GetDirectories();
+
+            }
+            catch (Exception exception)
+            {
+                files = null;
+                directories = null;
+
+                //string messageToDisplay = "Something went wrong.";
+
+                if (exception is DirectoryNotFoundException)
+                {
+                    UpdateAbsolutePath();
+                    return;
+                }
+                MessageBox.Show(exception.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public string GetFileNameWithExtension(DataGridViewRow row)
@@ -97,7 +117,6 @@ namespace noname_SanityArchiver
         /// </summary>
         public long GetFolderSize(string directoryPath, BackgroundWorker bw)
         {
-
             try
             {
                 if (!File.GetAttributes(directoryPath).HasFlag(FileAttributes.Directory))

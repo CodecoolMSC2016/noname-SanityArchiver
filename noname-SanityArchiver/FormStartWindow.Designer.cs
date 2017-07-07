@@ -1,6 +1,6 @@
 ﻿namespace noname_SanityArchiver
 {
-    partial class reg_cs
+    partial class FormStartWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -36,27 +36,31 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(93, 143);
+            this.button1.Location = new System.Drawing.Point(70, 116);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 38);
+            this.button1.Size = new System.Drawing.Size(121, 31);
             this.button1.TabIndex = 0;
             this.button1.Text = "[ 1 ]";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(260, 143);
+            this.button2.Location = new System.Drawing.Point(195, 116);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(161, 38);
+            this.button2.Size = new System.Drawing.Size(121, 31);
             this.button2.TabIndex = 1;
             this.button2.Text = "[ 2 ]";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(427, 143);
+            this.button3.Location = new System.Drawing.Point(320, 116);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(161, 38);
+            this.button3.Size = new System.Drawing.Size(121, 31);
             this.button3.TabIndex = 2;
             this.button3.Text = "[ 3 ]";
             this.button3.UseVisualStyleBackColor = true;
@@ -65,21 +69,23 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(154, 68);
+            this.label1.Location = new System.Drawing.Point(116, 55);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(366, 25);
+            this.label1.Size = new System.Drawing.Size(296, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Nyomd meg a [ 2 ] gombot a folytatáshoz";
             // 
             // reg_cs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 206);
+            this.ClientSize = new System.Drawing.Size(510, 167);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "reg_cs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "NEMR EGISZTÁLT";

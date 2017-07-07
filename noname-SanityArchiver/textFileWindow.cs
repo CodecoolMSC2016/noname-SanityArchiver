@@ -18,7 +18,6 @@ namespace noname_SanityArchiver
         public textFileWindow(string fileLocation)
         {
             InitializeComponent();
-
             this.fileLocation = fileLocation;
             richTextBox1.Text = File.ReadAllText(fileLocation, Encoding.UTF8);
             Show();

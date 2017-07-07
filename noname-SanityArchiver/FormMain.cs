@@ -21,9 +21,12 @@ namespace noname_SanityArchiver
         public FormMain()
         {
             InitializeComponent();
-            leftFileExplorer = new FileExplorer(leftView, leftTextBox);
-            rightFileExplorer = new FileExplorer(rightView, rightTextBox);
+            leftFileExplorer = new FileExplorer(leftView, leftTextBox, listMenu);
+            rightFileExplorer = new FileExplorer(rightView, rightTextBox, listMenu);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
+            var formStart = new FormStartWindow();
+            formStart.ShowDialog(this);
+
         }
 
         public DataGridView FocusedView
@@ -50,6 +53,7 @@ namespace noname_SanityArchiver
             var rootDirInfo = new DirectoryInfo(root).Root;
             leftFileExplorer.DisplayFiles(rootDirInfo);
             rightFileExplorer.DisplayFiles(rootDirInfo);
+
         }
 
         #region View Events
@@ -368,7 +372,7 @@ namespace noname_SanityArchiver
             leftFileExplorer.DisplayFiles();
             rightFileExplorer.DisplayFiles();
         }
-
+    
         #endregion Helpers
 
         private void listMenu_Opening(object sender, CancelEventArgs e)
@@ -398,6 +402,7 @@ namespace noname_SanityArchiver
             {
 
                 string path = selectedPaths[i].FullName;
+
                 if (FileTransfer.IsDirectory(path))
                 {
                     long size = explorer.GetFolderSize(path, calculateSizeBW);
@@ -436,5 +441,7 @@ namespace noname_SanityArchiver
             Debug.WriteLine("CLOSED");
             calculateSizeBW.CancelAsync();
         }
+
     }
+
 }

@@ -492,14 +492,6 @@
         private System.Windows.Forms.TextBox rightTextBox;
         private System.Windows.Forms.DataGridView leftView;
         private System.Windows.Forms.DataGridView rightView;
-        private System.Windows.Forms.DataGridViewImageColumn iconHeaderLeft;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderLeft;
-        private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderLeft;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderLeft;
-        private System.Windows.Forms.DataGridViewImageColumn iconHeaderRight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderRight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderRight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderRight;
         private System.Windows.Forms.ContextMenuStrip listMenu;
         private System.Windows.Forms.ToolStripMenuItem menuItemView;
         private System.Windows.Forms.ToolStripMenuItem menuItemArchive;
@@ -524,6 +516,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripTextBox menuItemSize;
+        private System.Windows.Forms.DataGridViewImageColumn iconHeaderLeft;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderLeft;
+        private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderLeft;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderLeft;
+        private System.Windows.Forms.DataGridViewImageColumn iconHeaderRight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderRight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderRight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderRight;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
