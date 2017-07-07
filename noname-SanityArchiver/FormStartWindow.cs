@@ -20,7 +20,10 @@ namespace noname_SanityArchiver
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Close();
+            var formMain = new FormMain();
+            formMain.FormClosed += (s, args) => Close();
+            formMain.Show();
+            Hide();
         }
     }
 }

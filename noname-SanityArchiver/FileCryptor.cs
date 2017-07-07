@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace noname_SanityArchiver
 {
@@ -70,24 +71,32 @@ namespace noname_SanityArchiver
             {
                 rijn.GenerateIV();
                 rijn.Key = key;
-                using (FileStream fsIn = new FileStream(filename, FileMode.Open))
-                using (FileStream fsOut = new FileStream(encryptedName, FileMode.CreateNew))
+                try
                 {
-                    ICryptoTransform encryptor = rijn.CreateEncryptor();
-                    using (CryptoStream cs = new CryptoStream(fsIn, encryptor, CryptoStreamMode.Read))
+                    using (FileStream fsIn = new FileStream(filename, FileMode.Open))
+                    using (FileStream fsOut = new FileStream(encryptedName, FileMode.CreateNew))
                     {
-                        for (int i = 0; i < rijn.IV.Length; i++)
+                        ICryptoTransform encryptor = rijn.CreateEncryptor();
+                        using (CryptoStream cs = new CryptoStream(fsIn, encryptor, CryptoStreamMode.Read))
                         {
-                            fsOut.WriteByte(rijn.IV[i]);
-                        }
+                            for (int i = 0; i < rijn.IV.Length; i++)
+                            {
+                                fsOut.WriteByte(rijn.IV[i]);
+                            }
 
-                        int data;
-                        while ((data = cs.ReadByte()) != -1)
-                        {
-                            fsOut.WriteByte((byte)data);
+                            int data;
+                            while ((data = cs.ReadByte()) != -1)
+                            {
+                                fsOut.WriteByte((byte)data);
+                            }
                         }
                     }
+                } catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                
             }
         }
 

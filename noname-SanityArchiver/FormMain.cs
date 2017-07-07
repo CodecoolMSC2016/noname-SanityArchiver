@@ -24,8 +24,6 @@ namespace noname_SanityArchiver
             leftFileExplorer = new FileExplorer(leftView, leftTextBox, listMenu);
             rightFileExplorer = new FileExplorer(rightView, rightTextBox, listMenu);
             root = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
-            var formStart = new FormStartWindow();
-            formStart.ShowDialog(this);
 
         }
 
@@ -303,12 +301,23 @@ namespace noname_SanityArchiver
 
         private void menuItemView_Click(object sender, EventArgs e)
         {
-            FileExplorer explorer = GetFileExplorer(FocusedView);
-            textFileWindow viewer = new textFileWindow(explorer.SelectedItems[0].FullName);
+            try
+            {
+                FileExplorer explorer = GetFileExplorer(FocusedView);
+                textFileWindow viewer = new textFileWindow(explorer.SelectedItems[0].FullName);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void Switch_Click(object sender, EventArgs e)
         {
+            PictureBox arrow = (PictureBox)sender;
+            SwitchViewFocus(arrow);
             PictureBox control = (PictureBox)sender;
             FileExplorer from = GetFileExplorer(control);
             FileExplorer to = GetFileExplorer(GetOtherView(FocusedView));
@@ -318,6 +327,18 @@ namespace noname_SanityArchiver
         #endregion MenuStrip Handlers
 
         #region Helpers
+
+        private void SwitchViewFocus(PictureBox arrow)
+        {
+            if (arrow == leftToRight)
+            {
+                leftFileExplorer.View.Focus();
+            }
+            else if (arrow == rightToLeft)
+            {
+                rightFileExplorer.View.Focus();
+            }
+        }
 
         private FileExplorer GetFileExplorer(Control control)
         {

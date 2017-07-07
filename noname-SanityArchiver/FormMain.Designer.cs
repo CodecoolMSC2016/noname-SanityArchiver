@@ -188,7 +188,7 @@
             this.toolStripSeparator6,
             this.menuItemSize});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(170, 340);
+            this.listMenu.Size = new System.Drawing.Size(170, 318);
             this.listMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.listMenu_Closing);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
