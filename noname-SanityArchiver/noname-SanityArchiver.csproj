@@ -106,6 +106,7 @@
     <Compile Include="FormStartWindow.Designer.cs">
       <DependentUpon>FormStartWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="SizeDetector3000.cs" />
     <Compile Include="textFileWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +224,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\right-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_move_right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_attributes.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -69,6 +69,7 @@
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -187,7 +188,8 @@
             this.toolStripSeparator6,
             this.menuItemSize});
             this.listMenu.Name = "listMenu";
-            this.listMenu.Size = new System.Drawing.Size(170, 318);
+            this.listMenu.Size = new System.Drawing.Size(170, 340);
+            this.listMenu.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.listMenu_Closing);
             this.listMenu.Opening += new System.ComponentModel.CancelEventHandler(this.listMenu_Opening);
             // 
             // menuItemRefresh
@@ -276,6 +278,7 @@
             // 
             // menuItemChangeAttr
             // 
+            this.menuItemChangeAttr.Image = global::noname_SanityArchiver.Properties.Resources.icon_attributes;
             this.menuItemChangeAttr.Name = "menuItemChangeAttr";
             this.menuItemChangeAttr.Size = new System.Drawing.Size(169, 26);
             this.menuItemChangeAttr.Text = "Change Attribute";
@@ -307,7 +310,7 @@
             this.menuItemSize.Name = "menuItemSize";
             this.menuItemSize.ReadOnly = true;
             this.menuItemSize.Size = new System.Drawing.Size(100, 16);
-            this.menuItemSize.Text = "asdasd";
+            this.menuItemSize.Text = "Calculating...";
             // 
             // searchPanelLeft
             // 
@@ -521,6 +524,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn extensionHeaderRight;
         private System.Windows.Forms.DataGridViewTextBoxColumn sizeHeaderRight;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
